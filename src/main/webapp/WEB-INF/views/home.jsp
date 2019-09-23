@@ -55,7 +55,7 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="/home">홈</a>
+								<a href="/home">홈홈</a>
 								<ul class="sub_menu">
 									<li><a href="index.html">Homepage V1</a></li>
 									<li><a href="home-02.html">Homepage V2</a></li>
