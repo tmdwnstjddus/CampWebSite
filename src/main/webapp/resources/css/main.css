@@ -36,6 +36,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 
 
+
 /*[ FONT ]
 ///////////////////////////////////////////////////////////
 */
@@ -2254,6 +2255,10 @@ body {padding-right: 0px !important;}
 }
 .modal-open {overflow-y: scroll;}
 
+#myModal {
+  
+  background-color: rgba(0,0,0,0.8);
+}
 /* ------------------------------------ */
 .modal-backdrop {
   background-color: transparent;
@@ -2346,7 +2351,7 @@ input.num-product::-webkit-inner-spin-button {
     margin: 0; 
 }
 
-/*/////직접 작성  /////////*/
+/*/////吏곸젒 �옉�꽦  /////////*/
 .row2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2369,4 +2374,123 @@ input.num-product::-webkit-inner-spin-button {
   padding-bottom: 70px;
   margin-bottom: 30px;
   border-radius: 2px;
+}
+
+/*濡쒓렇�씤*/
+.login-form-container {
+  background: transparent none repeat scroll 0 0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  padding: 80px;
+  text-align: left;
+}
+.login-text {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.login-text h2 {
+  color: #444;
+  font-size: 30px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+.login-text span {
+  font-size: 15px;
+}
+.login-form-container input {
+  background-color: #f7f7f7;
+  border: medium none;
+  color: #7d7d7d;
+  font-size: 12px;
+  font-weight: 500;
+  height: 50px;
+  width: 100%;
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+.login-form-container input::-moz-placeholder,
+.login-form-container input::-webkit-placeholder {
+  color: #7d7d7d;
+  opacity: 1;
+}
+.login-toggle-btn {
+  padding: 10px 0 19px;
+}
+.login-form-container input[type="checkbox"] {
+  height: 15px;
+  margin: 0;
+  position: relative;
+  top: 1px;
+  width: 17px;
+}
+.login-form-container label {
+  color: #777;
+  font-size: 15px;
+  font-weight: 400;
+}
+.login-toggle-btn > a {
+  color: #666;
+  float: right;
+  transition: all 0.3s ease 0s;
+}
+.login-toggle-btn > a:hover {
+  color: #e65540;
+}
+.login-register-tab-list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.login-register-tab-list.nav a h4 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0 20px;
+  text-transform: capitalize;
+  transition: all 0.3s ease 0s;
+}
+.login-register-tab-list.nav a.active h4,
+.login-register-tab-list.nav a h4:hover {
+  color: #e65540;
+}
+.login-form button {
+  border: medium none;
+  cursor: pointer;
+}
+
+
+        /* The sidepanel menu */
+.sidepanel {
+  width: 0; 
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  float: right;
+  right: 0;
+  overflow-x: hidden;
+  padding-top: 60px; 
+  transition: 0.5s;
+  background-color: #fff;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+.nevpanner{
+  padding: 30px; 
 }
