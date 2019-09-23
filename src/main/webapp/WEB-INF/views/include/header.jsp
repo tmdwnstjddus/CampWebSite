@@ -26,7 +26,7 @@
 							</li>
 
 							<li>
-								<a href="/upload/camping">캠핑장 예약</a>
+								<a href="/camp/camping">캠핑장 예약</a>
 							</li>
 
 							<li >

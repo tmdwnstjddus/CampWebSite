@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/upload")
+@RequestMapping(value = "/camp")
 public class CampSiteController {
 
-	@RequestMapping(value = "/camping", method = RequestMethod.GET)
+	@RequestMapping(value = "/campList", method = RequestMethod.GET)
 	public String campingList() {
 		
-		return "upload/camping";
+		return "camp/campList";
 	}
 }
