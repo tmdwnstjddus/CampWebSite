@@ -13,4 +13,10 @@ public class QnAController {
 		
 		return "upload/qna";
 	}
+	
+	@RequestMapping(path = "/qnawrite", method = RequestMethod.GET)
+	public String qnaWrite() {
+		
+		return "upload/qnawrite";
+	}
 }

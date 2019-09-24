@@ -36,7 +36,6 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 
 
-
 /*[ FONT ]
 ///////////////////////////////////////////////////////////
 */
@@ -2096,7 +2095,14 @@ li.sale-noti > a {
 .table-shopping-cart .column-5 {
   padding-right: 30px;
 }
-
+.column-6 {
+  padding-right: 30px;
+  width: 55%;
+}
+.column-7{
+  padding-right: 30px;
+  width: 80px;
+}
 .table-shopping-cart .table-head th {
   font-family: Montserrat-Bold;
   font-size: 13px;
@@ -2351,7 +2357,7 @@ input.num-product::-webkit-inner-spin-button {
     margin: 0; 
 }
 
-/*/////吏곸젒 �옉�꽦  /////////*/
+/*/////직접 작성  /////////*/
 .row2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2376,7 +2382,7 @@ input.num-product::-webkit-inner-spin-button {
   border-radius: 2px;
 }
 
-/*濡쒓렇�씤*/
+/*로그인*/
 .login-form-container {
   background: transparent none repeat scroll 0 0;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
@@ -2457,11 +2463,12 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 
-        /* The sidepanel menu */
+/* The side panel menu */
+
 .sidepanel {
   width: 0; 
   position: fixed;
-  z-index: 1;
+  z-index: 1500;
   top: 0;
   float: right;
   right: 0;
