@@ -3,18 +3,19 @@
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<title>Contact</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<jsp:include page="include/cssimport.jsp" />
+	
+	<jsp:include page="../include/cssimport.jsp" />
 	
 </head>
 <body class="animsition">
 
 	<!-- Header -->
-	<jsp:include page="include/header.jsp" />
+	<jsp:include page="../include/header.jsp" />
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/heading-pages-06.jpg);">
 		<h2 class="l-text2 t-center">
@@ -237,7 +238,7 @@
 
 
 	<!-- Footer -->
-	<jsp:include page="include/footer" />
+	<jsp:include page="../include/footer" />
 
 
 
@@ -254,7 +255,7 @@
 
 
 	<!-- js import -->
-	<jsp:include page="include/jsimport.jsp" />
+	<jsp:include page="../include/jsimport.jsp" />
 
 
 </body>
