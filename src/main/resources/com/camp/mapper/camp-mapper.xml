@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camp.mapper.CampMapper">
+
+	<select id="getCampList"
+		parameterType="hashmap" resultType="com.camp.vo.Camp">
+		SELECT *
+		FROM CAMP
+	</select>
+	<select id="getCampKind"
+		parameterType="hashmap" resultType="com.camp.vo.Camp">
+		SELECT *
+		FROM CAMP
+		WHERE category = #{category}
+	</select>
+	
+</mapper>
