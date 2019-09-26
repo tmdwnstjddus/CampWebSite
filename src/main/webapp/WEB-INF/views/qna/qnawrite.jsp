@@ -85,12 +85,14 @@
 						<h4>1:1 고객센터</h4>
 					</div>
 					<div class="p-b-20"> 
-						<form class="leave-comment">
+					
+						<form class="leave-comment" action="qnawrite" method="POST" >
 							<!-- Edit Password start -->
 							<div class="p-t-15 p-b-14">
 								<div class="p-t-15 p-b-23">
 									<div class="widget">
 										<p class="m-text2 flex-sb-m p-b-10"> 글 작성하기 </p>
+										<input type="hidden" name="memberId" value="1" />
 										<p>제목</p>
 										<div class="bo4 of-hidden size15 m-b-20">
 											<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="title" >
@@ -101,8 +103,8 @@
 													
 										<div class="p-b-10 float-r">
 											<!-- Button -->
-											<button type="button" class="btn btn-secondary">목록으로</button>
-											<button type="button" class="btn btn-dark">작성 완료</button>
+											<button type="button" class="btn btn-secondary" id="cansel">돌아가기</button>
+											<button type="submit" class="btn btn-dark" id="savebutton">작성 완료</button>
 											
 										</div>
 									
@@ -174,7 +176,6 @@
 	
 	<jsp:include page="../include/jsimport.jsp" />
 	
-	 
 
 	
 </body>

@@ -83,8 +83,6 @@
 						<h4>공지</h4>
 						<a href="#" class="badge badge-primary"> <p class="s-text14">글작성</p>	</a> 
 					</div>
-					
-
 
 					<div class="p-b-20"> 
 						<div class="flex-w flex-sb">
@@ -126,24 +124,29 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>제목1 </td>
-												<td>임시1번</td>
-												<td>2019-01-01</td>
-												<td><a href="#" class="badge badge-success">답변완료</a></td>
+										
+										<c:forEach var="qnaList" items="${ qnaList }">
+											<tr onClick="location.href='/qna/qnadetail?qaNo=${ qnaList.qaNo }'">
+												<td>${ qnaList.qaNo }</td>
+												<td> ${ qnaList.title } </td>
+												<td>${ qnaList.memberId }</td>
+												<td>${ qnaList.regDate }</td>
+												<td><span class="badge badge-danger">답변대기</span> </td>
 											</tr>
+										</c:forEach>
+										
 											<tr>
+											
 												<td>2</td>
-												<td>제목2</td>
+												<td><a href="/upload/qnadetail">제목2</a></td>
 												<td>임시1번</td>
 												<td>2019-01-01</td>
-												<td><a href="#" class="badge badge-danger">답변대기</a> </td>
+												<td><span class="badge badge-success">답변완료</span></td>
 											</tr>
 										</tbody>
 								</table>
 								<div class="flex-sb">
-									<button type="button" class="btn btn-dark"  onclick ="location.href ='/upload/qnawrite'">문의사항 남기기</button>
+									<button type="button" class="btn btn-dark"  onclick ="location.href ='/qna/qnawrite'">문의사항 남기기</button>
 								</div>
 						</div>
 					</div>

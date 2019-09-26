@@ -35,7 +35,7 @@
 							</li>
 
 							<li>
-								<a href="/upload/qna">Q&A</a>
+								<a href="/qna/qna">Q&A</a>
 							</li>
 
 							<li>
