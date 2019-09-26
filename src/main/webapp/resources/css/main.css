@@ -2501,5 +2501,7 @@ input.num-product::-webkit-inner-spin-button {
   background-color: #444;
 }
 .nevpanner{
-  padding: 30px; 
+  padding: 30px;
+  height: 700px;
+
 }
