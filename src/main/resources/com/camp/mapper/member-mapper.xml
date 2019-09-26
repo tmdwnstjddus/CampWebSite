@@ -42,11 +42,11 @@
       WHERE EMAIL = #{ email }
    </select>
 
-	<!-- <update id="UpdateMember" parameterType="Member">
+    <update id="updateMember" parameterType="com.camp.vo.Member">
 		UPDATE MEMBER
-		SET NAME = #{name}, PWD = #{passwd}, PHONE = #{phone}, EMAIL = #{email}
-		WHERE MEMBERID = #{memberId}
-	</update> -->
+		SET PWD = #{ pwd }
+		WHERE MEMBERID = #{ memberId }
+	</update> 
 	
 	
 </mapper>

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Home</title>
+	<title>TheCamp</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -23,58 +23,58 @@
 	<section class="slide1">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1 item2-slick1" style="background-image: url(/resources/images/submain.png);">
+				<div class="item-slick1 item2-slick1" style="background-image: url(/resources/images/main.png);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
-							Event
+							Welcome
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
-							구트 캠프
+							Camp World
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
 							<!-- Button -->
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+							<a href="camp/campList" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
 								예약하기
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="item-slick1 item2-slick1" style="background-image: url(/resources/images/submain.png);">
+				<div class="item-slick1 item2-slick1" style="background-image: url(/resources/images/main2.png);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
-							Women Collection 2018
+							Welcome
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
-							New arrivals
+							Camp World
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
 							<!-- Button -->
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-								Shop Now
+							<a href="camp/campList" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								예약하기
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="item-slick1 item3-slick1" style="background-image: url(/resources/images/submain.png);">
+				<div class="item-slick1 item3-slick1" style="background-image: url(/resources/images/main3.png);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
-							Women Collection 2018
+							Welcome
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="rotateInUpRight">
-							New arrivals
+							Camp World
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
 							<!-- Button -->
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-								Shop Now
+							<a href="camp/campList" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								예약하기
 							</a>
 						</div>
 					</div>
