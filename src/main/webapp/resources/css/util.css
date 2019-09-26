@@ -4193,3 +4193,6 @@ RESPONSIVE  RESPONSIVE  RESPONSIVE  RESPONSIVE   RESPONSIVE
 	bottom:   20%;
 }
 
+.radio-btn{
+	display:none;
+}
