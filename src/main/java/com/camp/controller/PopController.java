@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path = "/member")
-public class MyPageController {
-
-	@RequestMapping(path = "/mypage", method = RequestMethod.GET)
-	public String mypageList() {
+public class PopController {
+	
+	@RequestMapping(path = { "/pop" }, method = RequestMethod.GET)
+	public String pop() {
 		
-		return "member/mypage";
+		return "pop";
 	}
+	
 }

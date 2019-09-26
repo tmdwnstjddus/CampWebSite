@@ -55,7 +55,7 @@
 															<input type="email" name="email" placeholder="이메일" >
 															
 															<div class="cart_title">주소 정보</div><br>															
-															<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+															<input type="button" style="color: white;background-color: black" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 															<input type="text" name="addr1" id="addr1" placeholder="우편번호">	
 															<input type="text" name="addr2" id="addr2" placeholder="주소"><br>
 															<input type="text" name="addr3" id="addr3" placeholder="상세주소">

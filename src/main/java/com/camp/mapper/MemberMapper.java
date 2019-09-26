@@ -18,5 +18,9 @@ public interface MemberMapper {
 	Member loginMember(HashMap<String, Object> params);
 	   
 	String idfind(HttpServletResponse response, String email) throws Exception;
+	
+	Member getMemberById(String memberId);
+	
+	void updateMember(Member member);
 
 }

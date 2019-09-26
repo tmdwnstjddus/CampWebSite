@@ -13,6 +13,9 @@ public interface MemberService {
 	void registerMember(Member member);
 
 	Member idCheck(String memberId);
-	
+
+	void updateMember(Member member);
+
+	Member getMemberById(String memberId);
 
 }
