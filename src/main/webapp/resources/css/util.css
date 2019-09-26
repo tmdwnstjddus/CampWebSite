@@ -30,6 +30,10 @@
     margin: 0 auto;
 }
 
+.text-center{
+	text-align: center;
+}
+
 
 /* ////////////////////////////////////////////////////// */
 
@@ -4186,6 +4190,6 @@ RESPONSIVE  RESPONSIVE  RESPONSIVE  RESPONSIVE   RESPONSIVE
 .logout-btn{
 	position: absolute;
 	right:    30px;
-	bottom:   10px;
+	bottom:   20%;
 }
 

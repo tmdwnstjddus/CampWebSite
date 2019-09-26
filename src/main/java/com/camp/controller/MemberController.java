@@ -45,7 +45,6 @@ public class MemberController {
 			return "redirect:/member/memberset?memberId="+memberId;
 		}	
 		pwd = Util.getHashedString(pwd, "SHA-256");
-//		String email = req.getParameter("email");
 		
 		member.setMemberId(memberId);
 		member.setPwd(pwd);
@@ -53,4 +52,11 @@ public class MemberController {
 		
 		return "redirect:/member/mypage?memberId="+memberId;
 	}
+	
+	
+	   @RequestMapping(path = "/orderlist", method = RequestMethod.GET)
+	   public String orderList() {
+	      
+	      return "member/orderlist";
+	   }
 }

@@ -26,6 +26,7 @@
 		</div>
 			<!-- 회원 정보 수정 -->
 	         <div class="memberset">
+	         	<form id="memberset-form" action="memberset" method="post">
 	             <table class="table table-hover">
 					<tr style="height: 50px">
 						<th style="width:;text-align: right">아이디</th>
@@ -36,7 +37,7 @@
 					<tr style="height: 50px">
 						<th style="width:;text-align: right">비밀번호</th>
 						<td>
-							<input type="password" name="passwd" style="width:280px" />
+							<input type="password" name="pwd" style="width:280px" />
 						</td>
 					</tr>
 					<tr style="height: 50px">
@@ -61,15 +62,15 @@
 						<th style="width:;text-align: right">주소</th>
 						<td>${ member.addr1 }&nbsp;${ member.addr2 }&nbsp;${ member.addr3 }</td>
 					</tr>									
-				</table>	
-            <div class="p-b-10 float-r">
+				</table>
+			</form>
+		</div>	
                     <!-- Button -->
-			<div style="padding-top: 10px; text-align: center">		
-			 <input type="submit" id="btnmemberset" value="Submit" class="button cart_button" style="color:white;" >
-			 <input type="button" id="btnmembermypage" value="Cancle" class="button cart_button" style="color:white;" >			
-			</div>	
-        	</div>
-          </div>
+	             <div style="padding-top: 10px; text-align: center">
+				 <input type="submit" id="btnmemberset" value="수정" class="size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4" style="color:white;" >
+				 <input type="button" id="btnmembermypage" value="취소" class="size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4" style="color:white;" >		
+				</div>	
+
           
 	<!-- Footer -->
 	<jsp:include page="../include/footer" />
@@ -93,6 +94,7 @@
 	
 	<script>
 	   	$(function(){
+		   	
    		$('#btnmembermypage').on('click', function(event){
    			location.href="/member/mypage?memberId=${loginuser.memberId }"; 
    			
@@ -104,7 +106,5 @@
    		});
    	});
   	</script>
-
-
 </body>
 </html>

@@ -626,10 +626,11 @@ iframe {
 /*[ Logo ]
 -----------------------------------------------------------*/
 .logo {
-  display: block;
   position: absolute;
-  left: 52px;
+  left: 51px;
   top: 50%;
+  font-size:22px;
+  font-weight: 700;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -638,7 +639,8 @@ iframe {
 }
 
 .logo img {
-  max-height: 27px;
+ width: 45px;
+ height: 42px;
 }
 
 

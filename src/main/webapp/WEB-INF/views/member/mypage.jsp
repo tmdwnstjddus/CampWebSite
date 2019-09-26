@@ -37,7 +37,7 @@
 				<a href="#" class="p-r-17"> 
 					<img src="/resources/images/cart.png" alt="" style="width: 360px; height:360px">
 				</a>
-				<a href="#" class="p-r-17">
+				<a href="/member/orderlist?memberId=${ loginuser.memberId }" class="p-r-17">
 					<img src="/resources/images/order.png" alt="" style="width: 360px; height:360px">
 				</a>
 				<a href="/member/memberset?memberId=${ loginuser.memberId }">

@@ -11,6 +11,7 @@
             <!-- Logo -->
             <a href="/home" class="logo">
                <img src="/resources/images/icons/logo.png" alt="IMG-LOGO">
+               TheCamp
             </a>
 
             <!-- Menu -->
@@ -45,8 +46,7 @@
 					<div>                        
 						<a href="#" onclick="openNav()" class="p-r-8">
 							<img src="/resources/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-						</a>
-						<a href="#">${ loginuser.memberId }님 환영합니다!</a>&nbsp;
+						 ${ loginuser.memberId }님 환영합니다!</a>&nbsp;	</a>
 					</div>
 				</c:otherwise>
 			</c:choose>
