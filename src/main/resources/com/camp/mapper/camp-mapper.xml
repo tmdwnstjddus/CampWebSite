@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camp.mapper.CampMapper">
+
+	<!-- <insert id="insertBoard" 
+			parameterType="com.springdemo.bootboard.vo.Board"
+			useGeneratedKeys="true" keyColumn="board_idx" keyProperty="boardIdx">
+		INSERT INTO t_board
+		(
+			title, 
+			contents, 
+			created_datetime,
+			creator_id
+		)
+		VALUES
+		(
+			#{ title }, 
+			#{ contents }, 
+			NOW(),
+			#{ creatorId }
+		)	
+	</insert>
+	
+	<select id="selectBoard" 
+			resultType="com.springdemo.bootboard.vo.Board">
+		<![CDATA[
+		SELECT 
+			board_idx,
+			title,
+			hit_cnt,
+			created_datetime
+		FROM
+			t_board
+		WHERE
+			deleted_yn = 'n'
+		ORDER BY board_idx DESC
+		]]> 
+	</select> -->
+	
+	<!-- <resultMap id="campMap" type="com.camp.vo.Camp">
+		<id column="CAMPNO" property="campNo" />
+		<result column="CAMPNAME" property="campName" />
+		<result column="CONTENT" property="content" />
+		<result column="PRICE" property="price" />
+		<result column="CATEGORY" property="category" />
+		<result column="MEMBERID" property="memberId" />
+		<collection property="fileList" 
+					column="CAMPNO"
+					resultMap="CampFileMap" />
+	</resultMap>	
+	<resultMap id="campFileMap" type="com.camp.vo.CampFile" >
+		<id column="CAMPFILENO" property="campFileNo" />
+		<result column="SAVEDFILENAME" property="savedFileName" />
+		<result column="USERFILENAME" property="userFileName" />
+	</resultMap> -->		
+	
+	<select id="selectCampByCampNo" 
+			parameterType="int" resultType="com.camp.vo.Camp">
+		select 
+			CAMPNO,
+			CAMPNAME,
+			CONTENT,
+			PRICE,
+			CATEGORY,
+			MEMBERID
+		from CAMP
+		where CAMPNO = #{ CAMPNO }
+	</select>
+	
+	<select id="selectCampFilesByCampNo" parameterType="int" resultType="com.camp.vo.CampFile">
+		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
+		FROM CAMPFILE
+		WHERE CAMPNO = #{ CAMPNO }
+	</select>
+	
+	<!-- <delete id="deleteBoard" parameterType="int">
+		UPDATE t_board
+		SET
+			deleted_yn = 'y',
+			updated_datetime = NOW(),
+			updater_id = 'current_user'
+		WHERE
+			board_idx = #{ boardIdx }
+	</delete>
+	
+	<update id="updateBoard" parameterType="com.springdemo.bootboard.vo.Board">
+		UPDATE t_board
+		SET
+			title = #{ title },
+			contents = #{ contents },
+			updated_datetime = NOW(),
+			updater_id = 'current_user'
+		WHERE
+			board_idx = #{ boardIdx }
+	</update>
+	
+	*************************************************
+	
+	<insert id="insertBoardFileList" 
+			parameterType="com.springdemo.bootboard.vo.BoardFile">
+		INSERT INTO t_file
+		(
+			board_idx,
+			original_file_name,
+			stored_file_path,
+			file_size,
+			creator_id,
+			created_datetime
+		)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+			#{ item.boardIdx },
+			#{ item.originalFileName },
+			#{ item.storedFilePath },
+			#{ item.fileSize },
+			#{ item.creatorId },
+			NOW()
+		)
+		</foreach>
+	</insert> -->
+	
+</mapper>
+
+
