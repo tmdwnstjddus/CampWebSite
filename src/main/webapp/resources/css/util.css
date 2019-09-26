@@ -4182,3 +4182,10 @@ RESPONSIVE  RESPONSIVE  RESPONSIVE  RESPONSIVE   RESPONSIVE
 	}
 }
 
+
+.logout-btn{
+	position: absolute;
+	right:    30px;
+	bottom:   10px;
+}
+

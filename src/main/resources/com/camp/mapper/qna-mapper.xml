@@ -16,20 +16,20 @@
 
 <!-- 목록조회  -->
 <select id="selectQnA" resultType="com.camp.vo.QnA">
-	<![CDATA[
+
 	SELECT QANO, TITLE, CONTENT, REGDATE, MEMBERID
 	FROM QA
 	WHERE DELETED = '0'
 	ORDER BY QANO DESC
-	]]>
+
 	
 </select>
 
 <!-- 삭제  -->
 <update id="deleteQnA" parameterType="int">
 	UPDATE QA
-	SET DELETED = '1'
-	WHRER QANO = #{ qaNo }
+	SET DELETED ='1' 
+	WHERE QANO = #{ qaNo }
 </update>
 
 <!-- detail -->
