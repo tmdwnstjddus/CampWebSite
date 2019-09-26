@@ -42,24 +42,24 @@
 						<form name="selectform" method="GET" action="campKind">
 						<ul class="p-b-54">
 							<li class="p-t-4">
-							<input type="radio" class="s-text13 active1" name="category" value="all" id="all" /><label for="all">ALL</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="all" id="all" /><label for="all">ALL</label>
 								<!-- <button class="s-text13 active1" id="All" data-category="all">All</button> -->
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text13 active1" name="category" value="tent" id="tent" <c:if test="${param.category eq 'tent'}"></c:if>/><label for="tent">텐트</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="tent" id="tent" <c:if test="${param.category eq 'tent'}"></c:if>/><label for="tent">텐트</label>
 								<!-- <button class="s-text13 active1" id="Tent" data-category="tent">텐트</button> -->
 								
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text13 active1" name="category" value="caravan" id="caravan" <c:if test="${param.category eq 'caravan'}"></c:if>/><label for="caravan">카라반</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="caravan" id="caravan" <c:if test="${param.category eq 'caravan'}"></c:if>/><label for="caravan">카라반</label>
 								<!-- <button class="s-text13 active1" id="Cravan" data-category="caravan">카라반</button> -->
 								
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text13 active1" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">글램핑</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">글램핑</label>
 								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">글램핑</button> -->
 								
 							</li>
