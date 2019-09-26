@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.camp.vo.Camp;
+
 import com.camp.vo.CampFile;
 
 @Mapper
@@ -13,6 +14,10 @@ public interface CampMapper {
 	Camp selectCampByCampNo(int campNo);
 
 	List<CampFile> selectCampFilesByCampNo(int campNo);
+	
+	List<Camp> getCampList();
+	
+	List<Camp> getCampKind(String category);
 
 //	void insertBoard(Board board);
 //	
@@ -25,5 +30,5 @@ public interface CampMapper {
 //	///////////////////////////////
 //	
 //	void insertBoardFileList(List<BoardFile> list);
-	
+		
 }

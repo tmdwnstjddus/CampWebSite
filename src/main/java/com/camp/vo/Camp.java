@@ -15,5 +15,5 @@ public class Camp {
 	private String memberId;
 	
 	private ArrayList<CampFile> fileList;
-
+	
 }

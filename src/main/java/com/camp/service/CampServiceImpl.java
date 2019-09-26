@@ -26,6 +26,24 @@ public class CampServiceImpl implements CampService {
 		List<CampFile> campFile = campMapper.selectCampFilesByCampNo(campNo);
 		return campFile;
 	}
+	
+
+	@Override
+	public List<Camp> findCampList() {
+		
+		List<Camp> camps = campMapper.getCampList();
+		
+		return camps;
+		
+	}
+
+
+	@Override
+	public List<Camp> findCampKind(String category) {
+		
+		List<Camp> camps = campMapper.getCampKind(category);
+		return camps;
+	}
 
 	
 //	@Override
@@ -72,5 +90,4 @@ public class CampServiceImpl implements CampService {
 //	}
 
 }
-
 

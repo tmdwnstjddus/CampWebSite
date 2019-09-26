@@ -38,24 +38,7 @@
 			deleted_yn = 'n'
 		ORDER BY board_idx DESC
 		]]> 
-	</select> -->
-	
-	<!-- <resultMap id="campMap" type="com.camp.vo.Camp">
-		<id column="CAMPNO" property="campNo" />
-		<result column="CAMPNAME" property="campName" />
-		<result column="CONTENT" property="content" />
-		<result column="PRICE" property="price" />
-		<result column="CATEGORY" property="category" />
-		<result column="MEMBERID" property="memberId" />
-		<collection property="fileList" 
-					column="CAMPNO"
-					resultMap="CampFileMap" />
-	</resultMap>	
-	<resultMap id="campFileMap" type="com.camp.vo.CampFile" >
-		<id column="CAMPFILENO" property="campFileNo" />
-		<result column="SAVEDFILENAME" property="savedFileName" />
-		<result column="USERFILENAME" property="userFileName" />
-	</resultMap> -->		
+	</select> -->		
 	
 	<select id="selectCampByCampNo" 
 			parameterType="int" resultType="com.camp.vo.Camp">
@@ -74,6 +57,18 @@
 		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
 		FROM CAMPFILE
 		WHERE CAMPNO = #{ CAMPNO }
+	</select>
+	
+	<select id="getCampList"
+		parameterType="hashmap" resultType="com.camp.vo.Camp">
+		SELECT *
+		FROM CAMP
+	</select>
+	<select id="getCampKind"
+		parameterType="hashmap" resultType="com.camp.vo.Camp">
+		SELECT *
+		FROM CAMP
+		WHERE category = #{category}
 	</select>
 	
 	<!-- <delete id="deleteBoard" parameterType="int">
@@ -124,5 +119,4 @@
 	</insert> -->
 	
 </mapper>
-
 
