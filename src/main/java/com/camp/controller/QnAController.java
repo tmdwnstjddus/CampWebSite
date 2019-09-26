@@ -56,15 +56,26 @@ public class QnAController {
 	}
 	
 	//게시물 삭제 - user
-	@RequestMapping(path="/qnadelete/{qaNo}", method = RequestMethod.GET)
+	@RequestMapping(path="/deletedqna/{qaNo}", method = RequestMethod.GET)
 	public String qnaDelete(@PathVariable int qaNo) {
 		qnaService.deleteQna(qaNo);
 		
-		return "/qna/qna";
+		return "redirect:/qna/qna";
 	}
+	
+	//게시물 수정 - user
+//	@RequestMapping(path = "/updateqna/{ qano }")
+//	public String qnaUpdate(int qaNo, HttpServletRequest req) {
+//		return null;
+//	}
 	
 	//comment---------------------------------//
 	
+//	@RequestMapping(path = "/qnacomment/{ qano }", method =RequestMethod.POST)
+//	private String comment() {
+//		
+//		return null;
+//	}
 	
 	
 }

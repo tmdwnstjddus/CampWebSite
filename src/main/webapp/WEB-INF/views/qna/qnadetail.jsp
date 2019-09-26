@@ -31,52 +31,9 @@
 			<div class="row">
 				<!-- 사이드 네비-->
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-					<div class="leftbar p-r-20 p-r-0-sm">
-						<!--  -->
-						<h4 class="m-text14 p-b-7">
-							Categories
-						</h4>
-
-						<ul class="p-b-54">
-							<li class="p-t-4">
-								<a href="#" class="s-text13 active1">
-									All
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Women
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Men
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Kids
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Accesories
-								</a>
-							</li>
-						</ul>
-
-						<div class="search-product pos-relative bo4 of-hidden">
-							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
-							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-							</button>
-						</div>
-					</div>
+					
+					<jsp:include page= "../include/qnaSide.jsp" />
+					
 				</div>
 
 				<!--알맹이-->
@@ -91,21 +48,23 @@
 								<div class="p-t-15 p-b-23">
 									<div class="widget">
 										
-										<div class="flex-c-m">
-											<p class="">작성자</p>
-											<p>${ qna.memberId }</p>
-											
-											<p>등록일자</p>
-											<p>${ qna.regDate }</p>
+										<div class="m-text6	 flex-sb flex-m p-b-21">
+											<div class="t-left">
+												<span>작성자</span>
+												<span class="m-l-3 m-r-6">|</span>
+												<span>${ qna.memberId }</span>
+											</div>
+											<div class="t-right">
+												<span>등록일자</span>
+												<span class="m-l-3 m-r-6">|</span>
+												<span>${ qna.regDate }</span>
+											</div>
 
 										</div>
 										
-										<div class="flex-c-m">
-											<p class="w-size29 p-b-17">제목</p>
-											<div class="bo4 of-hidden size15 m-b-20">
-												<input class="sizefull s-text7 p-l-22 p-r-22" id=title name="title" value=${ qna.title } />
-											</div>
-
+									
+										<div class="bo4 of-hidden size15 m-b-20">
+											<input class="sizefull s-text7 p-l-22 p-r-22" id=title name="title" value=${ qna.title } />
 										</div>
 
 										<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="content">${ qna.content }</div>
@@ -113,56 +72,17 @@
 										<c:if test="${ true }">
 											<div class="p-b-10 t-right">
 												<!-- Button -->
-												<button type="button" class="btn btn-outline-secondary"onclick ="location.href ='/qna/qna'">수정</button>
-												<button type="button" class="btn btn-outline-secondary"onclick ="">삭제</button>
+												<button type="button" class="btn btn-outline-secondary" onclick ="location.href ='/qna/qna'">수정</button>
+												<button type="button" class="btn btn-outline-secondary" id="user_deleted_qa">삭제</button>
 											</div>
 										</c:if>
 
 										<hr class="p-b-30"/>	
 										
-										<!-- 관리자만 가능하게 차후 수정할것 -->
-										<c:choose>
-											<c:when test="${ true }">
-												<div id="Unregistered" class="s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 bg8 t-center">
-													<p class="p-t-35 p-b-8">아직 답변이 등록되지않았습니다.</p>
-													<c:if test="${ true }">
-														<h5>
-															<a href="#" id="UnregisteredBtn" class="badge badge-dark">답변달기</a>
-														</h5>
-													</c:if>
-												</div>
-												
-											<!-- 답변등록 폼 -->
-											<c:if test="${ true }">
-												<div id="answer">
-													<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 sizefull" name="content"></textarea>
-	
-													<div class="p-b-10 t-right">
-														<!-- Button -->
-														<button type="button" class="btn btn-secondary" onclick ="location.href ='/qna/qna'">답변등록</button>
-													</div>
-												</div>
-											</c:if>
-												
-											</c:when>
-											<c:otherwise>
-												<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="content"></div>
-												<div class="p-b-10 t-right">
-													<c:if test="${ true }">
-														<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">수정</button>
-														<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">삭제</button>
-													</c:if>
-												</div>
-											</c:otherwise>
-										
-										</c:choose>
-										
-										
-									
-
+										<jsp:include page="qnacomment.jsp" />
 													
 										<div class="p-b-10 t-center">
-											<button type="button" class="btn btn-secondary"onclick ="location.href ='/upload/qna'">목록으로</button>
+											<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">목록으로</button>
 										</div>
 									
 									</div>
@@ -243,7 +163,21 @@
            $("#answer").show();
        }); 
        
-	</script> 
+	</script>
+	<script type="text/javascript">
+		        	window.addEventListener('load', function(event) {
+		        		var qaNo = ${qna.qaNo};
+		        		var btnDelete = document.querySelector('#user_deleted_qa');
+		        		btnDelete.addEventListener('click', function(event) {
+		        			var ok = confirm("삭제할까요?");
+		        			if (ok) {
+			        			location.href = "deletedqna/"+ qaNo ; 			
+		        			}
+		        		});
+		        		
+		        		
+		        	});
+	</script>
 	 
 
 	

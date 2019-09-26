@@ -34,27 +34,23 @@
                </nav>
             </div>
             <!-- Header Icon -->
-                  <div class="header-icons-mobile ">
-                  <c:choose>
-                        <c:when test="${ empty loginuser }">
-                           <a href="/account/login">로그인</a>&nbsp;&nbsp;
-                            <a href="/account/register">회원가입</a>   
-                        </c:when>
-                     <c:otherwise>
-                      <div style="text-align: right; padding-right: 10pt;">
-                        <a href="#">${ loginuser.memberId }님 환영합니다!</a>&nbsp;
-                        <a href="/account/logout" style="color: blue">로그아웃</a>
-                        
-                     <!-- <a href="/member/mypage" > -->
-                   <a href="#" onclick="openNav()" >
-                  <img src="/resources/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                  </a>&nbsp;&nbsp;
-                  <a href="#" >
-                   <img src="/resources/images/icons/icon-header-02.png" class="header-icon2" alt="ICON">
-                  </a>
-                  </div>
-                  </c:otherwise>
-                  </c:choose>
+ 		<div class="header-icons">
+ 			<div class="header-wrapicon1 dis-block">
+			<c:choose>
+				<c:when test="${ empty loginuser }">
+					<a href="/account/login">로그인</a>&nbsp;&nbsp;
+					<a href="/account/register">회원가입</a>   
+				</c:when>
+				<c:otherwise>
+					<div>                        
+						<a href="#" onclick="openNav()" class="p-r-8">
+							<img src="/resources/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+						</a>
+						<a href="#">${ loginuser.memberId }님 환영합니다!</a>&nbsp;
+					</div>
+				</c:otherwise>
+			</c:choose>
+			</div>
          </div>
          </div>
       </div>

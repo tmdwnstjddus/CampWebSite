@@ -31,52 +31,9 @@
 			<div class="row">
 				<!-- 사이드 네비-->
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-					<div class="leftbar p-r-20 p-r-0-sm">
-						<!--  -->
-						<h4 class="m-text14 p-b-7">
-							Categories
-						</h4>
-
-						<ul class="p-b-54">
-							<li class="p-t-4">
-								<a href="#" class="s-text13 active1">
-									All
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Women
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Men
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Kids
-								</a>
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Accesories
-								</a>
-							</li>
-						</ul>
-
-						<div class="search-product pos-relative bo4 of-hidden">
-							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
-							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-							</button>
-						</div>
-					</div>
+				
+				<jsp:include page="../include/qnaSide.jsp" />
+				
 				</div>
 
 				<!--알맹이-->
@@ -92,6 +49,7 @@
 								<div class="p-t-15 p-b-23">
 									<div class="widget">
 										<p class="m-text2 flex-sb-m p-b-10"> 글 작성하기 </p>
+										<!-- 멤버 아이디로 받아오기 -->
 										<input type="hidden" name="memberId" value="1" />
 										<p>제목</p>
 										<div class="bo4 of-hidden size15 m-b-20">

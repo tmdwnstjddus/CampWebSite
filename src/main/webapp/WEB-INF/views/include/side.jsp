@@ -132,6 +132,12 @@
                         </div>
                       </li>
                     </ul> -->
+                    <div class="p-t-10 t-right logout-btn">
+                    	<button class="btn btn-outline-primary" onclick="location.href='/account/logout'">
+							<i class="fa fa-sign-out" aria-hidden="true"></i>
+							<span>로그아웃</span>
+						</button>
+					</div>
                   </div>
                 </div>
           </div>
