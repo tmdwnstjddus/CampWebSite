@@ -41,7 +41,7 @@
                                                    <input type="checkbox"class="checkbox"  id="idSaveCheck">
                                                    <label>아이디 기억하기</label>
                                                    <a href="#"><span id="idfindform">아이디 찾기</span></a><br>
-                                                   <a href="#"><span id="pwdfindform">비밀번호 찾기</span></a>
+<!--                                                    <a href="#"><span id="pwdfindform">비밀번호 찾기</span></a> -->
                                                 </div>
                                                 <div class="p-b-10">
                                                    <button   id="login" type="submit" value="로그인" class="flex-c-m size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4">

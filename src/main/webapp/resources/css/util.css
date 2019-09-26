@@ -1,3 +1,38 @@
+/*                          마이페이지                                                  */
+.mypage {
+    text-align: center;
+}
+
+.memberset {
+    text-align: center;
+}
+
+.mypage_block01_wrap {
+    background: #f0f0f0;
+    padding: 42px 0px;
+    margin-bottom: 100px;
+}
+
+.mypage_block01 {
+	text-align:center;
+	font-weight:600;
+	font-size:20px;
+    width: 1035px;
+    margin: 0 auto;
+}
+
+.mypage_block02 {
+	text-align:center;	
+	color: gray;
+	font-weight:400;
+	font-size:14px;
+    width: 1035px;
+    margin: 0 auto;
+}
+
+
+/* ////////////////////////////////////////////////////// */
+
 /*[ FONT SIZE ]
 ///////////////////////////////////////////////////////////
 */

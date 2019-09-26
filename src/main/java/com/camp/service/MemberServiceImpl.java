@@ -48,6 +48,12 @@ public class MemberServiceImpl implements MemberService {
 	      return member;
 	   }
 	   
+		@Override
+		public Member getMemberById(String memberId) {
+			Member member = memberMapper.getMemberById(memberId);
+			return member;
+		}
+	   
 	   // 아이디 찾기
 	   @Override
 	   public String idfind(HttpServletResponse response, String email) throws Exception {
@@ -65,6 +71,11 @@ public class MemberServiceImpl implements MemberService {
 	      } else {
 	         return memberId;
 	      }
-	   }
-
+	 }
+	   
+		@Override
+		public void updateMember(Member member) {
+			
+			memberMapper.updateMember(member);
+		}
 }
