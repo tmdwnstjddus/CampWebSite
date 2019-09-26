@@ -1,20 +1,17 @@
 package com.camp.vo;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 import lombok.Data;
 
 @Data
-public class QnA {
+public class QnAComment {
 	
-	private int qaNo;
-	private String title;
+	private int commentNo;
 	private String content;
 	private Date regDate;
+	private int qaNo;
 	private String memberId;
-	private Boolean deleted;
 	
-	private ArrayList<QnAComment> qnaComment;
 
 }

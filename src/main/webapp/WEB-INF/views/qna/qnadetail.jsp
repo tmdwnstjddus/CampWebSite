@@ -91,18 +91,78 @@
 								<div class="p-t-15 p-b-23">
 									<div class="widget">
 										
-										<p>제목</p>
-										<div class="bo4 of-hidden size15 m-b-20">
-											<div class="sizefull s-text7 p-l-22 p-r-22" type="text" name="title" >
-											</div>
+										<div class="flex-c-m">
+											<p class="">작성자</p>
+											<p>${ qna.memberId }</p>
+											
+											<p>등록일자</p>
+											<p>${ qna.regDate }</p>
+
 										</div>
-										<p> 내용을 작성해주세요 </p>
-										<div class="dis-block s-text7 size21 bo4 p-l-22 p-r-22 p-t-13 m-b-50" name="content"></div>
+										
+										<div class="flex-c-m">
+											<p class="w-size29 p-b-17">제목</p>
+											<div class="bo4 of-hidden size15 m-b-20">
+												<input class="sizefull s-text7 p-l-22 p-r-22" id=title name="title" value=${ qna.title } />
+											</div>
+
+										</div>
+
+										<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="content">${ qna.content }</div>
+										
+										<c:if test="${ true }">
+											<div class="p-b-10 t-right">
+												<!-- Button -->
+												<button type="button" class="btn btn-outline-secondary"onclick ="location.href ='/qna/qna'">수정</button>
+												<button type="button" class="btn btn-outline-secondary"onclick ="">삭제</button>
+											</div>
+										</c:if>
+
+										<hr class="p-b-30"/>	
+										
+										<!-- 관리자만 가능하게 차후 수정할것 -->
+										<c:choose>
+											<c:when test="${ true }">
+												<div id="Unregistered" class="s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 bg8 t-center">
+													<p class="p-t-35 p-b-8">아직 답변이 등록되지않았습니다.</p>
+													<c:if test="${ true }">
+														<h5>
+															<a href="#" id="UnregisteredBtn" class="badge badge-dark">답변달기</a>
+														</h5>
+													</c:if>
+												</div>
+												
+											<!-- 답변등록 폼 -->
+											<c:if test="${ true }">
+												<div id="answer">
+													<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 sizefull" name="content"></textarea>
+	
+													<div class="p-b-10 t-right">
+														<!-- Button -->
+														<button type="button" class="btn btn-secondary" onclick ="location.href ='/qna/qna'">답변등록</button>
+													</div>
+												</div>
+											</c:if>
+												
+											</c:when>
+											<c:otherwise>
+												<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="content"></div>
+												<div class="p-b-10 t-right">
+													<c:if test="${ true }">
+														<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">수정</button>
+														<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">삭제</button>
+													</c:if>
+												</div>
+											</c:otherwise>
+										
+										</c:choose>
+										
+										
+									
 
 													
 										<div class="p-b-10 t-center">
-											<!-- Button -->
-											<button type="button" class="btn btn-secondary">목록으로</button>
+											<button type="button" class="btn btn-secondary"onclick ="location.href ='/upload/qna'">목록으로</button>
 										</div>
 									
 									</div>
@@ -114,6 +174,7 @@
 					</div>
 
 				</div>
+				
 			</div>
 		</div>
 
@@ -174,7 +235,15 @@
 
 	
 	<jsp:include page="../include/jsimport.jsp" />
-	
+	<script type="text/javascript"> 
+       $("#answer").hide(); 
+       $("#UnregisteredBtn").click(function ( event ) {
+           event.preventDefault(); 
+           $("#Unregistered").hide(); 
+           $("#answer").show();
+       }); 
+       
+	</script> 
 	 
 
 	
