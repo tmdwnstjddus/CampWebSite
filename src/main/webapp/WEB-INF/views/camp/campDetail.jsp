@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="title" value="디테일" scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Blog Detail</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../include/cssimport.jsp" />
 </head>

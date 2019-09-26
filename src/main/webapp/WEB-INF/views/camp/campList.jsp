@@ -75,23 +75,11 @@
 						<h4 class="m-text14 p-b-32">
 							Search
 						</h4>
-						<div class="filter-price p-t-22 p-b-50 bo3">
-							<div class="m-text15 p-b-17">
-								<c:if test="${loginuser.userType eq 'admin' }">
-								 	<a href="pr-write"> <input type="button" value="Write" class="btn btn-dark" style="width:100px"></a>	 
-								</c:if>
-							</div>
-
-							
-
-							<div class="flex-sb-m flex-w p-t-16">
-								
-
-								<div class="s-text3 p-t-10 p-b-10">
-									
-								</div>
-							</div>
-						</div>
+						<div class="filter-price p-t-22 p-b-50 bo3">	
+							<c:if test="${ loginuser.type eq 'admin' }">							
+							<a class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" href="/camp/campWrite">등록하기</a>
+							</c:if>
+						</div>						
 
 						<div class="search-product pos-relative bo4 of-hidden">
 							

@@ -1,8 +1,9 @@
 package com.camp.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.service.CampService;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
-
-import java.util.Map;
 
 
 
@@ -29,7 +27,7 @@ public class CampController {
 	
 	
 	@RequestMapping(path = "/campList", method = RequestMethod.GET)
-	public String campingList(Model model) {
+	public String campingList(Model model, HttpSession session) {
 		List<Camp> camps = campService.findCampList();
 		
 		//조회 결과를 request 객체에 저장 (JSP에서 사용할 수 있도록)
@@ -68,7 +66,7 @@ public class CampController {
 	}
 	
 	@RequestMapping(value = "/campDetail/{campNo}", method = RequestMethod.GET)
-	public String detail(@PathVariable int campNo, Model model) {
+	public String campDetail(@PathVariable int campNo, Model model) {
 
 		Camp camps = campService.findCampByCampNo(campNo);
 		List<CampFile> campfiles = campService.findCampFilesByCampNo(campNo);
@@ -78,6 +76,12 @@ public class CampController {
 		model.addAttribute("camp", camps);
 
 		return "camp/campDetail";
+	}
+	
+	@RequestMapping(path = "/campWrite", method = RequestMethod.GET)
+	public String campWrite() {
+
+		return "camp/campWrite";
 	}
 	
 }
