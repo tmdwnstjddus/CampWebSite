@@ -30,37 +30,51 @@
 
 				<div class="col-md-12 p-b-30">
 					<form class="leave-comment" action="/CampWebSite/camp/campWrite" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="again" id="again-hidden">
-						<h4 class="m-text26 p-b-36 p-t-15">
-							공간 정보를 입력해 주세요.
-						</h4>
-						<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>
-						
-						<div class="box_form">
-							<div class="tit">
-								<label for="space_name">공간명<span class="ico_required">*</span></label>
-							</div>
-							<span class="option"><span class="txt_count"><em id="spcNmCnt">0</em>자/<em>18</em>자</span></span>
-							<div class="bo4 of-hidden size15 m-b-20">
-								<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="공간명 " required>
-							</div>
-							<p class="p_guide normal">
-								<i class="sp_icon ico_alert"></i>사용 가능한 특수문자 : ( , ) , [ , ] , - , .(마침표), ,(쉼표)
-							</p>
-							<p class="p_guide warn">
-								<i class="sp_icon ico_alert"></i>공간이름 입력은 필수입니다.
-							</p>
+						<input type="hidden" name="again" id="again-hidden">
+						<div class="row">
+							<h4 class="m-text26 p-b-36 p-t-15"><strong>공간 정보를 입력해 주세요</strong></h4>
+							<p class="p-t-15">( * 필수입력 )</p>
 						</div>						
-
+						
+						<div class="row">
+							<div class="col-md-10">
+								<label for="camp_name">공간명<span style="color:red;"> *</span></label>
+							</div>
+							<div class="p-l-100">
+								<span class="option"><span class="txt_count"><em id="campNameCnt">0</em>자/<em>18</em>자</span></span>
+							</div>							
+						</div>						
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Phone Number">
+							<input class="sizefull s-text7 p-l-22 p-r-22" id="camp_name" type="text" name="campName" placeholder="공간명 " required>
+						</div>					
+						<p class="p_guide normal">
+							<i class="sp_icon ico_alert"></i>사용 가능한 특수문자 : ( , ) , [ , ] , - , .(마침표), ,(쉼표)
+						</p>	
+						<br><br>
+						
+						<div class="row">
+							<div class="col-md-9">
+								<label for="camp_text">공간 소개<span style="color:red;"> *</span></label>
+							</div>
+							<div class="p-l-100">
+								<span class="txt_count"><em id="campContentCnt">0</em>자/<em>500</em>자<span class="txt_guide">(최소 20자)</span></span>
+							</div>							
+						</div>
+						<div class="input">
+							<textarea id="camp_text" class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="content" required
+								placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
+						</div>
+						<br>
+						
+						<div class="row">
+							<div class="col-md-10">
+								<label>가격<span style="color:red;"> *</span></label>
+							</div>
+						</div>
+						<div class="bo4 of-hidden size15 m-b-20">
+							<input class="sizefull s-text7 p-l-22 p-r-22" id="price" type="text" name="price" placeholder="가격 " required>
 						</div>
 
-						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="Email Address">
-						</div>
-
-						<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message" placeholder="Message"></textarea>
 
 						<div class="w-size25">
 							<!-- Button -->
