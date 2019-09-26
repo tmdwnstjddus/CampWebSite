@@ -612,6 +612,7 @@
 	<!-- Container Selection1 -->
 	<div id="dropDownSelect1"></div>
 
+
 	<!-- js import -->
 	<jsp:include page="include/jsimport.jsp" />
 
@@ -652,7 +653,5 @@
 	noticeWindow.opener = self;
 	}
 </script>
-
-
 </body>
 </html>

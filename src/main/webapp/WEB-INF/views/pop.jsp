@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>추석이벤트</title>
+		<title>겨울맞이 이벤트</title>
 	</head>
 	
 		<img src="/resources/images/pop.png">
