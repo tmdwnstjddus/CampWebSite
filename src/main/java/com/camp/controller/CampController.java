@@ -1,7 +1,9 @@
 package com.camp.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.service.CampService;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
+import com.camp.vo.Criteria;
+import com.camp.vo.PageMaker;
 
 
 
@@ -27,41 +33,38 @@ public class CampController {
 	
 	
 	@RequestMapping(path = "/campList", method = RequestMethod.GET)
-	public String campingList(Model model, HttpSession session) {
-		List<Camp> camps = campService.findCampList();
+	public String campingList(Criteria cri, Model model) {
 		
-		//조회 결과를 request 객체에 저장 (JSP에서 사용할 수 있도록)
+		int listCnt = campService.getListCnt();
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(listCnt);
+		
+		List<Camp> camps = campService.findCampList(cri);
+
 		model.addAttribute("camps", camps);
-		return "camp/campList";
+		model.addAttribute("pageMaker", pageMaker);
+	    return "camp/campList";
 	}
 	
 	@RequestMapping(path = "/campKind", method = RequestMethod.GET)
-//	public ModelAndView campingKind(String category, ModelAndView mav) {
-	public String campingKind(String category, Model model) {	
-//		Map<String, Object> map = new HashMap<String, Object>();
+
+	public String campingKind(Criteria cri, String category, Model model) {	
+
 		
-//		if (category == "all") {
-//			List<Camp> camps = campService.findCampList();
-//			model.addAttribute("camps", camps);
-//			}
-		
-//			map.put("camps", camps);
-//			mav.setViewName("camp/campList");
-//			mav.addObject("map", map);
+		int kindCnt = campService.getKindCnt(category);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(kindCnt);
 		
 		
-		    List<Camp> camps = campService.findCampKind(category);
-//		    for (Camp camp: camps) {
-//		         camp.setImg(campService.findUploadFileByUploadNo(camp.getCampNo()));
-//		      }
-		    model.addAttribute("camps", camps);
-//		    map.put("camps", camps);
-//			mav.setViewName("camp/campList");
-//			mav.addObject("map", map);
+	    List<Camp> camps = campService.findCampKind(cri, category);
+
+	    model.addAttribute("camps", camps);
+	    model.addAttribute("pageMaker", pageMaker);
 	    
-		
-		
-//		return mav;
 		return "camp/campList";
 	}
 	

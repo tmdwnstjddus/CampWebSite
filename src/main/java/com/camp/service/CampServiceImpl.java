@@ -1,6 +1,7 @@
 package com.camp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.camp.mapper.CampMapper;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
+import com.camp.vo.Criteria;
 
 @Service
 public class CampServiceImpl implements CampService {
@@ -28,23 +30,41 @@ public class CampServiceImpl implements CampService {
 	}
 	
 
+//	@Override
+//	public List<Map<String, Object>> findCampList(Criteria cri) {
+//		
+//		return (List<Map<String, Object>>)campMapper.getCampList(cri); 
+//		
+//	}
+	
 	@Override
-	public List<Camp> findCampList() {
-		
-		List<Camp> camps = campMapper.getCampList();
-		
+	public List<Camp> findCampList(Criteria cri) {
+		List<Camp> camps = campMapper.getCampList(cri);
 		return camps;
 		
 	}
 
-
 	@Override
-	public List<Camp> findCampKind(String category) {
+	public List<Camp> findCampKind(Criteria cri, String category) {
 		
-		List<Camp> camps = campMapper.getCampKind(category);
+		List<Camp> camps = campMapper.getCampKind(cri, category);
 		return camps;
 	}
 
+	@Override
+	public int getListCnt() {
+		int Cnt = campMapper.getCampListCnt();
+		return Cnt;
+	}
+
+	
+	@Override
+	public int getKindCnt(String category) {
+		int Cnt = campMapper.getCampKindCnt(category);
+		return Cnt;
+	}
+
+	
 	
 //	@Override
 //	public void writeBoard(Camp board) {

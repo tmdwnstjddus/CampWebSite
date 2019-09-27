@@ -1,12 +1,14 @@
 package com.camp.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.camp.vo.Camp;
 
 import com.camp.vo.CampFile;
+import com.camp.vo.Criteria;
 
 @Mapper
 public interface CampMapper {
@@ -15,9 +17,14 @@ public interface CampMapper {
 
 	List<CampFile> selectCampFilesByCampNo(int campNo);
 	
-	List<Camp> getCampList();
+//	List<Map<String, Object>> getCampList(Criteria cri);
+	List<Camp> getCampList(Criteria cri);
 	
-	List<Camp> getCampKind(String category);
+	List<Camp> getCampKind(Criteria cri, String category);
+	
+	int getCampListCnt();
+
+	int getCampKindCnt(String category);
 
 //	void insertBoard(Board board);
 //	
