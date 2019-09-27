@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Contact</title>
+	<title>예약/주문 내역</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -17,13 +17,13 @@
 	<!-- Header -->
 	<jsp:include page="../include/header.jsp" />
 	<!-- content page -->
-                    <h4 class="m-text20 p-b-36 p-t-15 text-center">주문 내역</h4> 
-
+                    <h4 class="m-text20 p-b-36 p-t-15 text-center">${ loginuser.memberId }님의 예약/주문 내역</h4> 
+                    
 <div class="work_area">
         <div class="container">
             <div class="bo4">
                 <div class="bs-example">
-                <ul class="nav nav-tabs bg7">
+                <ul class="nav nav-tabs bg7 flex-sa">
                     <div class="p-t-15 p-b-14 p-l-22" >
                         <a data-toggle="tab" href="#sectionA" class="toggle-color">
                             <h6 class="s-text4 flex-sb-m cs-pointer color0-hov trans-0-4">캠핑장 예약 내역</h6>
@@ -36,60 +36,63 @@
                     </div>
 
                 </ul>
-                <div class="tab-content">
-                    <div id="sectionC" class="tab-pane fade in active p-t-15 p-b-14">
+
+                <div class="tab-content">													
+                    <div id="sectionC" class="tab-pane fade in active">
                         <table class="table-shopping-cart">
 							<tr class="table-head">
 								<th class="column-1"></th>
 								<th class="column-2">주문 날짜</th>
 								<th class="column-3">용품 이름</th>
-								<th class="column-4">개수</th>
+								<th class="column-4">주소</th>
 								<th class="column-5">가격</th>
 							</tr>
-	
-							<tr class="table-row">
+							<c:forEach var="buy" items="${ buys }">  							
+							<tr class="table-row">		
 								<td class="column-1">
 									<div class="cart-img-product b-rad-4 o-f-hidden">
 										<img src="/resources/images/ran.png" alt="IMG-PRODUCT">
-									</div>
-								</td>
-								<td class="column-2">2019-09-26</td>
-								<td class="column-3">빨간색 랜턴</td>
+									</div>								
+								</td>														
+								<td class="column-2">${ buy.buyDate }</td>
+								<td class="column-3">${ buy.name }</td>
 								<td class="column-4">
-										1
+										${ buy.addr1 }${ buy.addr2 }${ buy.addr3 }
 								</td>
-								<td class="column-5">￦22,000</td>
-							</tr>
+								<td class="column-5">￦${ buy.price }<a href="/qna/qna" class="badge badge-success">리뷰 남기기</a></td>
 
-	
+							</tr>
+							</c:forEach>
 						</table>
                     </div>
-                    <div id="sectionA" class="tab-pane fade p-t-15 p-b-14">
-                    	<table class="table table-hover">
+                    <div id="sectionA" class="tab-pane fade table">                  
+                    	<table class="table table-hover text-center">
 								<thead>
 									<tr>
-										<th scope="col" colspan="2">예약 날짜</th>		
-										<th scope="col" colspan="1">캠핑장 분류</th>																		
-										<th scope="col" colspan="1">캠핑장 이름</th>
-										<th scope="col">캠핑장 가격</th>
+										<th class="text-center" scope="col" colspan="2">예약 날짜</th>		
+										<th class="text-center" scope="col" colspan="1">캠핑장 분류</th>																		
+										<th class="text-center" scope="col" colspan="1">캠핑장 이름</th>
+										<th class="text-center" scope="col">캠핑장 가격</th>
 									</tr>
 								</thead>
 								<tbody>
+								    <c:forEach var="rent" items="${ rents }">  
 									<tr>
-										<td colspan="2">2019-09-26</td>				
-										<td colspan="1">카라반</td>															
-										<td colspan="1">카라반 디럭스</td>
-										<td>￦50,000<a href="#" class="badge badge-success">예약 완료</a></td>
+										<td colspan="2">${ rent.rentDate }</td>				
+										<td colspan="1">${ rent.category }</td>															
+										<td colspan="1">${ rent.campName }</td>
+										<td>${ rent.price }<a href="/qna/qna" class="badge badge-success">리뷰 남기기</a></td>
 									</tr>
+									</c:forEach>
 								</tbody>
 						</table>
-					</div>
-                                            
-                </div>
-                </div>
+				</div>
+               </div>
+              </div>
             </div> 
         </div>    
     </div>
+  	<br><br><br>
 
 
 

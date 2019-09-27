@@ -1,5 +1,8 @@
 package com.camp.controller;
 
+import java.text.DateFormat;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.camp.common.Util;
 import com.camp.service.MemberService;
+import com.camp.vo.Buy;
+import com.camp.vo.Camp;
 import com.camp.vo.Member;
+import com.camp.vo.Rent;
 
 @Controller
 @RequestMapping(path = "/member")
@@ -21,7 +27,7 @@ public class MemberController {
 	MemberService memberService;
 	
    @RequestMapping(path = "/mypage", method = RequestMethod.GET)
-   public String mypageList() {
+   public String mypage() {
       
       return "member/mypage";
    }
@@ -53,10 +59,46 @@ public class MemberController {
 		return "redirect:/member/mypage?memberId="+memberId;
 	}
 	
-	
+/////////////////////////////////////////////주문 내역///////////////////////////////////////////////////////
 	   @RequestMapping(path = "/orderlist", method = RequestMethod.GET)
-	   public String orderList() {
-	      
+	   public String orderList(Model model, String memberId) { 
+
+		List<Rent> rent = memberService.orderList(memberId);
+		
+		List<Buy> buy = memberService.orderLists(memberId);
+		   
+		model.addAttribute("rents", rent);
+		model.addAttribute("buys", buy);		
+		   
 	      return "member/orderlist";
 	   }
+	   
+/////////////////////////////////////////////관리자 페이지///////////////////////////////////////////////////////
+	   @RequestMapping(path = "/adminpage", method = RequestMethod.GET)
+	   public String adminPage() {
+	      
+	      return "member/adminpage";
+	   }
+	   
+		@RequestMapping(path = "/memberlist", method = RequestMethod.GET)
+		public String memberList(Model model) {
+			
+			List<Member> members = memberService.findMemberList();
+			
+			model.addAttribute("members", members);
+			return "member/memberlist";
+		}
+		
+/////////////////////////////////////////////레포팅 페이지///////////////////////////////////////////////////////
+		//구매자별 레포팅
+		@RequestMapping(path = "/reporting", method = RequestMethod.GET)
+		public String ReportingForm(Model model) {
+			
+			List<Camp> report = memberService.reporting();
+			
+		    model.addAttribute("report", report);
+				
+			return "/member/reporting";
+			
+		}
 }

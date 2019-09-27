@@ -2,6 +2,7 @@ package com.camp.service;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.camp.common.Util;
 import com.camp.mapper.MemberMapper;
+import com.camp.vo.Buy;
+import com.camp.vo.Camp;
 import com.camp.vo.Member;
+import com.camp.vo.Rent;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -78,4 +82,40 @@ public class MemberServiceImpl implements MemberService {
 			
 			memberMapper.updateMember(member);
 		}
+		
+////////////////////////////////////////관리자 페이지////////////////////////////////////////////		
+		
+		@Override
+		public List<Member> findMemberList() {
+			List<Member> members = memberMapper.getList();
+			return members;
+		}
+		
+////////////////////////////////////////레포팅 페이지////////////////////////////////////////////			
+
+		@Override
+		public List<Camp> reporting() {
+			List<Camp> camp = memberMapper.reporting();
+			
+			return camp;
+		}
+
+///////////////////////////////////////주문 내역////////////////////////////////////////////			
+		
+		@Override
+		public List<Rent> orderList(String memberId) {
+			
+		List<Rent> rent = memberMapper.orderList(memberId);			
+			
+			return rent;
+		}
+
+		@Override
+		public List<Buy> orderLists(String memberId) {
+
+			List<Buy> buy = memberMapper.orderLists(memberId);	
+			
+			return buy;
+		}
+		
 }

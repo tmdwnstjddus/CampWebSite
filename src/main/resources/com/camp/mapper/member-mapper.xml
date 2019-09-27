@@ -46,8 +46,34 @@
 		UPDATE MEMBER
 		SET PWD = #{ pwd }
 		WHERE MEMBERID = #{ memberId }
-	</update> 
+	</update>
 	
+ 	<!-- 주문 페이지 -->	
+    <select id="orderList" resultType="com.camp.vo.Rent">	
+		SELECT R.MEMBERID, R.RENTDATE, C.CAMPNAME, C.CATEGORY, C.PRICE, R.CAMPNO
+		FROM RENT R, CAMP C
+		WHERE R.CAMPNO = C.CAMPNO AND R.MEMBERID = #{ memberId }
+		GROUP BY R.RENTDATE
+	</select> 
+	
+    <select id="orderLists" resultType="com.camp.vo.Buy">	
+		SELECT B.MEMBERID, B.BUYDATE, B.ADDR1, B.ADDR2, B.ADDR3, P.NAME, P.CATEGORY, P.PRICE
+		FROM PRODUCT P, BUY B
+		WHERE P.PRODUCTNO = B.PRODUCTNO AND B.MEMBERID = #{ memberId }
+		GROUP BY B.BUYDATE
+	</select>	
+	
+	<!-- 관리자 페이지 -->
+	<select id="getList" resultType="com.camp.vo.Member">
+	<include refid="memberColumns"/>
+		FROM MEMBER
+	</select>
+	
+	<!-- 레포팅 -->
+		<select id="reporting" resultType="com.camp.vo.Camp">
+		SELECT CAMPNAME, CONTENT, PRICE, CATEGORY, MEMBERID
+		FROM CAMP		
+	</select>
 	
 </mapper>
 

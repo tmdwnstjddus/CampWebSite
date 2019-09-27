@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>마이페이지</title>
+	<title>관리자 페이지</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -22,11 +22,8 @@
 		
 	<div class ="mypage_block01_wrap">
 		<div class="mypage_block01">
-			<img src="/resources/images/person.png" style="width: 50px; height: 50px">&nbsp;${ loginuser.memberId }님의 마이페이지
+			<img src="/resources/images/person.png" style="width: 50px; height: 50px">&nbsp;관리자 페이지
 		</div>
-			<div class="mypage_block02">
-			회원정보 수정 및 주문내역을 확인하실 수 있습니다
-			</div>
 	</div>
 
 
@@ -36,15 +33,12 @@
 	<div class="mypage">
 		<ul>
 			<li style="text-align: center">
-				<a href="#" class="p-r-17"> 
-					<img src="/resources/images/cart.png" alt="" style="width: 360px; height:360px">
-				</a>
-				<a href="/member/orderlist?memberId=${ loginuser.memberId }" class="p-r-17">
-					<img src="/resources/images/order.png" alt="" style="width: 360px; height:360px">
-				</a>
-				<a href="/member/memberset?memberId=${ loginuser.memberId }">
-					<img src="/resources/images/set.png" alt="" style="width: 360px; height:360px">
-				</a>								
+			<button id="memberlist" name="memberlist" type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 리스트&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+			<button type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 답변&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>	
+			<button id="reporting" type="button" class="btn btn-dark btn-lg">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;캠핑장 통계&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>					
 			</li>
 		</ul>
 	</div>
@@ -67,6 +61,20 @@
 	<!-- js import -->
 	<jsp:include page="../include/jsimport.jsp" />
 
+	<script type="text/javascript">	 
+   	$(function(){
+	   	
+   		$('#memberlist').on('click', function(event){
+   			location.href="/member/memberlist"; 
+   			
+   		});
+   		
+   		$('#reporting').on('click', function(event){
+   			location.href="/member/reporting"; 
+   			
+   		});
+   	});
+	</script>
 
 </body>
 </html>

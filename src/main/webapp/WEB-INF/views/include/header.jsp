@@ -23,7 +23,7 @@
                      </li>
 
                      <li >
-                        <a href="/upload/product">캠핑장 용품</a>
+                        <a href="/product/productList">캠핑장 용품</a>
                      </li>
                      <li>
                         <a href="/upload/tourist">주변관광지</a>

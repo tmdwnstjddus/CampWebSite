@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
-	<title>board</title>
+	<title>Error</title>
 	<link rel="stylesheet" href="/resources/css/style.css" />
 </head>
 <body>

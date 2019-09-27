@@ -3,7 +3,7 @@
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 
-        <div id="mySidepanel" class="sidepanel">
+        <div id="mySidepanel" class="sidepanel ">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="nevpanner"> 
                   <div class="rightbar">
@@ -13,6 +13,14 @@
                       	MyPage
                     </h4>    
                     <ul>
+                      <c:if test="${ loginuser.type eq 'admin' }">    
+                     	<li class="p-t-6 p-b-8 bo6">
+	                        <a href="/member/adminpage" class="s-text13 p-t-5 p-b-5"
+	                        style="color:red">
+	                                                  관리자 페이지
+	                        </a>
+	                     </li> 
+                      </c:if>                      
                       <li class="p-t-6 p-b-8 bo6">
                         <a href="/member/mypage?memberId=${loginuser.memberId }" class="s-text13 p-t-5 p-b-5">
                           	마이페이지
@@ -27,8 +35,9 @@
                         <a href="/member/mypage?memberId=${loginuser.memberId }" class="s-text13 p-t-5 p-b-5">
                           	예약내역
                         </a>
-                      </li>                                        
+                      </li>                                                       
                     </ul>
+                    
         
                     <div class="p-t-10 t-right logout-btn">
                     	<button class="btn btn-outline-primary" onclick="location.href='/account/logout'">

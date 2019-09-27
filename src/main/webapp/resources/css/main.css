@@ -39,6 +39,10 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*[ FONT ]
 ///////////////////////////////////////////////////////////
 */
+.text-center{
+	text-align: center;
+}
+
 
 @font-face {
   font-family: Montserrat-Regular;
