@@ -45,40 +45,39 @@ public class CampServiceImpl implements CampService {
 		return camps;
 	}
 
+	@Override
+	public Integer registerCamp(Camp camp) {
+		
+		campMapper.insertCamp(camp);
+		int newCampNo = camp.getCampNo();
+		
+//		대표이미지
+		CampFile titleFile = camp.getFile();
+		titleFile.setCampNo(newCampNo);
+		campMapper.insertCampFile(titleFile);
+		
+		insertCampFiles(camp, newCampNo);
+		
+		return newCampNo;
+		
+	}
 	
-//	@Override
-//	public void writeBoard(Camp board) {
-//		
-//		boardMapper.insertBoard(board);
-//		for (CampFile file : board.getFileList()) {
-//			file.setBoardIdx(board.getBoardIdx());
-//			//boardMapper.insertBoardFileList(list); //count 만큼 반복
-//		}
-//		boardMapper.insertBoardFileList(board.getFileList()); //1회
-//		
-//	}
-//
-//	@Override
-//	public List<Camp> findBoard() {
-//		List<Camp> boards = boardMapper.selectBoard();
-//		return boards;
-//	}
-//
-//	@Override
-//	public Camp findBoardByIdx(int boardIdx) {
-//		//1. Board 조회
-//		//2. BoardFile 조회
-//		//3. Board에 BoardFile 저장
-//		Camp board = boardMapper.selectBoardByIdx(boardIdx);
-//		return board;
-//	}
-//
-//	@Override
-//	public CampFile findBoardFileByIdx(int fileIdx) {
-//		CampFile file = boardMapper.selectBoardFileByIdx(fileIdx);
-//		return file;
-//	}
-//
+	@Override
+	public void insertCampFiles(Camp camp, int campNo) {
+
+//		이미지
+		for (CampFile file : camp.getFileList()) {
+			file.setCampNo(campNo);
+			campMapper.insertCampFile(file);
+		}
+	}
+
+	@Override
+	public CampFile findCampFile(int campNo) {
+		CampFile file = campMapper.selectCampFile(campNo);
+		return file;
+	}
+
 //	@Override
 //	public void deleteBoard(int boardIdx) {
 //		boardMapper.deleteBoard(boardIdx);

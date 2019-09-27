@@ -16,10 +16,12 @@ public interface CampService {
 
 	List<Camp> findCampKind(String category);
 
-//	void writeBoard(Camp board);
-//	
-//	List<Camp> findBoard();
-//
+	Integer registerCamp(Camp camp);
+
+	void insertCampFiles(Camp camp, int campNo);
+
+	CampFile findCampFile(int campNo);
+
 //	void deleteBoard(int boardIdx);
 //
 //	void updateBoard(Camp board);

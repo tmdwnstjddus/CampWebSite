@@ -8,5 +8,6 @@ public class CampFile {
 	private int campFileNo;	
 	private String savedFileName;
 	private String userFileName;	
+	private boolean flag;	
 	private int campNo;
 }

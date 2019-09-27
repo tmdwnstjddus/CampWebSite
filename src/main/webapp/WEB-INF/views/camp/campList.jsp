@@ -47,7 +47,7 @@
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="tent" id="tent" <c:if test="${param.category eq 'tent'}"></c:if>/><label for="tent">텐트</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="room" id="room" <c:if test="${param.category eq 'room'}"></c:if>/><label for="room">숙소</label>
 								<!-- <button class="s-text13 active1" id="Tent" data-category="tent">텐트</button> -->
 								
 							</li>
@@ -108,7 +108,7 @@
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 									<a href="/camp/campDetail/${camp.campNo}">
-										<img src="/resources/images/item-02.jpg" alt="IMG-PRODUCT">
+										<img src="/resources/camp-files/${ camp.file.savedFileName }" alt="IMG-PRODUCT">
 									</a>								
 								</div>
 
@@ -178,7 +178,7 @@
 			location.href="/camp/campList";
 		 			
 		 	});
-		$('#tent').on('change', function(event){
+		$('#room').on('change', function(event){
 				this.form.submit();
 			});
 		$('#caravan').on('change', function(event){

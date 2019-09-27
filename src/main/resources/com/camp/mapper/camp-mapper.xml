@@ -3,42 +3,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.camp.mapper.CampMapper">
-
-	<!-- <insert id="insertBoard" 
-			parameterType="com.springdemo.bootboard.vo.Board"
-			useGeneratedKeys="true" keyColumn="board_idx" keyProperty="boardIdx">
-		INSERT INTO t_board
-		(
-			title, 
-			contents, 
-			created_datetime,
-			creator_id
-		)
-		VALUES
-		(
-			#{ title }, 
-			#{ contents }, 
-			NOW(),
-			#{ creatorId }
-		)	
-	</insert>
-	
-	<select id="selectBoard" 
-			resultType="com.springdemo.bootboard.vo.Board">
-		<![CDATA[
-		SELECT 
-			board_idx,
-			title,
-			hit_cnt,
-			created_datetime
-		FROM
-			t_board
-		WHERE
-			deleted_yn = 'n'
-		ORDER BY board_idx DESC
-		]]> 
-	</select> -->		
+<mapper namespace="com.camp.mapper.CampMapper">	
 	
 	<select id="selectCampByCampNo" 
 			parameterType="int" resultType="com.camp.vo.Camp">
@@ -50,13 +15,13 @@
 			CATEGORY,
 			MEMBERID
 		from CAMP
-		where CAMPNO = #{ CAMPNO }
+		where CAMPNO = #{ campNo }
 	</select>
 	
 	<select id="selectCampFilesByCampNo" parameterType="int" resultType="com.camp.vo.CampFile">
 		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
 		FROM CAMPFILE
-		WHERE CAMPNO = #{ CAMPNO }
+		WHERE CAMPNO = #{ campNo }
 	</select>
 	
 	<select id="getCampList"
@@ -69,6 +34,24 @@
 		SELECT *
 		FROM CAMP
 		WHERE category = #{category}
+	</select>
+	
+	<insert id="insertCamp" parameterType="com.camp.vo.Camp"
+			useGeneratedKeys="true" keyColumn="campNo" keyProperty="campNo">
+		INSERT INTO CAMP (CAMPNAME, CONTENT, PRICE, CATEGORY, MEMBERID)
+		VALUES (#{campName}, #{content}, #{price}, #{category}, #{memberId})
+	</insert>
+	
+	<insert id="insertCampFile" parameterType="com.camp.vo.CampFile">
+		INSERT INTO CAMPFILE (CAMPNO, SAVEDFILENAME, USERFILENAME, FLAG)
+		VALUES (#{campNo}, #{savedFileName}, #{userFileName}, #{flag})
+	</insert>
+	
+	<select id="selectCampFile" parameterType="int" resultType="com.camp.vo.CampFile">
+		SELECT CAMPFILENO, CAMPNO, SAVEDFILENAME, FLAG
+		FROM CAMPFILE
+		where campNo = #{ campNo }
+		and flag = 1
 	</select>
 	
 	<!-- <delete id="deleteBoard" parameterType="int">

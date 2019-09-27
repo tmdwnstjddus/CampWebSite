@@ -34,19 +34,60 @@
 	<div class="container bgwhite p-t-35 p-b-80">
 		<div class="flex-w flex-sb">
 			<div class="w-size13 p-t-30 respon5">
-				<div class="wrap-slick3 flex-sb flex-w">
-					<div class="wrap-slick3-dots"></div>
-					
-					<c:forEach var="file" items="${ camp.fileList }">
-					<div class="slick3">
-						<div class="item-slick3" data-thumb="/resources/images/thumb-item-01.jpg">
-							<div class="wrap-pic-w">
-								<img src="/CampWebSite/resources/camp-files/${ file.savedFileName }">
+				<div class="wrap-slick3 flex-sb flex-w">					
+					<div class="wrap-slick3-dots">
+						<ul class="slick3-dots" role="tablist">
+							<c:forEach var="file" items="${ camp.fileList }">
+							<li class="" role="presentation">
+								<img src="/resources/camp-files/${ file.savedFileName }">
+								<div class="slick3-dot-overlay"></div>
+							</li>
+							<!-- <li role="presentation" class="slick-active">
+								<img src=" images/thumb-item-02.jpg ">
+								<div class="slick3-dot-overlay"></div>
+							</li>
+							<li role="presentation" class="">
+								<img src=" images/thumb-item-03.jpg ">
+								<div class="slick3-dot-overlay"></div>
+							</li> -->
+							</c:forEach>
+						</ul>
+						
+						<div class="slick3 slick-initialized slick-slider slick-dotted">
+							<div class="slick-list draggable">
+								<div class="slick-track" style="opacity: 1; width: 1299px;">
+									<div class="item-slick3 slick-slide"
+										data-thumb="images/thumb-item-01.jpg" data-slick-index="0"
+										aria-hidden="true" tabindex="-1" role="tabpanel"
+										id="slick-slide10" aria-describedby="slick-slide-control10"
+										style="width: 433px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
+										<div class="wrap-pic-w">
+											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+										</div>
+									</div>
+									<div class="item-slick3 slick-slide slick-current slick-active"
+										data-thumb="images/thumb-item-02.jpg" data-slick-index="1"
+										aria-hidden="false" tabindex="0" role="tabpanel"
+										id="slick-slide11" aria-describedby="slick-slide-control11"
+										style="width: 433px; position: relative; left: -433px; top: 0px; z-index: 999; opacity: 1;">
+										<div class="wrap-pic-w">
+											<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+										</div>
+									</div>
+									<div class="item-slick3 slick-slide"
+										data-thumb="images/thumb-item-03.jpg" data-slick-index="2"
+										aria-hidden="true" tabindex="-1" role="tabpanel"
+										id="slick-slide12" aria-describedby="slick-slide-control12"
+										style="width: 433px; position: relative; left: -866px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
+										<div class="wrap-pic-w">
+											<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
+						
 					</div>
-					</c:forEach>
-					
 				</div>
 			</div>
 

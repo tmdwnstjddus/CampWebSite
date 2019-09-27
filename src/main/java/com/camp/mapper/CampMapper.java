@@ -19,16 +19,14 @@ public interface CampMapper {
 	
 	List<Camp> getCampKind(String category);
 
-//	void insertBoard(Board board);
-//	
-//	List<Board> selectBoard();
-//	
+	int insertCamp(Camp camp);
+
+	void insertCampFile(CampFile titleFile);
+
+	CampFile selectCampFile(int campNo);
+
 //	void deleteBoard(int boardIdx);
 //	
 //	void updateBoard(Board board);
-//	
-//	///////////////////////////////
-//	
-//	void insertBoardFileList(List<BoardFile> list);
 		
 }

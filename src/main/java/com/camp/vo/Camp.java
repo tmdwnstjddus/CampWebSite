@@ -14,6 +14,7 @@ public class Camp {
 	private String category;
 	private String memberId;
 	
-	private ArrayList<CampFile> fileList;
+	private CampFile file;  // flag = 1
+	private ArrayList<CampFile> fileList; // flag = 0
 	
 }
