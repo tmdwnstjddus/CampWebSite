@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Product</title>
+	<title>캠핑장 예약</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<jsp:include page="../include/cssimport.jsp" />
@@ -47,19 +47,19 @@
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="room" id="room" <c:if test="${param.category eq 'room'}"></c:if>/><label for="room">숙소</label>
-								<!-- <button class="s-text13 active1" id="Tent" data-category="tent">텐트</button> -->
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="숙소" id="room" <c:if test="${param.category eq 'room'}"></c:if>/><label for="room">방</label>
+								<!-- <button class="s-text13 active1" id="Room" data-category="tent">텐트</button> -->
 								
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="caravan" id="caravan" <c:if test="${param.category eq 'caravan'}"></c:if>/><label for="caravan">카라반</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="카라반" id="caravan" <c:if test="${param.category eq 'caravan'}"></c:if>/><label for="caravan">카라반</label>
 								<!-- <button class="s-text13 active1" id="Cravan" data-category="caravan">카라반</button> -->
 								
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">글램핑</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="글램핑" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">글램핑</label>
 								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">글램핑</button> -->
 								
 							</li>
@@ -71,10 +71,7 @@
 							</li>
 						</ul>
 						</form>
-						<!--  -->
-						<h4 class="m-text14 p-b-32">
-							Search
-						</h4>
+
 						<div class="filter-price p-t-22 p-b-50 bo3">	
 							<c:if test="${ loginuser.type eq 'admin' }">							
 							<a class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" href="/camp/campWrite">등록하기</a>
@@ -130,8 +127,24 @@
 
 					<!-- Pagination -->
 					<div class="pagination flex-m flex-w p-t-26">
-						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+												
+						    <c:if test="${pageMaker.prev }">					  
+						        <a href='/camp/campList?page=${pageMaker.startPage-1 }'><i class="fa fa-chevron-left"></i></a>						    
+						    </c:if>
+						    
+						    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+						    					    
+						        <a href='/camp/campList?page=${idx }' class="item-pagination flex-c-m trans-0-4"><i class="fa">${idx }</i></a>
+						        						  
+						    </c:forEach>
+						    
+						    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">			    
+						        <a href='camp/campList?page=${pageMaker.endPage+1 }'  class="item-pagination flex-c-m trans-0-4"><i class="fa fa-chevron-right"></i></a>					    
+						    </c:if>
+						
+
+		
+
 					</div>
 				</div>
 			</div>
@@ -190,6 +203,8 @@
    			
    		 			
 			});
+	
+
 	
 		
 	</script>

@@ -20,8 +20,9 @@ import com.camp.common.Util;
 import com.camp.service.CampService;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
+import com.camp.vo.Criteria;
 import com.camp.vo.Member;
-
+import com.camp.vo.PageMaker;
 
 
 @Controller
@@ -33,40 +34,43 @@ public class CampController {
 	
 	
 	@RequestMapping(path = "/campList", method = RequestMethod.GET)
-	public String campingList(Model model, HttpSession session) {
-		List<Camp> camps = campService.findCampList();
+	public String campingList(Criteria cri, Model model) {
+		
+		//조회 결과를 request 객체에 저장 (JSP에서 사용할 수 있도록)
+		int listCnt = campService.getListCnt();
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(listCnt);
+		
+		List<Camp> camps = campService.findCampList(cri);
 		
 		for (Camp camp : camps) {
 			camp.setFile(campService.findCampFile(camp.getCampNo()));
 		}
-		
-		//조회 결과를 request 객체에 저장 (JSP에서 사용할 수 있도록)
+
 		model.addAttribute("camps", camps);
-		return "camp/campList";
+		model.addAttribute("pageMaker", pageMaker);
+	    return "camp/campList";
 	}
 	
 	@RequestMapping(path = "/campKind", method = RequestMethod.GET)
-//	public ModelAndView campingKind(String category, ModelAndView mav) {
-	public String campingKind(String category, Model model) {	
-//		Map<String, Object> map = new HashMap<String, Object>();
+	public String campingKind(Criteria cri, String category, Model model) {	
 		
-//		if (category == "all") {
-//			List<Camp> camps = campService.findCampList();
-//			model.addAttribute("camps", camps);
-//			}
-		
-//			map.put("camps", camps);
-//			mav.setViewName("camp/campList");
-//			mav.addObject("map", map);
-		
-		
-		    List<Camp> camps = campService.findCampKind(category);
-		    
-		    for (Camp camp : camps) {
-				camp.setFile(campService.findCampFile(camp.getCampNo()));
-			}
+		int kindCnt = campService.getKindCnt(category);
 
-		    model.addAttribute("camps", camps);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(kindCnt);
+
+	    List<Camp> camps = campService.findCampKind(cri, category);
+	    
+	    for (Camp camp : camps) {
+			camp.setFile(campService.findCampFile(camp.getCampNo()));
+		}
+
+		model.addAttribute("camps", camps);
+	    model.addAttribute("pageMaker", pageMaker);
 
 		return "camp/campList";
 	}

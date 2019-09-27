@@ -22,16 +22,24 @@
 		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
 		FROM CAMPFILE
 		WHERE CAMPNO = #{ campNo }
+		ORDER BY CAMPNO DESC
 	</select>
 	
 	<select id="getCampList"
 		parameterType="hashmap" resultType="com.camp.vo.Camp">
-		SELECT *
+			SELECT *
+			FROM CAMP
+			ORDER BY CAMPNO DESC
+			LIMIT #{pageStart}, #{perPageNum}	
+	</select>
+	
+	<select id="getCampListCnt" resultType="int">
+		SELECT count(*)
 		FROM CAMP
 	</select>
-	<select id="getCampKind"
-		parameterType="hashmap" resultType="com.camp.vo.Camp">
-		SELECT *
+	
+	<select id="getCampKindCnt" resultType="int">
+		SELECT count(*)
 		FROM CAMP
 		WHERE category = #{category}
 	</select>
@@ -52,6 +60,14 @@
 		FROM CAMPFILE
 		where campNo = #{ campNo }
 		and flag = 1
+	</select>
+
+	<select id="getCampKind"
+		parameterType="hashmap" resultType="com.camp.vo.Camp">
+			SELECT *
+			FROM CAMP
+			WHERE category = #{category}
+			ORDER BY CAMPNO DESC
 	</select>
 	
 	<!-- <delete id="deleteBoard" parameterType="int">
