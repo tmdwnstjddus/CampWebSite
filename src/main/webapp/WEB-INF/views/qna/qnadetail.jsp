@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 
@@ -70,10 +71,10 @@
 
 										<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="content">${ qna.content }</div>
 										
-										<c:if test="${ true }">
+										<c:if test="${ loginuser.memberId eq qna.memberId }">
 											<div class="p-b-10 t-right">
 												<!-- Button -->
-												<button type="button" class="btn btn-outline-secondary" onclick ="location.href ='/qna/qna'">수정</button>
+												
 												<button type="button" class="btn btn-outline-secondary" id="user_deleted_qa">삭제</button>
 											</div>
 										</c:if>
@@ -81,7 +82,6 @@
 										<hr class="p-b-30"/>	
 										
 										<jsp:include page="qnacomment.jsp" />
-													
 										<div class="p-b-10 t-center">
 											<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">목록으로</button>
 										</div>
@@ -156,53 +156,56 @@
 
 	
 	<jsp:include page="../include/jsimport.jsp" />
-	<script type="text/javascript">
-		$(function() {
-			$("#answerSubmitButton").on("click", function(event){
-				event.preventDefault();
-				submitAnswer();
+		<script type="text/javascript">
+	$(function() {
+		$("#answerSubmit").on("click", function(event){
+			event.preventDefault();
+			submitAnswer();
+		});
+		
+		function submitAnswer() {
+			
+			//var formData = $('#answerform').serialize();
+			
+			var writer = $("#memberId").text();
+			var answerQaNo = $("#qaNo").text();
+			var answerText = $("#answerText").val();
+
+			var formData = {
+				"memberId":writer,
+				"qaNo":answerQaNo,
+				"answerText":answerText
+				 }
+			
+			
+			$.ajax({
+				type: "post",
+				url: "/qna/answer",
+				contentType: "application/json;charset=UTF-8",
+				dataType: "text",
+				data: JSON.stringify(formData),
+		//		data: formData,
+				success: function(data, status, xhr) {
+					//$("#success-anser").load('/qna/qna-answer', 
+					//		{ "qaNo" : ${ qna.qaNo } },
+					alert("성공"); 
+				},
+				error: function(err) {
+					console.log(err);
+				}
 			});
 			
-			function submitAnswer() {
-				
-				//var formData = $('#answerform').serialize();
-				
-				var writer = $("#writer").text();
-				var answerQaNo = $("answerQaNo").text();
-				var answerText = $("answerText").val();
+		}
 
-				var formData = {
-					"writer":writer,
-					"answerQaNo":answerQaNo,
-					"answerText":answerText
-					 }
-				
-				
-				$.ajax({
-					type: "post",
-					url: "/qna/answer",
-					contentType: "application/json;charset=UTF-8",
-					dataType: "text",
-					data: JSON.stringify(formData),
-			//		data: formData,
-					success: function(data, status, xhr) {
-						//$("#success-anser").load('/qna/qna-answer', 
-						//		{ "qaNo" : ${ qna.qaNo } },
-						alert("성공"); 
-					},
-					error: function(err) {
-						console.log(err);
-					}
-				});
-				
-			}
-	
 
-			})
+		})
 		
 	</script>
 	
 	
+	
+	
+
 	
 	<script type="text/javascript"> 
        $("#answer").hide(); 

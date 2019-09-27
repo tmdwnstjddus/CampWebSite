@@ -52,8 +52,8 @@ public class QnAServiceImpl implements QnAService {
 
 	@Override
 	public List<QnAComment> findQnAAnswer(int qaNo) {
-		List<QnAComment> comment = qnaMapper.selectComment(qaNo);
-		return comment;
+		List<QnAComment> qnaComment = qnaMapper.selectComment(qaNo);
+		return qnaComment;
 	}
 
 

@@ -2,6 +2,7 @@ package com.camp.vo;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 
@@ -15,6 +16,6 @@ public class QnA {
 	private String memberId;
 	private Boolean deleted;
 	
-	private ArrayList<QnAComment> qnaComment;
+	private List<QnAComment> qnaComment;
 
 }

@@ -20,6 +20,7 @@ public interface QnAService {
 	void answerQuestion(QnAComment qnaComment);
 
 	List<QnAComment> findQnAAnswer(int qaNo);
+
 	
 
 }

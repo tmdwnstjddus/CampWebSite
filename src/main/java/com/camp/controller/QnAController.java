@@ -38,6 +38,7 @@ public class QnAController {
 		
 		return "qna/qnawrite";
 	}
+	
 	@RequestMapping(path = "/qnawrite", method = RequestMethod.POST)
 	public String qnaWrite(QnA qna,HttpServletRequest req ) {
 		
@@ -53,9 +54,10 @@ public class QnAController {
 		if (qna == null) {
 			return "redirect:/qna/qna";
 		}
-		
-		//List<QnA> qnaComment = qnaService.findQnACommentByqaNo(qaNo); 
 		model.addAttribute("qna",qna);
+		
+		List<QnAComment> qnacomments = qnaService.findQnAAnswer(qaNo);
+		model.addAttribute("qnacomments", qnacomments);
 		
 		return "qna/qnadetail";
 	}
@@ -76,26 +78,30 @@ public class QnAController {
 	
 	//comment---------------------------------//
 	
-	@RequestMapping(value="/answer", 
-					method =RequestMethod.POST,
-					consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
-					produces = "text/plain;charset=utf-8")
-	@ResponseBody
-	private String qnaComment(QnAComment qnaComment) {
+//	@RequestMapping(value="/answer", method =RequestMethod.POST)
+//	@ResponseBody
+//	private String qnaComment(QnAComment qnaComment) {
+//		
+//		qnaService.answerQuestion(qnaComment);
+//		
+//		return "success";
+//	}
+//	@RequestMapping(value="/qna-answer", method =RequestMethod.GET)
+//	private String calledAnswer(int qaNo, Model model) {
+//
+//		List<QnAComment> comment = qnaService.findQnAAnswer(qaNo);
+//		model.addAttribute("comment",comment);
+//		
+//		return "success";
+//	}
+	
+	@RequestMapping(value = "/answerform", method = RequestMethod.POST )
+	private String qnaComment(QnAComment qnaComment,HttpServletRequest req ) {
 		
 		qnaService.answerQuestion(qnaComment);
 		
-		return "success";
+		return "redirect:/qna/qna";
 	}
-	
-	@RequestMapping(value="/qna-answer", method =RequestMethod.POST)
-	private String calledAnswer(int qaNo, Model model) {
 
-		List<QnAComment> comment = qnaService.findQnAAnswer(qaNo);
-		model.addAttribute("comment",comment);
-		
-		return "success";
-}
-	
 
 }
