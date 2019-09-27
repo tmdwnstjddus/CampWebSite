@@ -50,7 +50,7 @@
 									<div class="widget">
 										<p class="m-text2 flex-sb-m p-b-10"> 글 작성하기 </p>
 										<!-- 멤버 아이디로 받아오기 -->
-										<input type="hidden" name="memberId" value="1" />
+										<input type="hidden" name="memberId" value="${ loginuser.memberId }" />
 										<p>제목</p>
 										<div class="bo4 of-hidden size15 m-b-20">
 											<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="title" >

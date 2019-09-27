@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.camp.vo.QnA;
+import com.camp.vo.QnAComment;
 
 @Mapper
 public interface QnAMapper {
@@ -16,6 +17,10 @@ public interface QnAMapper {
 	void deleteQnA(int qaNo);
 	List<QnA> selectQnA();
 	QnA selectQnABoardByIdx(int qaNo);
-
+	
+	
+	/* comment */
+	void insertQnAComment(QnAComment qnaComment);
+	List<QnAComment> selectComment(int qaNo);
 
 }

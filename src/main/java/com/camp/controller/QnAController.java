@@ -10,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.MediaType;
 
 import com.camp.service.QnAService;
 import com.camp.vo.QnA;
+import com.camp.vo.QnAComment;
 
 @Controller
 @RequestMapping(path = "/qna")
@@ -50,6 +53,8 @@ public class QnAController {
 		if (qna == null) {
 			return "redirect:/qna/qna";
 		}
+		
+		//List<QnA> qnaComment = qnaService.findQnACommentByqaNo(qaNo); 
 		model.addAttribute("qna",qna);
 		
 		return "qna/qnadetail";
@@ -71,11 +76,26 @@ public class QnAController {
 	
 	//comment---------------------------------//
 	
-//	@RequestMapping(path = "/qnacomment/{ qano }", method =RequestMethod.POST)
-//	private String comment() {
-//		
-//		return null;
-//	}
+	@RequestMapping(value="/answer", 
+					method =RequestMethod.POST,
+					consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
+					produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	private String qnaComment(QnAComment qnaComment) {
+		
+		qnaService.answerQuestion(qnaComment);
+		
+		return "success";
+	}
 	
+	@RequestMapping(value="/qna-answer", method =RequestMethod.POST)
+	private String calledAnswer(int qaNo, Model model) {
+
+		List<QnAComment> comment = qnaService.findQnAAnswer(qaNo);
+		model.addAttribute("comment",comment);
+		
+		return "success";
+}
 	
+
 }

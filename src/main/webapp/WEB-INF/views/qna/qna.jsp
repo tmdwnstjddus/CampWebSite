@@ -34,14 +34,15 @@
 
 				<!--알맹이-->
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<div class="flex-w flex-sb p-b-10">
+					<div class="flex-w flex-sb p-b-10 ">
 						<h4>공지</h4>
 						<a href="#" class="badge badge-primary"> <p class="s-text14">글작성</p>	</a> 
 					</div>
+							
 
-					<div class="p-b-20"> 
+					<div class="m-b-30 "> 
 						<div class="flex-w flex-sb">
-							<table class="table table-hover">
+							<table class="table table-hover bo4">
 								<thead>
 									<tr>
 										<th scope="col" class="column-7">#</th>
@@ -62,6 +63,8 @@
 						</div>
 					
 					</div>
+					
+					
 					<!--Q service-->
 					<jsp:include page="../include/quickqna.jsp" />
 
