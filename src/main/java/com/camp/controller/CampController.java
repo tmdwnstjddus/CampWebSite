@@ -179,7 +179,7 @@ public class CampController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/camp/campList";
+		return "redirect:/camp/campList?category=all";
 
 	}
 	
@@ -283,7 +283,7 @@ public class CampController {
 
 		campService.deleteCamp(campNo);
 
-		return "redirect:/camp/campList";
+		return "redirect:/camp/campList?category=all";
 	}
 	
 	
@@ -347,7 +347,7 @@ public class CampController {
 
 		Camp camp = campService.findCampByCampNo(campNo);
 		if (camp == null) {
-			return "redirect:/camp/campList";
+			return "redirect:/camp/campList?category=all";
 		}
 		
 		camp.setFile(campService.findCampFile(camp.getCampNo()));
@@ -382,7 +382,7 @@ public class CampController {
 
 		Camp camp = campService.findCampByCampNo(campNo);
 		if (camp == null) {
-			return "redirect:/camp/campList";		
+			return "redirect:/camp/campList?category=all";		
 		}
 
 		try {
@@ -444,7 +444,7 @@ public class CampController {
 
 		Camp camp = campService.findCampByCampNo(campNo);
 		if (camp == null) { 
-			return "redirect:/camp/campList";
+			return "redirect:/camp/campList?category=all";
 		}
 
 		camp.setFile(campService.findCampFile(camp.getCampNo()));

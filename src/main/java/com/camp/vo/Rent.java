@@ -14,11 +14,11 @@ public class Rent {
 	private String memberId; 
 	private int startDate;
 	private int endDate;
-	
+
 	private String category;
 	private String campName;
 	private int price;
-	
+
 	private CampFile file;  // flag = 1
 	private ArrayList<CampFile> fileList; // flag = 0
 }
