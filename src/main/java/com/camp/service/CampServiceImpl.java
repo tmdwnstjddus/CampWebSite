@@ -1,5 +1,7 @@
 package com.camp.service;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import com.camp.mapper.CampMapper;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
+import com.camp.vo.Rent;
 
 @Service
 public class CampServiceImpl implements CampService {
@@ -97,16 +100,43 @@ public class CampServiceImpl implements CampService {
 		CampFile file = campMapper.selectCampFile(campNo);
 		return file;
 	}
+	
+	@Override
+	public void updateCamp(Camp camp) {
+		campMapper.updateCamp(camp);
+		
+	}
 
-//	@Override
-//	public void deleteBoard(int boardIdx) {
-//		boardMapper.deleteBoard(boardIdx);
-//	}
-//
-//	@Override
-//	public void updateBoard(Camp board) {
-//		boardMapper.updateBoard(board);	
-//	}
+	@Override
+	public void updateCampFile(CampFile campFile) {
+		campMapper.updateCampFile(campFile);
+		
+	}
+
+	@Override
+	public CampFile findCampFileByCampFileNo(int campFileNo) {
+		CampFile file = campMapper.selectCampFileByCampFileNo(campFileNo);
+		return file;
+	}
+
+	@Override
+	public void deleteCamp(int campNo) {
+		campMapper.deleteCamp(campNo);
+		
+	}
+
+	@Override
+	public void deleteCampFile(int campFileNo) {
+		campMapper.deleteCampFile(campFileNo);
+		
+	}
+
+	@Override
+	public ArrayList<Rent> findRentsByCampNo(int campNo, Date rentDate) {
+		List<Rent> rents = campMapper.selectRentsByCampNo(campNo, rentDate);
+		return (ArrayList<Rent>) rents;
+	}
+
 
 }
 

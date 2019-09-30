@@ -9,9 +9,8 @@ import lombok.Data;
 public class Rent {
 	
 	private Date rentDate;
-	private int campNo;
-	private String campName;
-	private int price;
-	private String category;	
+	private int campNo;	
 	private String memberId;
+	private int startDate;
+	private int endDate;
 }

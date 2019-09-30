@@ -63,37 +63,22 @@
 								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">글램핑</button> -->
 								
 							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									
-								</a>
-							</li>
 						</ul>
 						</form>
 
-						<div class="filter-price p-t-22 p-b-50 bo3">	
+						<div>	
 							<c:if test="${ loginuser.type eq 'admin' }">							
 							<a class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" href="/camp/campWrite">등록하기</a>
 							</c:if>
 						</div>						
 
-						<div class="search-product pos-relative bo4 of-hidden">
-							
-						</div>
 					</div>
 				</div>
 
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<!--  -->
 					<div class="flex-sb-m flex-w p-b-35">
-						<div class="flex-w">
-							
-						</div>
-
-						<span class="s-text8 p-t-5 p-b-5">
-							
-						</span>
+						<div class="flex-w"></div>
+						<span class="s-text8 p-t-5 p-b-5"></span>
 					</div>
 
 					<!-- Product -->
@@ -142,9 +127,6 @@
 						        <a href='camp/campList?page=${pageMaker.endPage+1 }'  class="item-pagination flex-c-m trans-0-4"><i class="fa fa-chevron-right"></i></a>					    
 						    </c:if>
 						
-
-		
-
 					</div>
 				</div>
 			</div>

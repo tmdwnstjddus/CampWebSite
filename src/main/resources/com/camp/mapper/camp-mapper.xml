@@ -18,11 +18,23 @@
 		where CAMPNO = #{ campNo }
 	</select>
 	
-	<select id="selectCampFilesByCampNo" parameterType="int" resultType="com.camp.vo.CampFile">
-		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
+	<select id="selectCampFile" parameterType="int" resultType="com.camp.vo.CampFile">
+		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO, FLAG
 		FROM CAMPFILE
 		WHERE CAMPNO = #{ campNo }
-		ORDER BY CAMPNO DESC
+		AND FLAG = 1
+	</select>
+	
+	<select id="selectCampFilesByCampNo" parameterType="int" resultType="com.camp.vo.CampFile">
+		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO, FLAG
+		FROM CAMPFILE
+		WHERE CAMPNO = #{ campNo } AND FLAG = 0
+	</select>
+	
+	<select id="selectCampFileByCampFileNo" parameterType="int" resultType="com.camp.vo.CampFile">
+		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
+		FROM CAMPFILE
+		WHERE CAMPFILENO = #{ campFileNo }
 	</select>
 	
 	<select id="getCampList"
@@ -54,13 +66,6 @@
 		INSERT INTO CAMPFILE (CAMPNO, SAVEDFILENAME, USERFILENAME, FLAG)
 		VALUES (#{campNo}, #{savedFileName}, #{userFileName}, #{flag})
 	</insert>
-	
-	<select id="selectCampFile" parameterType="int" resultType="com.camp.vo.CampFile">
-		SELECT CAMPFILENO, CAMPNO, SAVEDFILENAME, FLAG
-		FROM CAMPFILE
-		where campNo = #{ campNo }
-		and flag = 1
-	</select>
 
 	<select id="getCampKind"
 		parameterType="hashmap" resultType="com.camp.vo.Camp">
@@ -70,52 +75,30 @@
 			ORDER BY CAMPNO DESC
 	</select>
 	
-	<!-- <delete id="deleteBoard" parameterType="int">
-		UPDATE t_board
-		SET
-			deleted_yn = 'y',
-			updated_datetime = NOW(),
-			updater_id = 'current_user'
-		WHERE
-			board_idx = #{ boardIdx }
-	</delete>
-	
-	<update id="updateBoard" parameterType="com.springdemo.bootboard.vo.Board">
-		UPDATE t_board
-		SET
-			title = #{ title },
-			contents = #{ contents },
-			updated_datetime = NOW(),
-			updater_id = 'current_user'
-		WHERE
-			board_idx = #{ boardIdx }
+	<update id="updateCamp" parameterType="com.camp.vo.Camp">
+		UPDATE CAMP
+		SET CAMPNAME = #{ campName }
+			, CONTENT = #{ content }
+			, PRICE = #{ price }
+			, CATEGORY = #{ category }
+		WHERE CAMPNO = #{ campNo }
 	</update>
 	
-	*************************************************
+	<update id="updateCampFile" parameterType="com.camp.vo.CampFile">
+		UPDATE CAMPFILE
+		SET SAVEDFILENAME = #{ savedFileName }, USERFILENAME = #{ userFileName }
+		WHERE CAMPNO = #{ campNo } AND FLAG = 1
+	</update>
 	
-	<insert id="insertBoardFileList" 
-			parameterType="com.springdemo.bootboard.vo.BoardFile">
-		INSERT INTO t_file
-		(
-			board_idx,
-			original_file_name,
-			stored_file_path,
-			file_size,
-			creator_id,
-			created_datetime
-		)
-		VALUES
-		<foreach collection="list" item="item" separator=",">
-		(
-			#{ item.boardIdx },
-			#{ item.originalFileName },
-			#{ item.storedFilePath },
-			#{ item.fileSize },
-			#{ item.creatorId },
-			NOW()
-		)
-		</foreach>
-	</insert> -->
+	<delete id="deleteCamp" parameterType="int">
+		DELETE FROM CAMP
+		WHERE CAMPNO = #{ campNo }
+	</delete>
+	
+	<delete id="deleteCampFile" parameterType="int">
+		DELETE FROM CAMPFILE
+		WHERE CAMPFILENO = #{ campFileNo }
+	</delete>
 	
 </mapper>
 

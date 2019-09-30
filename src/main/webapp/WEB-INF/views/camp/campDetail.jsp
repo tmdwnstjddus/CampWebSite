@@ -8,6 +8,49 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../include/cssimport.jsp" />
+<style>
+.datepick {
+	position: relative;
+	border: 0;
+	background-color: #704de4;
+	color: wheat;
+}
+
+.nowDay {
+	background: blue;
+}
+
+.timepick {
+	background: #704de4;
+	color: wheat;
+}
+
+.calender {
+	margin: auto;
+	border: 1px solid #ccccff;
+	width: -webkit-fill-available;
+}
+
+.time {
+	text-align: -webkit-center;
+	width: 37px;
+	height: 37px;
+	border-radius: 50px;
+}
+
+/* rating */
+.starrr {
+	display: inline-block;
+}
+
+.starrr a {
+	font-size: 16px;
+	padding: 0 1px;
+	cursor: pointer;
+	color: #FFD119;
+	text-decoration: none;
+}
+</style>
 </head>
 <body class="animsition">
 
@@ -34,60 +77,17 @@
 	<div class="container bgwhite p-t-35 p-b-80">
 		<div class="flex-w flex-sb">
 			<div class="w-size13 p-t-30 respon5">
-				<div class="wrap-slick3 flex-sb flex-w">					
-					<div class="wrap-slick3-dots">
-						<ul class="slick3-dots" role="tablist">
-							<c:forEach var="file" items="${ camp.fileList }">
-							<li class="" role="presentation">
-								<img src="/resources/camp-files/${ file.savedFileName }">
-								<div class="slick3-dot-overlay"></div>
-							</li>
-							<!-- <li role="presentation" class="slick-active">
-								<img src=" images/thumb-item-02.jpg ">
-								<div class="slick3-dot-overlay"></div>
-							</li>
-							<li role="presentation" class="">
-								<img src=" images/thumb-item-03.jpg ">
-								<div class="slick3-dot-overlay"></div>
-							</li> -->
-							</c:forEach>
-						</ul>
-						
-						<div class="slick3 slick-initialized slick-slider slick-dotted">
-							<div class="slick-list draggable">
-								<div class="slick-track" style="opacity: 1; width: 1299px;">
-									<div class="item-slick3 slick-slide"
-										data-thumb="images/thumb-item-01.jpg" data-slick-index="0"
-										aria-hidden="true" tabindex="-1" role="tabpanel"
-										id="slick-slide10" aria-describedby="slick-slide-control10"
-										style="width: 433px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
-										<div class="wrap-pic-w">
-											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
-										</div>
-									</div>
-									<div class="item-slick3 slick-slide slick-current slick-active"
-										data-thumb="images/thumb-item-02.jpg" data-slick-index="1"
-										aria-hidden="false" tabindex="0" role="tabpanel"
-										id="slick-slide11" aria-describedby="slick-slide-control11"
-										style="width: 433px; position: relative; left: -433px; top: 0px; z-index: 999; opacity: 1;">
-										<div class="wrap-pic-w">
-											<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-										</div>
-									</div>
-									<div class="item-slick3 slick-slide"
-										data-thumb="images/thumb-item-03.jpg" data-slick-index="2"
-										aria-hidden="true" tabindex="-1" role="tabpanel"
-										id="slick-slide12" aria-describedby="slick-slide-control12"
-										style="width: 433px; position: relative; left: -866px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;">
-										<div class="wrap-pic-w">
-											<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-										</div>
-									</div>
+				<div class="wrap-slick3 flex-sb flex-w">
+					<div class="wrap-slick3-dots"></div>								
+					<div class="slick3">
+						<c:forEach var="file" items="${ camp.fileList }">
+							<div class="item-slick3" data-thumb="/resources/camp-files/${ file.savedFileName }">
+								<div class="wrap-pic-w">
+									<img src="/resources/camp-files/${ file.savedFileName }" width="500px" height="600px" alt="IMG-PRODUCT">
 								</div>
 							</div>
-						</div>
-						
-					</div>
+						</c:forEach>
+					</div>					
 				</div>
 			</div>
 
@@ -100,11 +100,93 @@
 					${ camp.price }
 				</span>
 				
-				<div class="p-b-45">
+				<%-- 관리자가 로그인했을 시 삭제,수정 버튼 활성화 --%>
+				<c:if test="${ loginuser.type eq 'admin' }">
+					<div>
+						<a class="btn btn-outline-success"
+							href="/camp/campUpdate/${ camp.campNo }"
+							role="button">수정</a> 
+						<a class="btn btn-outline-secondary"
+							href="/camp/campDelete/${ camp.campNo }"
+							role="button" onclick="return confirm('삭제하시겠습니까?');">삭제</a> 
+					</div>
+				</c:if>
+
+				<form action="/camp/campRent" method="post" id="rentform">
+					<input type="hidden" name="campNo" id="campNo" value="${ camp.campNo }">
+					<h5 class="pt-3">날짜 선택</h5>
+					<h6 class="px-3 row justify-content-end">
+						<select name="year" id="y" onchange="change()" class="border">
+							<c:forEach var="y" begin="${ nowYear }" end="${ nowYear+1 }" varStatus="y_status">
+								<option <c:if test="${ y eq nowYear }">selected</c:if>>${ y_status.index }</option>
+							</c:forEach>
+						</select>년도&nbsp;&nbsp;&nbsp; 
+						<select name="month" id="m" onchange="change()" class="border">
+							<c:forEach var="m" begin="1" end="12" varStatus="m_status">
+								<option <c:if test="${ m eq nowMonth }">selected</c:if>>${ m_status.index }</option>
+							</c:forEach>
+						</select>월
+					</h6>
+					<!-- // 요일출력 start -->
+					<table id="calendar-table" class="calender">
+						<tr bgcolor="#ccccff">
+							<c:forEach var="week" varStatus="i" items="${ strWeek }">
+								<td class="text-center py-1 px-2">
+									<font color=<c:choose>
+										<c:when test="${ i.index eq 0 }">"red"</c:when>
+										<c:when test="${ i.index eq 6 }">"blue"</c:when>
+										<c:otherwise>"black"</c:otherwise>
+									</c:choose>><b>${ week }</b>
+									</font>
+								</td>
+							</c:forEach>
+						</tr>
+						<c:forEach var="i" begin="1" end="${ lastDay }">
+							<c:if test="${ i eq 1 }">
+								<tr>
+									<%-- <c:forEach begin="0" end="${ week-1 }">
+										<td>&nbsp;</td>
+									</c:forEach> --%>
+							</c:if>
+							<td class="text-center py-1 px-2"
+								<c:if test="${ i eq nowDay }">style="background:#e2d6b79e"</c:if>
+								<c:if test="${ i < nowDay }">style="background: #a9a9a92e;color: #c1c1c1;"</c:if>
+								<c:if test="${ i > nowDay }">style="cursor: pointer;"</c:if>>
+
+								<c:if test="${ i > nowDay }">
+									<input type="radio" id="day${i}" name="day" value="${i}"
+										hidden="hidden" onclick="javascript:dayCheck(${ i })">
+								</c:if> <label for="day${i}" class="date m-0">${i}</label>
+							</td>
+
+							<c:if test="${ i eq lastDay }">
+								<c:forEach begin="${ week+1 }" end="6">
+									<td>&nbsp;</td>
+								</c:forEach>
+							</c:if>
+
+							<c:set var="week" value="${week+1}" />
+							<c:if test="${ week > 6 }">
+								<c:set var="week" value="0" />
+								</tr>
+								<tr>
+							</c:if>
+						</c:forEach>
+						</tr>
+					</table>
+
+					<h5 class="pt-4">시간 선택</h5>
+					<div class="pt-2 row justify-content-center col-sm-12 m-0" id="time-table">날짜를 먼저 선택해주세요.</div>
+					<div class="row justify-content-end">
+						<input class="btn btn-primary" type="button" id="rent_submit" name="rent_submit" value="예약" />
+					</div>
+				</form>
+
+				<div class="p-b-45 mt-5">
 					<span class="s-text8">${ camp.category }</span>
 				</div>
 
-				<!--  -->          
+				<!-- 세부설명 -->          
 				<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
 						Description

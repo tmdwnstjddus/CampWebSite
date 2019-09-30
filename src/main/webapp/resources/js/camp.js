@@ -64,12 +64,12 @@ $(function () {
 
 	//이미지 삭제
 	$('.img-wrap .close').on('click', function() {
-		var CampFileNo = $(this).attr('data-fileNo');
+		var campFileNo = $(this).attr('data-fileNo');
 		var deleteBtn = $(this).parent().parent();
 		$.ajax({
-			url: "/CampWebSite/camp/delete-file",
+			url: "/camp/delete-file",
 			method: "GET",
-			data: {"CampFileNo" : CampFileNo },
+			data: {"campFileNo" : campFileNo },
 			success: function(data, status, xhr){
 				deleteBtn.remove();
 			},
@@ -81,5 +81,59 @@ $(function () {
 	});
 	
 });
+
+/* ----------- year & monthChange ---------- */
+function change() {
+	$('#calendar-table').load("/camp/calendar", {
+		"year": $('#y').val(),
+		"month": $('#m').val(),
+		"campNo": $('#campNo').val()
+	});
+}
+
+/* ----------- dayChange ---------- */
+function dayCheck(i) {
+	if ($('#day' + i).is(":checked")) {
+		$('td').removeClass('datepick');
+		$('#day' + i).parent().addClass('datepick');
+	} else {
+		$('#day' + i).parent().removeClass('datepick');
+	}
+
+	$('#time-table').load("/camp/time", {
+		"year": $('#y').val(),
+		"month": $('#m').val(),
+		"day": $('#day' + i).val(),
+		"campNo": $('#campNo').val()
+	});
+}
+
+/* ----------- timeChange ---------- */
+var n = 0, s_t = 0, e_t = 0;
+function timeClick(time) {
+	n++;
+
+	$('label').removeClass('timepick');
+	if (n % 2 == 1) {
+		s_t = time;
+		startTime(time, s_t);
+	} else if (n % 2 == 0) {
+		e_t = time;
+		endTime(time, s_t, e_t);
+	}
+}
+
+function startTime(time, s_t) {// 시작시간 선택
+	$('#timelabel' + time).addClass('timepick');
+	$('#startTime').attr('value', s_t);
+	$('#endTime').attr('value', s_t);
+}
+
+function endTime(time, s_t, e_t) {// 끝나는시간 선택
+	for (var t = s_t; t <= e_t; t++) {
+		$('#timelabel' + t).addClass('timepick');
+	}
+	$('#endTime').attr('value', e_t);
+}
 
 
