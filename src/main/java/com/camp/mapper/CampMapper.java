@@ -15,11 +15,14 @@ public interface CampMapper {
 
 	Camp selectCampByCampNo(int campNo);
 	List<CampFile> selectCampFilesByCampNo(int campNo);
+
 	CampFile selectCampFile(int campNo);
 	CampFile selectCampFileByCampFileNo(int campFileNo);
-
-	List<Camp> getCampList(Criteria cri);	
-	List<Camp> getCampKind(Criteria cri, String category);
+	
+//	List<Map<String, Object>> getCampList(Criteria cri);
+	List<Camp> getCampList(Criteria cri);
+	
+	List<Camp> getCampKind(Criteria cri);
 	
 	int getCampListCnt();
 	int getCampKindCnt(String category);

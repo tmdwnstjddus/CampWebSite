@@ -7,6 +7,7 @@ public class Criteria {
 	
 	private int page;
     private int perPageNum;
+    private String category;
     
     public int getPageStart() {
         return (this.page-1)*perPageNum;
@@ -15,6 +16,7 @@ public class Criteria {
     public Criteria() {
         this.page = 1;
         this.perPageNum = 6;
+        
     }
     
     public int getPage() {
@@ -38,5 +40,14 @@ public class Criteria {
             this.perPageNum = pageCount;
         }
     }
+    public String getCategory() {
+    	return category;
+    }
+	public void setCategory(String category) {
+		this.category = category;
+		
+	}
+
+	
     
 }

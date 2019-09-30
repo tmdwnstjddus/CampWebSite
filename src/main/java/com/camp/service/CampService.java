@@ -16,8 +16,9 @@ public interface CampService {
 	CampFile findCampFile(int campNo);	
 	CampFile findCampFileByCampFileNo(int campFileNo);
 
-	List<Camp> findCampList(Criteria cri);	
-	List<Camp> findCampKind(Criteria cri, String category);
+	List<Camp> findCampList(Criteria cri);
+	
+	List<Camp> findCampKind(Criteria cri);
 	
 	int getListCnt();
 	int getKindCnt(String category);

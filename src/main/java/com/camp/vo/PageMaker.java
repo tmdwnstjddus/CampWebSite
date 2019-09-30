@@ -32,7 +32,7 @@ public class PageMaker {
         }
         
         startPage = (endPage - displayPageNum) + 1;
-        if(startPage <= 0) startPage = 1;
+        if(startPage <= 0) {startPage = 1;}
 
  
         prev = startPage == 1 ? false : true;

@@ -19,7 +19,8 @@
                <nav class="menu">
                   <ul class="main_menu">
                      <li>
-                        <a href="/camp/campList">캠핑장 예약</a>
+                     <!-- <input type="hidden" name="category" value="all"/> -->
+                        <a href="/camp/campList?category=all">캠핑장 예약</a>
                      </li>
 
                      <li >
