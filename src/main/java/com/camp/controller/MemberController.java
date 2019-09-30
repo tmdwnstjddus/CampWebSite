@@ -1,6 +1,5 @@
 package com.camp.controller;
 
-import java.text.DateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.camp.common.Util;
+import com.camp.service.CampService;
 import com.camp.service.MemberService;
+import com.camp.service.ProductService;
 import com.camp.vo.Buy;
-import com.camp.vo.Camp;
 import com.camp.vo.Member;
 import com.camp.vo.Rent;
 
@@ -25,6 +25,12 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	CampService campService;
+	
+	@Autowired
+	ProductService productService;
 	
    @RequestMapping(path = "/mypage", method = RequestMethod.GET)
    public String mypage() {
@@ -63,12 +69,20 @@ public class MemberController {
 	   @RequestMapping(path = "/orderlist", method = RequestMethod.GET)
 	   public String orderList(Model model, String memberId) { 
 
-		List<Rent> rent = memberService.orderList(memberId);
+		List<Rent> rents = memberService.orderList(memberId);
 		
-		List<Buy> buy = memberService.orderLists(memberId);
+		List<Buy> buys = memberService.orderLists(memberId);
+		
+		for (Rent rent : rents) {
+			rent.setFile(campService.findCampFile(rent.getCampNo()));
+		}
+
+		for (Buy buy : buys) {
+			buy.setFile(productService.findProductFile(buy.getProductNo()));
+		}		
 		   
-		model.addAttribute("rents", rent);
-		model.addAttribute("buys", buy);		
+		model.addAttribute("rents", rents);
+		model.addAttribute("buys", buys);		
 		   
 	      return "member/orderlist";
 	   }
@@ -94,11 +108,11 @@ public class MemberController {
 		@RequestMapping(path = "/reporting", method = RequestMethod.GET)
 		public String ReportingForm(Model model) {
 			
-			List<Camp> report = memberService.reporting();
+			List<Member> report = memberService.reporting();
 			
-		    model.addAttribute("report", report);
+		    model.addAttribute("reports", report);
 				
-			return "/member/reporting";
+			return "member/reporting";
 			
 		}
 }

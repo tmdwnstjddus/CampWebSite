@@ -18,50 +18,45 @@
 	<jsp:include page="../include/header.jsp" />
 	<!-- content page -->
 		
-		<div class="container" style="padding-top:50;text-align:center">
-		
-		<table class="table table-bordered">
-			<tr style="background-color: black;height: 50px" class="dark">
-				<th style="width: 5%;text-align: center; color:white">아이디</th>
-				<th style="width: 5%;text-align: center; color:white">카테고리</th>				
-				<th style="width: 5%;text-align: center; color:white">캠핑장 이름</th>
-		
-			</tr>
-			<c:forEach var="report" items="${ report }">
-				<tr style="height: 20px; text-align: center">
-					<td >
-        				${ report.memberId }
-       				</td>			
-					<td >
-        				${ report.category }
-       				</td>			
-					<td>
-						${ report.campName }
-					</td>
-						
-				</tr>
-			</c:forEach>
-		</table>		
+	<%-- <div>
+	       <c:forEach var="report" items="${ reports }" varStatus="status">
+             ${ report.memberId }
+            </c:forEach>
+	</div>
+	 --%>
+	<div class="container">
+		<div id="chart" style="width: 1000px; height: 500px;"></div>
+	</div>
 	
-		<br></br>
-		</div>
-
-
+	
 	<!-- Footer -->
 	<jsp:include page="../include/footer" />
 
-
-
-
-
-	<!-- Container Selection -->
-	<div id="dropDownSelect1"></div>
-	<div id="dropDownSelect2"></div>
-
-
 	<!-- js import -->
 	<jsp:include page="../include/jsimport.jsp" />
+	
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawVisualization);
 
+      function drawVisualization() {
+        var data = google.visualization.arrayToDataTable([
+            ['회원 아이디', '이름'],
+            <c:forEach var="report" items="${ reports }" varStatus="status">
+             ['${ report.memberId }', '${ report.name }'],
+            </c:forEach>
+            ]);
 
+        var options = {
+            title: '회원별 현황',
+            subtitle: '통계 년도: 2018-2019'
+                
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
 </body>
 </html>

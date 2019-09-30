@@ -36,6 +36,8 @@
                     </div>
 
                 </ul>
+                
+                
 
                 <div class="tab-content">													
                     <div id="sectionC" class="tab-pane fade in active">
@@ -45,46 +47,49 @@
 								<th class="column-2">주문 날짜</th>
 								<th class="column-3">용품 이름</th>
 								<th class="column-4">주소</th>
-								<th class="column-5">가격</th>
+								<th class="column-2">가격</th>
 							</tr>
 							<c:forEach var="buy" items="${ buys }">  							
 							<tr class="table-row">		
 								<td class="column-1">
 									<div class="cart-img-product b-rad-4 o-f-hidden">
-										<img src="/resources/images/ran.png" alt="IMG-PRODUCT">
+										<img src="/resources/camp-files/${ buy.file.savedFileName }" alt="IMG-PRODUCT">
 									</div>								
 								</td>														
 								<td class="column-2">${ buy.buyDate }</td>
-								<td class="column-3">${ buy.name }</td>
+								<td class="column-3">${ buy.productName }</td>
 								<td class="column-4">
 										${ buy.addr1 }${ buy.addr2 }${ buy.addr3 }
 								</td>
-								<td class="column-5">￦${ buy.price }<a href="/qna/qna" class="badge badge-success">리뷰 남기기</a></td>
-
+								<td class="column-2">￦${  buy.price }<br><a href="/qna/qna" class="badge2 badge-success2">리뷰 남기기</a></td>
 							</tr>
 							</c:forEach>
 						</table>
                     </div>
-                    <div id="sectionA" class="tab-pane fade table">                  
-                    	<table class="table table-hover text-center">
-								<thead>
-									<tr>
-										<th class="text-center" scope="col" colspan="2">예약 날짜</th>		
-										<th class="text-center" scope="col" colspan="1">캠핑장 분류</th>																		
-										<th class="text-center" scope="col" colspan="1">캠핑장 이름</th>
-										<th class="text-center" scope="col">캠핑장 가격</th>
-									</tr>
-								</thead>
-								<tbody>
-								    <c:forEach var="rent" items="${ rents }">  
-									<tr>
-										<td colspan="2">${ rent.rentDate }</td>				
-										<td colspan="1">${ rent.category }</td>															
-										<td colspan="1">${ rent.campName }</td>
-										<td>${ rent.price }<a href="/qna/qna" class="badge badge-success">리뷰 남기기</a></td>
-									</tr>
-									</c:forEach>
-								</tbody>
+                    <div id="sectionA" class="tab-pane fade in active">                  
+                           <table class="table-shopping-cart">
+							<tr class="table-head">
+								<th class="column-1"></th>
+								<th class="column-2">예약 날짜</th>
+								<th class="column-4">분류</th>
+								<th class="column-4">이름</th>
+								<th class="column-2">가격</th>
+							</tr>
+							<c:forEach var="rent" items="${ rents }">  							
+							<tr class="table-row">		
+								<td class="column-1">
+									<div class="cart-img-product" style="height: 120px; width: 180px">
+											<img src="/resources/camp-files/${ rent.file.savedFileName }" alt="NO-IMAGE">
+									</div>								
+								</td>														
+								<td class="column-2">${ rent.rentDate }</td>
+								<td class="column-4">${ rent.category }</td>
+								<td class="column-4">
+										${ rent.campName }
+								</td>
+								<td class="column-2">￦${ rent.price }<br><a href="/qna/qna" class="badge2 badge-success2">리뷰 남기기</a></td>
+							</tr>
+							</c:forEach>
 						</table>
 				</div>
                </div>
@@ -93,8 +98,10 @@
         </div>    
     </div>
   	<br><br><br>
+  	
 
 
+<!-- #container -->
 
 	<!-- Footer -->
 	<jsp:include page="../include/footer" />
@@ -115,7 +122,22 @@
 
 	<!-- js import -->
 	<jsp:include page="../include/jsimport.jsp" />
-
+	<script type="text/javascript">
+		$(function () {
+		
+		    $(".tab_content").hide();
+		    $(".tab_content:first").show();
+		
+		    $("ul.tabs li").click(function () {
+		        $("ul.tabs li").removeClass("active").css("color", "#333");
+		        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+		        $(this).addClass("active").css("color", "darkred");
+		        $(".tab_content").hide()
+		        var activeTab = $(this).attr("rel");
+		        $("#" + activeTab).fadeIn()
+		    });
+		});
+	</script>
 
 </body>
 </html>

@@ -26,9 +26,9 @@
 				<th style="width: 10%;text-align: center; color:white">이름</th>
 				<th style="width: 10%;text-align: center; color:white">회원분류</th>				
 				<th style="width: 15%;text-align: center; color:white">이메일</th>
-				<th style="width: 10%;text-align: center; color:white">전화번호</th>
+				<th style="width: 15%;text-align: center; color:white">전화번호</th>
 				<th style="width: 10%;text-align: center; color:white">가입날짜</th>
-				<th style="width: 30%;text-align: center; color:white">주소</th>				
+				<th style="width: 90%;text-align: center; color:white">주소</th>				
 			</tr>
 			<c:forEach var="member" items="${members}">
 				<tr style="height: 20px; text-align: center">

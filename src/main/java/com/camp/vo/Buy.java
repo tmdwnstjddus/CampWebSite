@@ -2,6 +2,7 @@ package com.camp.vo;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -16,7 +17,11 @@ public class Buy {
 	
 	private int productNo;
 	private String category;
-	private String name;
+	private String productName;
 	private String price;
+	
+	private ProductFile file;  // flag = 1
+	private ArrayList<ProductFile> fileList; // flag = 0
+
 	
 }

@@ -2084,7 +2084,8 @@ li.sale-noti > a {
 
 .table-shopping-cart .column-1 {
   width: 225px;
-  padding-left: 50px;
+  padding-left: 40px;
+  padding-right: 90px;  
 }
 .table-shopping-cart .column-2 {
   width: 330px;
@@ -2146,7 +2147,7 @@ li.sale-noti > a {
 .cart-img-product::after {
   content: '\e870';
   font-family: Linearicons;
-  font-size: 16px;
+  font-size: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

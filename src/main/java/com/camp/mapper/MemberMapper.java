@@ -30,7 +30,7 @@ public interface MemberMapper {
 
 	List<Member> getList();
 
-	List<Camp> reporting();
+	List<Member> reporting();
 
 	List<Rent> orderList(String memberId);
 

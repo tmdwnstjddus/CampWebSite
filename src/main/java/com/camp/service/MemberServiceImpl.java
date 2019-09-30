@@ -94,10 +94,10 @@ public class MemberServiceImpl implements MemberService {
 ////////////////////////////////////////레포팅 페이지////////////////////////////////////////////			
 
 		@Override
-		public List<Camp> reporting() {
-			List<Camp> camp = memberMapper.reporting();
+		public List<Member> reporting() {
+			List<Member> member = memberMapper.reporting();
 			
-			return camp;
+			return member;
 		}
 
 ///////////////////////////////////////주문 내역////////////////////////////////////////////			

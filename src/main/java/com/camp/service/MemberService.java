@@ -25,7 +25,7 @@ public interface MemberService {
 
 	List<Member> findMemberList();
 
-	List<Camp> reporting();
+	List<Member> reporting();
 
 	List<Rent> orderList(String memberId);
 
