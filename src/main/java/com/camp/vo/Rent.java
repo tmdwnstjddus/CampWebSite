@@ -2,6 +2,7 @@ package com.camp.vo;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -13,4 +14,7 @@ public class Rent {
 	private String memberId;
 	private int startDate;
 	private int endDate;
+	
+	private CampFile file;  // flag = 1
+	private ArrayList<CampFile> fileList; // flag = 0
 }
