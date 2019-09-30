@@ -15,7 +15,14 @@ public interface ProductMapper {
 	Product selectProductByProductNo(int productNo);
 
 	List<ProductFile> selectProductFilesByProductNo(int productNo);
+	
+	ProductFile selectProductFile(int productNo);
 
+	int insertProduct(Product product);
+
+	void insertProductFile(ProductFile titleFile);
+
+	
 //	List<CampFile> selectCampFilesByCampNo(int campNo);
 //	
 //	Camp selectCampByCampNo(int campNo);

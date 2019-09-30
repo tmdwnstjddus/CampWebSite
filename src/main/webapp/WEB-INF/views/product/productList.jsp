@@ -120,13 +120,13 @@
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 									<a href="/product/productDetail/${products.productNo}">
-										<img src="/resources/images/item-02.jpg" alt="IMG-PRODUCT">
+										<img src="/resources/camp-files/${ products.file.savedFileName }" alt="IMG-PRODUCT">
 									</a>								
 								</div>
 
 								<div class="block2-txt p-t-20">
 									<a href="/product/productDetail/${ products.productNo }" class="block2-name dis-block s-text3 p-b-5">
-										${products.name }
+										${products.productName }
 									</a>
 
 									<span class="block2-price m-text6 p-r-5">

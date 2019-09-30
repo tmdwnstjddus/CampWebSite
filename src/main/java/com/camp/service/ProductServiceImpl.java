@@ -43,6 +43,41 @@ public class ProductServiceImpl implements ProductService {
 		return productFile;
 		
 	}
+
+	@Override
+	public int writeProduct(Product product) {
+		
+		productMapper.insertProduct(product);
+		int newProductNo = product.getProductNo();
+		
+		//대표이미지 등록
+		ProductFile titleFile = product.getFile();
+		titleFile.setProductNo(newProductNo);
+		productMapper.insertProductFile(titleFile);
+		
+		//insertProductFiles(product, newProductNo);
+		
+		return newProductNo;
+		
+	}
+
+	@Override
+	public ProductFile findProductFile(int productNo) {
+		
+		ProductFile file = productMapper.selectProductFile(productNo);
+		
+		return file;
+	}
+
+//	public void insertProductFiles(Product product, int productNo) {
+//		
+//		//다중이미지 등록
+//		for (ProductFile file : product.getFileList()) {
+//			file.setProductNo(productNo);
+//			productMapper.insertProductFile(file);
+//		}
+//		
+//	}
 	
 //	@Override
 //	public List<CampFile> findCampFilesByCampNo(int campNo) {

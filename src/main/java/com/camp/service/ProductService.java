@@ -13,6 +13,12 @@ public interface ProductService {
 
 	List<ProductFile> prdocutFilesByProductNo(int productNo);
 
+	int writeProduct(Product product);
+
+	ProductFile findProductFile(int productNo);
+	
+	//void insertProductFiles(Product product, int productNo);
+
 	//List<CampFile> findCampFilesByCampNo(int campNo);
 	
 	//Camp findCampByCampNo(int campNo);

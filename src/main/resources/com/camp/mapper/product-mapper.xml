@@ -5,12 +5,21 @@
 
 <mapper namespace="com.camp.mapper.ProductMapper">
 
+	<!-- 물품 리스트 -->
 	<select id="getProductList"
 			parameterType="hashmap" resultType="com.camp.vo.Product">
 			SELECT *
 			FROM PRODUCT
 	</select>
 	
+	<select id="selectProductFile" parameterType="int" resultType="com.camp.vo.ProductFile">
+		SELECT PRODUCTFILENO, PRODUCTNO, SAVEDFILENAME, FLAG
+		FROM PRODUCTFILE
+		where PRODUCTNO = #{ productNo }
+		and flag = 1
+	</select>
+	
+	<!-- 물품 디테일 -->
 	<select id="selectProductByProductNo"
 			parameterType="int" resultType="com.camp.vo.Product">
 			SELECT PRODUCTNO, NAME, CONTENT, PRICE, CATEGORY, MEMBERID
@@ -23,37 +32,22 @@
 			SELECT PRODUCTFILENO, SAVEDFILENAME, USERFILENAME, PRODUCTNO
 			FROM PRODUCTFILE
 			WHERE PRODUCTNO = #{ productNo }
-	
 	</select>
+	
+	<!-- 물품 작성 -->
+	<insert id="insertProduct" parameterType="com.camp.vo.Product"
+			useGeneratedKeys="true" keyColumn="productNo" keyProperty="productNo">
+		INSERT INTO PRODUCT (PRODUCTNAME, CONTENT, PRICE, CATEGORY, MEMBERID)
+		VALUES (#{productName}, #{content}, #{price}, #{category}, #{memberId})
+	</insert>
+	
+	<insert id="insertProductFile" parameterType="com.camp.vo.ProductFile">
+		INSERT INTO PRODUCTFILE (PRODUCTNO, SAVEDFILENAME, USERFILENAME, FLAG)
+		VALUES (#{productNo}, #{savedFileName}, #{userFileName}, #{flag})
+	</insert>
 
 	
-	<!-- <select id="selectCampByCampNo" 
-			parameterType="int" resultType="com.camp.vo.Camp">
-		select 
-			CAMPNO,
-			CAMPNAME,
-			CONTENT,
-			PRICE,
-			CATEGORY,
-			MEMBERID
-		from CAMP
-		where CAMPNO = #{ CAMPNO }
-	</select>
 	
-	<select id="selectCampFilesByCampNo" parameterType="int" resultType="com.camp.vo.CampFile">
-		SELECT CAMPFILENO, SAVEDFILENAME, USERFILENAME, CAMPNO
-		FROM CAMPFILE
-		WHERE CAMPNO = #{ CAMPNO }
-	</select>
-	
-	
-	<select id="getCampKind"
-		parameterType="hashmap" resultType="com.camp.vo.Camp">
-		SELECT *
-		FROM CAMP
-		WHERE category = #{category}
-	</select>
-	 -->
 	
 	
 </mapper>

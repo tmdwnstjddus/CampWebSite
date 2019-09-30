@@ -1,18 +1,14 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<%@ page language="java" 
-		 contentType="text/html; charset=utf-8" 
-		 pageEncoding="utf-8"%>
-
+<c:set var="title" value="캠핑물품 등록" scope="request"/>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-	<title>Product</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<jsp:include page="../include/cssimport.jsp" />
-	
+<meta charset="utf-8">
+<jsp:include page="../include/cssimport.jsp" />
+<link rel="stylesheet" type="text/css" href="/resources/css/camp.css">
 </head>
 <body class="animsition">
 
@@ -21,123 +17,145 @@
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/resources/images/heading-pages-02.jpg);">
 		<h2 class="l-text2 t-center">
-			Camping Product
+			Product
 		</h2>
 		<p class="m-text13 t-center">
-			캠핑장 용품 판매소
+			캠핑물품 등록
 		</p>
 	</section>
-
-
-	<!-- Content page -->
-	<section class="bgwhite p-t-55 p-b-65">
+	
+	<!-- content page -->
+	<section class="bgwhite p-t-66 p-b-60">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-					<div class="leftbar p-r-20 p-r-0-sm">
-						<!--  -->
-						<h4 class="m-text14 p-b-7">
-							Categories
-						</h4>
-						<form name="selectform" method="GET" action="campKind">
-						<ul class="p-b-54">
-							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="all" id="all" /><label for="all">ALL</label>
-								<!-- <button class="s-text13 active1" id="All" data-category="all">All</button> -->
-							</li>
 
-							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="tent" id="tent" <c:if test="${param.category eq 'tent'}"></c:if>/><label for="tent">텐트</label>
-								<!-- <button class="s-text13 active1" id="Tent" data-category="tent">텐트</button> -->
-								
-							</li>
-
-							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="caravan" id="caravan" <c:if test="${param.category eq 'caravan'}"></c:if>/><label for="caravan">카라반</label>
-								<!-- <button class="s-text13 active1" id="Cravan" data-category="caravan">카라반</button> -->
-								
-							</li>
-
-							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">글램핑</label>
-								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">글램핑</button> -->
-								
-							</li>
-
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									
-								</a>
-							</li>
-						</ul>
-						</form>
-						<!--  -->
-						<h4 class="m-text14 p-b-32">
-							Search
-						</h4>
-						<div class="filter-price p-t-22 p-b-50 bo3">	
-							<c:if test="${ loginuser.type eq 'admin' }">							
-							<a class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" href="/camp/campWrite">등록하기</a>
-							</c:if>
-						</div>						
-
-						<div class="search-product pos-relative bo4 of-hidden">
-							
+				<div class="col-md-12 p-b-30">
+					<form action="/product/productWrite" method="post" enctype="multipart/form-data" id="writeForm">
+						<input type="hidden" name="memberId" value="${ loginuser.memberId }">
+						<div class="heading">
+							<h3>캠핑 정보를 입력해 주세요.</h3>
+							<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>
 						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<!--  -->
-					<div class="flex-sb-m flex-w p-b-35">
-						<div class="flex-w">
-							
+						<div class="box_form">
+							<div class="tit">
+								<label for="product_name">캠핑물품<span class="ico_required">*</span></label>
+							</div>
+							<span class="option"><span class="txt_count"><em id="productNameCnt">0</em>자/<em>18</em>자</span></span>
+							<div class="input">
+								<input type="text" id="product_name" min="1" maxlength="18" name="productName" placeholder="캠핑물품명을 입력해주세요." required>
+								<hr>
+							</div>
+							<p class="p_guide normal">
+								<i class="sp_icon ico_alert"></i>사용 가능한 특수문자 : ( , ) , [ , ] , - , .(마침표), ,(쉼표)
+							</p>
+							<p class="p_guide warn">
+								<i class="sp_icon ico_alert"></i>이름 입력은 필수입니다.
+							</p>
 						</div>
-
-						<span class="s-text8 p-t-5 p-b-5">
-							
-						</span>
-					</div>
-
-					<!-- Product -->
-					<div class="row">
-					
-					<c:forEach var="camp" items="${camps}">
-						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<a href="/camp/campDetail/${camp.campNo}">
-										<img src="/resources/images/item-02.jpg" alt="IMG-PRODUCT">
-									</a>								
+						<div class="box_form">
+							<div class="tit">
+								<label for="category">물품유형<span class="ico_required">*</span></label>
+							</div>
+							<p class="option">
+								<span class="txt_required">필수선택</span>
+							</p>
+							<div class="row">
+								<ul class="check_list space ml-3">
+									<li>
+										<input type="radio" name="category" value="텐트/탑프" id="tent" required>
+										<label for="tent" class="ellip">텐트/탑프</label>
+									</li>
+									<li>
+										<input type="radio" name="category" value="침낭/매트리스" id="sleepingBag" required>
+										<label for="sleepingBag" class="ellip">침낭/매트리스</label>
+									</li>
+									<li>
+										<input type="radio" name="category" value="그릴/화로" id="grill" required>
+										<label for="grill" class="ellip">그릴/화로</label>
+									</li>
+									<li>
+										<input type="radio" name="category" value="버너/랜턴" id="burner" required>
+										<label for="burner" class="ellip">버너/랜턴</label>
+									</li>
+									<li>
+										<input type="radio" name="category" value="취사도구" id="cook" required>
+										<label for="cook" class="ellip">취사도구</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="box_form">
+							<div class="tit">
+								<label for="product_text">캠핑물품 소개<span class="ico_required">*</span></label>
+							</div>
+							<span class="option">
+								<span class="txt_count"><em id="productContentCnt">0</em>자/<em>500</em>자<span class="txt_guide">(최소 20자)</span></span>
+							</span>
+							<div class="input">
+								<textarea id="product_text" class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" minlength="20" maxlength="500" name="content" required
+									placeholder="캠핑장을 상세하게 소개해보세요. 캠핑장의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
+							</div>
+							<p class="p_guide warn">
+								<i class="sp_icon ico_alert"></i>소개는 필수 입력입니다.
+							</p>
+						</div>
+						<div class="box_form">
+							<span class="tit">대표이미지<span class="ico_required"> *</span></span>
+							<p class="option">2048 *1158 권장, 최대 3MB</p>
+							<div class="file ">
+								<div class="inner inner_img">이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
+								<div class="btn_box">
+									<label class="titleImgBtn btn" for="titleImgFile"><div>파일첨부</div> 
+									<input type="file" class="_fileRel" name="titleImgFile" id="titleImgFile" required
+										accept="image/*" style="display: none;"></label>
 								</div>
-
-								<div class="block2-txt p-t-20">
-									<a href="/camp/campDetail/${ camp.campNo }" class="block2-name dis-block s-text3 p-b-5">
-										${camp.campName }
-									</a>
-
-									<span class="block2-price m-text6 p-r-5">
-										${camp.price }
-									</span>
+							</div>
+							<p class="p_guide warn">
+								<i class="sp_icon ico_alert"></i>대표이미지는 필수 입력입니다.
+							</p>
+						</div>
+						<div class="box_form">
+							<span class="tit">이미지<label for="product_img"><span class="ico_required">*</span></label></span>
+							<p class="option">
+								2048 * 1158 권장, 한 장당 최대 3MB<span class="txt_guide">(최대 10장)</span>
+							</p>
+							<div class="file ">
+								<div class="inner inner_imgs">이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
+								<div class="btn_box">
+									<label class="imgBtn btn" for="imgFile"><div>파일첨부</div> 
+										<input type="file" class="_fileRel" name="imgFile" id="imgFile" style="display: none;"
+											accept="image/*" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" multiple>
+									</label>
 								</div>
 							</div>
 						</div>
-					</c:forEach>
-
+						<div class="box_form">
+							<div class="tit">
+								<label for="price">가격<span class="ico_required">*</span></label>
+							</div>
+							<div class="input">
+								<input type="text" class="sizefull s-text7 p-l-22 p-r-22" name="price" placeholder="가격을 입력해주세요." required>
+								<hr>
+							</div>
+							<p class="p_guide warn">
+								<i class="sp_icon ico_alert"></i>가격은 필수 입력입니다.
+							</p>
+						</div>
 						
-					</div>
-
-					<!-- Pagination -->
-					<div class="pagination flex-m flex-w p-t-26">
-						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-					</div>
+						<div class="box_form">
+							<div class="btn_box">
+								<input type="submit" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4" value="캠핑 등록">
+							</div>
+						</div>
+							
+					</form>
 				</div>
-			</div>
-		</div>
+				
+			</div><!-- end row -->
+		</div><!-- end container -->
 	</section>
-	
+
+	<!-- Footer -->
 	<jsp:include page="../include/footer.jsp" />
 
 	<!-- Back to top -->
@@ -147,52 +165,11 @@
 		</span>
 	</div>
 
-	<!-- Container Selection -->
+	<!-- Container Selection1 -->
 	<div id="dropDownSelect1"></div>
-	<div id="dropDownSelect2"></div>
 
+	<!-- js import -->
 	<jsp:include page="../include/jsimport.jsp" />
-	<script type="text/javascript">	 
-	$(function(){
-   		
-   			
-   			/* $('button[data-category]').on('click', function(event) {
-
-   	   			var category = $(this).attr('data-category');
-   				$.ajax({
-   	   				url:"campKind",
-   	   				data: "category=" + category,
-   	   				method: "GET",
-   	   				success: function(data, status, xhr) {
-   	   	   					alert(data);
-   	   	   					
-   	   	   			}
-	   	   			, error: function(xhr, status, err){
-						alert(err);
-						
-		   	   		}
-   	   	   		});
-   			}); */
-   			
-		$('#all').on('change', function(event){
-			location.href="/camp/campList";
-		 			
-		 	});
-		$('#tent').on('change', function(event){
-				this.form.submit();
-			});
-		$('#caravan').on('change', function(event){
-			this.form.submit();
-		});
-		$('#glamping').on('change', function(event){
-			this.form.submit();
-		});
-   			
-   		 			
-			});
-	
-		
-	</script>
 
 </body>
 </html>

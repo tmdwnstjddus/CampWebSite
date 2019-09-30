@@ -77,6 +77,7 @@
 <!--===============================================================================================-->
 	<script src="/resources/js/main.js"></script>
 	<script src="/resources/js/camp.js"></script>
+	<script src="/resources/js/product.js"></script>
 
 	
 	
