@@ -16,7 +16,7 @@ public interface CampService {
 
 	List<Camp> findCampList(Criteria cri);
 	
-	List<Camp> findCampKind(Criteria cri, String category);
+	List<Camp> findCampKind(Criteria cri);
 
 	Integer registerCamp(Camp camp);
 

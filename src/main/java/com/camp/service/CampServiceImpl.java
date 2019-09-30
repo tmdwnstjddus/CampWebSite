@@ -45,9 +45,9 @@ public class CampServiceImpl implements CampService {
 	}
 
 	@Override
-	public List<Camp> findCampKind(Criteria cri, String category) {
+	public List<Camp> findCampKind(Criteria cri) {
 		
-		List<Camp> camps = campMapper.getCampKind(cri, category);
+		List<Camp> camps = campMapper.getCampKind(cri);
 		return camps;
 	}
 

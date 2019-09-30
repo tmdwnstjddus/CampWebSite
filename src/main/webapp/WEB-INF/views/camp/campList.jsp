@@ -39,10 +39,10 @@
 						<h4 class="m-text14 p-b-7">
 							Categories
 						</h4>
-						<form name="selectform" method="GET" action="campKind">
+						<form name="selectform" method="GET" action="campList">
 						<ul class="p-b-54">
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="all" id="all" /><label for="all">ALL</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="all" id="all" <c:if test="${param.category eq 'all'}"></c:if>/><label for="all">ALL</label>
 								<!-- <button class="s-text13 active1" id="All" data-category="all">All</button> -->
 							</li>
 
@@ -112,6 +112,7 @@
 								<div class="block2-txt p-t-20">
 									<a href="/camp/campDetail/${ camp.campNo }" class="block2-name dis-block s-text3 p-b-5">
 										${camp.campName }
+										
 									</a>
 
 									<span class="block2-price m-text6 p-r-5">
@@ -127,19 +128,19 @@
 
 					<!-- Pagination -->
 					<div class="pagination flex-m flex-w p-t-26">
-												
-						    <c:if test="${pageMaker.prev }">					  
-						        <a href='/camp/campList?page=${pageMaker.startPage-1 }'><i class="fa fa-chevron-left"></i></a>						    
+							
+						    <c:if test="${ pageMaker.prev }">					  
+						        <a href='/camp/campList?page=${pageMaker.startPage-1 }&category=${category}'><i class="fa fa-chevron-left"></i></a>						    
 						    </c:if>
 						    
 						    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-						    					    
-						        <a href='/camp/campList?page=${idx }' class="item-pagination flex-c-m trans-0-4"><i class="fa">${idx }</i></a>
+						     
+						        <a href='/camp/campList?category=${category}&page=${idx }' class="item-pagination flex-c-m trans-0-4"><i class="fa">${idx }</i></a>
 						        						  
 						    </c:forEach>
 						    
 						    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">			    
-						        <a href='camp/campList?page=${pageMaker.endPage+1 }'  class="item-pagination flex-c-m trans-0-4"><i class="fa fa-chevron-right"></i></a>					    
+						        <a href='camp/campList?page=${pageMaker.endPage+1 }&category=${category}'  class="item-pagination flex-c-m trans-0-4"><i class="fa fa-chevron-right"></i></a>					    
 						    </c:if>
 						
 
@@ -188,7 +189,7 @@
    			}); */
    			
 		$('#all').on('change', function(event){
-			location.href="/camp/campList";
+			this.form.submit();
 		 			
 		 	});
 		$('#room').on('change', function(event){

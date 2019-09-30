@@ -20,7 +20,7 @@ public interface CampMapper {
 //	List<Map<String, Object>> getCampList(Criteria cri);
 	List<Camp> getCampList(Criteria cri);
 	
-	List<Camp> getCampKind(Criteria cri, String category);
+	List<Camp> getCampKind(Criteria cri);
 	
 	int getCampListCnt();
 

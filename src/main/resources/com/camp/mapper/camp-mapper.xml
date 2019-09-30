@@ -26,11 +26,20 @@
 	</select>
 	
 	<select id="getCampList"
-		parameterType="hashmap" resultType="com.camp.vo.Camp">
+		parameterType="com.camp.vo.Criteria" resultType="com.camp.vo.Camp">
 			SELECT *
 			FROM CAMP
 			ORDER BY CAMPNO DESC
 			LIMIT #{pageStart}, #{perPageNum}	
+	</select>
+	
+	<select id="getCampKind"
+		parameterType="com.camp.vo.Criteria" resultType="com.camp.vo.Camp">
+			SELECT *
+			FROM CAMP
+			WHERE category = #{category}
+			ORDER BY CAMPNO DESC
+			LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="getCampListCnt" resultType="int">
@@ -41,7 +50,7 @@
 	<select id="getCampKindCnt" resultType="int">
 		SELECT count(*)
 		FROM CAMP
-		WHERE category = #{category}
+		WHERE category = #{ category }
 	</select>
 	
 	<insert id="insertCamp" parameterType="com.camp.vo.Camp"
@@ -62,13 +71,7 @@
 		and flag = 1
 	</select>
 
-	<select id="getCampKind"
-		parameterType="hashmap" resultType="com.camp.vo.Camp">
-			SELECT *
-			FROM CAMP
-			WHERE category = #{category}
-			ORDER BY CAMPNO DESC
-	</select>
+	
 	
 	<!-- <delete id="deleteBoard" parameterType="int">
 		UPDATE t_board
