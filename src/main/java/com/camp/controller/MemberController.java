@@ -85,7 +85,7 @@ public class MemberController {
 		model.addAttribute("buys", buys);		
 		   
 	      return "member/orderlist";
-	   }
+	   } 
 	   
 /////////////////////////////////////////////관리자 페이지///////////////////////////////////////////////////////
 	   @RequestMapping(path = "/adminpage", method = RequestMethod.GET)

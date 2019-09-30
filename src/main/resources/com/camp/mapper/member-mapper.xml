@@ -13,7 +13,7 @@
 		INSERT INTO MEMBER ( MEMBERID, PWD, NAME, PHONE, EMAIL, ADDR1, ADDR2, ADDR3 )
 		VALUES ( #{ memberId }, #{ pwd }, #{ name }, #{ phone }, #{ email }, #{ addr1 }, #{ addr2 }, #{ addr3 } )	
 	</insert>
-	
+	 
 	<!-- 아이디 중복 확인 -->
 	<select id="idCheck" resultType="com.camp.vo.Member">
 		SELECT MEMBERID

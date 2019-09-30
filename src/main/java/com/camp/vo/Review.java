@@ -17,4 +17,4 @@ public class Review {
 	private CampFile file;  // flag = 1
 	private ArrayList<CampFile> fileList; // flag = 0
 	
-}
+} 

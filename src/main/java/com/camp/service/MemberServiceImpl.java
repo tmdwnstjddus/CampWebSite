@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setPwd(pwd);
 		
 		memberMapper.registerMember(member);
-		
+		 
 	}
 
 	@Override

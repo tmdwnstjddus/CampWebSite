@@ -2060,7 +2060,7 @@ li.sale-noti > a {
   left: 0;
 }
 
-.container-table-cart::after {
+.container-table-cart::after { 
   content: '';
   display: block;
   position: absolute;

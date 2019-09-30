@@ -10,7 +10,7 @@ import lombok.Data;
 public class Buy {
 	
 	private int butNo;
-	private String addr1;
+	private String addr1; 
 	private String addr2;
 	private String addr3;
 	private Date buyDate;

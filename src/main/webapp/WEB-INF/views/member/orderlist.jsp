@@ -47,7 +47,7 @@
 								<th class="column-2">주문 날짜</th>
 								<th class="column-3">용품 이름</th>
 								<th class="column-4">주소</th>
-								<th class="column-2">가격</th>
+								<th class="column-2">가격</th> 
 							</tr>
 							<c:forEach var="buy" items="${ buys }">  							
 							<tr class="table-row">		

@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<jsp:include page="../include/cssimport.jsp" />
+	<jsp:include page="../include/cssimport.jsp" /> 
 	
 </head>
 <body class="animsition">

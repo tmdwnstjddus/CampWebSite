@@ -12,7 +12,7 @@
 	<jsp:include page="../include/cssimport.jsp" />
 	
 </head>
-<body class="animsition">
+<body class="animsition"> 
 
 	<!-- Header -->
 	<jsp:include page="../include/header.jsp" />

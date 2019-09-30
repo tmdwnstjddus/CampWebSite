@@ -16,7 +16,6 @@
 	<a href="javascript:window.close()" style="color: black">닫기 X</a>
 	</form>
 	</body>
-	
 	<script type="text/javascript">
 	function setCookie( name, value, expiredays )
 	{
@@ -31,7 +30,6 @@
 	setCookie( "Notice", "done" , 1);
 	self.close();
 	}
-</script>
 </html>		
 		
 

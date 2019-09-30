@@ -20,7 +20,7 @@ public interface MemberService {
 	Member idCheck(String memberId);
 
 	void updateMember(Member member);
-
+ 
 	Member getMemberById(String memberId);
 
 	List<Member> findMemberList();

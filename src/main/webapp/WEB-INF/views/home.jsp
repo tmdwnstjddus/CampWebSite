@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<jsp:include page="include/cssimport.jsp" />
-
+ 
 </head>
 <body class="animsition" onload="javascript:pop()">
 

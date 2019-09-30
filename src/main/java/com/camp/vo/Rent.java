@@ -11,7 +11,7 @@ public class Rent {
 	
 	private Date rentDate;
 	private int campNo;	
-	private String memberId;
+	private String memberId; 
 	private int startDate;
 	private int endDate;
 	
