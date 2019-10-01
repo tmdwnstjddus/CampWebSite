@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.camp.mapper.ProductMapper;
+import com.camp.vo.Criteria;
 import com.camp.vo.Product;
 import com.camp.vo.ProductFile;
 
@@ -15,15 +16,6 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductMapper productMapper;
 	
-
-	@Override
-	public List<Product> productList() {
-		
-		List<Product> products = productMapper.getProductList();
-		
-		return products;
-		
-	}
 
 	@Override
 	public Product productByProductNo(int productNo) {
@@ -45,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int writeProduct(Product product) {
+	public Integer writeProduct(Product product) {
 		
 		productMapper.insertProduct(product);
 		int newProductNo = product.getProductNo();
@@ -55,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 		titleFile.setProductNo(newProductNo);
 		productMapper.insertProductFile(titleFile);
 		
-		//insertProductFiles(product, newProductNo);
+		insertProductFiles(product, newProductNo);
 		
 		return newProductNo;
 		
@@ -69,15 +61,75 @@ public class ProductServiceImpl implements ProductService {
 		return file;
 	}
 
-//	public void insertProductFiles(Product product, int productNo) {
-//		
-//		//다중이미지 등록
-//		for (ProductFile file : product.getFileList()) {
-//			file.setProductNo(productNo);
-//			productMapper.insertProductFile(file);
-//		}
-//		
-//	}
+	public void insertProductFiles(Product product, int productNo) {
+		
+		//다중이미지 등록
+		for (ProductFile file : product.getFileList()) {
+			file.setProductNo(productNo);
+			productMapper.insertProductFile(file);
+		}
+		
+	}
+
+	@Override
+	public List<Product> findProductKind(Criteria cri) {
+		
+		List<Product> products = productMapper.getProductKind(cri);
+		return products;
+		
+	}
+
+	@Override
+	public int getKindCnt(String category) {
+		
+		int Cnt = productMapper.getProductKindCnt(category);
+		return Cnt;
+		
+	}
+
+	@Override
+	public List<Product> findProductList(Criteria cri) {
+		
+		List<Product> products = productMapper.getProductList(cri);
+		return products;
+	}
+
+	@Override
+	public int getListCnt() {
+		
+		int Cnt = productMapper.getProductListCnt();
+		return Cnt;
+	}
+
+
+	@Override
+	public void deleteProduct(int productNo) {
+		
+		productMapper.deleteProduct(productNo);
+		
+	}
+
+
+	@Override
+	public void deleteProductFile(int productFileNo) {
+		
+		productMapper.deleteProductFile(productFileNo);
+		
+	}
+
+
+	@Override
+	public void updateProductFile(ProductFile productFile) {
+		
+		productMapper.updateProductFile(productFile);
+	}
+
+	@Override
+	public void updateProduct(Product product) {
+		productMapper.updateProduct(product);
+		
+	}
+
 	
 //	@Override
 //	public List<CampFile> findCampFilesByCampNo(int campNo) {

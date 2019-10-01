@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Product</title>
+	<title>캠핑장 용품</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<jsp:include page="../include/cssimport.jsp" />
@@ -39,41 +39,30 @@
 						<h4 class="m-text14 p-b-7">
 							Categories
 						</h4>
-						<form name="selectform" method="GET" action="campKind">
+						<form name="selectform2" method="GET" action="productList">
 						<ul class="p-b-54">
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="all" id="all" /><label for="all">ALL</label>
-								<!-- <button class="s-text13 active1" id="All" data-category="all">All</button> -->
+								<input type="radio" class="s-text20 active1 radio-btn" name="category" value="all" id="all" /><label for="all">ALL</label>
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="tent" id="tent" <c:if test="${param.category eq 'tent'}"></c:if>/><label for="tent">텐트/탑프</label>
-								<!-- <button class="s-text13 active1" id="Tent" data-category="tent">텐트/탑프</button> -->
-								
+								<input type="radio" class="s-text20 active1 radio-btn" name="category" value="텐트and탑프" id="tent" <c:if test="${param.category eq 'tent'}"></c:if>/><label for="tent">텐트/탑프</label>
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="caravan" id="caravan" <c:if test="${param.category eq 'caravan'}"></c:if>/><label for="caravan">침낭/매트리스</label>
-								<!-- <button class="s-text13 active1" id="Cravan" data-category="caravan">침낭/매트리스</button> -->
-								
+								<input type="radio" class="s-text20 active1 radio-btn" name="category" value="침낭and매트리스" id="sleepingBag" <c:if test="${param.category eq 'sleepingBag'}"></c:if>/><label for="sleepingBag">침낭/매트리스</label>								
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">그릴/화로</label>
-								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">그릴/화로</button> -->
-								
+								<input type="radio" class="s-text20 active1 radio-btn" name="category" value="그릴and화로" id="grill" <c:if test="${param.category eq 'grill'}"></c:if>/><label for="grill">그릴/화로</label>
 							</li>
 							
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">버너/랜턴</label>
-								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">버너/랜턴</button> -->
-								
+								<input type="radio" class="s-text20 active1 radio-btn" name="category" value="버너and랜턴" id="burner" <c:if test="${param.category eq 'burner'}"></c:if>/><label for="burner">버너/랜턴</label>
 							</li>
 							
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="glamping" id="glamping" <c:if test="${param.category eq 'glamping'}"></c:if>/><label for="glamping">취사도구</label>
-								<!-- <button class="s-text13 active1" id="Glamping" data-category="glamping">취사도구</button> -->
-								
+								<input type="radio" class="s-text20 active1 radio-btn" name="category" value="취사도구" id="cook" <c:if test="${param.category eq 'cook'}"></c:if>/><label for="cook">취사도구</label>							
 							</li>
 
 							<li class="p-t-4">
@@ -83,32 +72,20 @@
 							</li>
 						</ul>
 						</form>
-						<!--  -->
-						<h4 class="m-text14 p-b-32">
-							Search
-						</h4>
-						<div class="filter-price p-t-22 p-b-50 bo3">	
+
+						<div>	
 							<c:if test="${ loginuser.type eq 'admin' }">							
 							<a class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" href="/product/productWrite">등록하기</a>
 							</c:if>
 						</div>						
 
-						<div class="search-product pos-relative bo4 of-hidden">
-							
-						</div>
 					</div>
 				</div>
 
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<!--  -->
 					<div class="flex-sb-m flex-w p-b-35">
-						<div class="flex-w">
-							
-						</div>
-
-						<span class="s-text8 p-t-5 p-b-5">
-							
-						</span>
+						<div class="flex-w"></div>
+						<span class="s-text8 p-t-5 p-b-5"></span>
 					</div>
 
 					<!-- Product -->
@@ -142,8 +119,21 @@
 
 					<!-- Pagination -->
 					<div class="pagination flex-m flex-w p-t-26">
-						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+							
+						    <c:if test="${ pageMaker.prev }">					  
+						        <a href='/product/productList?page=${pageMaker.startPage-1 }&category=${category}'><i class="fa fa-chevron-left"></i></a>						    
+						    </c:if>
+						    
+						    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+						     
+						        <a href='/product/productList?category=${category}&page=${idx }' class="item-pagination flex-c-m trans-0-4"><i class="fa">${idx }</i></a>
+						        						  
+						    </c:forEach>
+						    
+						    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">			    
+						        <a href='/product/productList?page=${pageMaker.endPage+1 }&category=${category}'  class="item-pagination flex-c-m trans-0-4"><i class="fa fa-chevron-right"></i></a>					    
+						    </c:if>
+						
 					</div>
 				</div>
 			</div>
@@ -187,21 +177,28 @@
    			}); */
    			
 		$('#all').on('change', function(event){
-			location.href="/camp/campList";
-		 			
-		 	});
+			location.href="/product/productList?category=all";	 			
+		});
 		$('#tent').on('change', function(event){
-				this.form.submit();
-			});
-		$('#caravan').on('change', function(event){
 			this.form.submit();
 		});
-		$('#glamping').on('change', function(event){
+		$('#sleepingBag').on('change', function(event){
+			this.form.submit();
+		});
+		$('#grill').on('change', function(event){
+			this.form.submit();
+		});
+		$('#burner').on('change', function(event){
+			this.form.submit();
+		});
+		$('#cook').on('change', function(event){
 			this.form.submit();
 		});
    			
    		 			
 			});
+	
+
 	
 		
 	</script>
