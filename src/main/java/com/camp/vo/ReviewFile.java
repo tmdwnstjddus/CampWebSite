@@ -11,7 +11,7 @@ public class ReviewFile {
 	private String savedFileName;
 	private String userFileName;	
 	private boolean flag;	
-	private int campNo; 
+	private int reviewNo; 
 	private Date rentDate;
 	
 }

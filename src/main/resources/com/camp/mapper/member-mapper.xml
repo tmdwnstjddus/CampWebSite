@@ -50,10 +50,10 @@
 	
  	<!-- 주문 페이지 -->	
     <select id="orderList" resultType="com.camp.vo.Rental">	
-		SELECT R.MEMBERID, R.RENTDATE, C.CAMPNAME, C.CATEGORY, C.PRICE, R.CAMPNO
-		FROM RENT R, CAMP C
+		SELECT R.MEMBERID, R.RENTNO, C.CAMPNAME, C.CATEGORY, C.PRICE, R.CAMPNO
+		FROM RENTAL R, CAMP C
 		WHERE R.CAMPNO = C.CAMPNO AND R.MEMBERID = #{ memberId }
-		GROUP BY R.RENTDATE
+		GROUP BY R.RENTNO
 	</select> 
 	
     <select id="orderLists" resultType="com.camp.vo.Buy">	
