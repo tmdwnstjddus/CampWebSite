@@ -1,6 +1,7 @@
 package com.camp.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +30,7 @@ public class QnAController {
 	public String qnaList(Model model) {
 		
 		List<QnA> qnaList = qnaService.findAllQnA();
+		
 		model.addAttribute("qnaList", qnaList);
 		
 		return "qna/qna";
@@ -70,38 +73,50 @@ public class QnAController {
 		return "redirect:/qna/qna";
 	}
 	
-	//게시물 수정 - user
-//	@RequestMapping(path = "/updateqna/{ qano }")
-//	public String qnaUpdate(int qaNo, HttpServletRequest req) {
-//		return null;
-//	}
-	
-	//comment---------------------------------//
-	
-//	@RequestMapping(value="/answer", method =RequestMethod.POST)
-//	@ResponseBody
-//	private String qnaComment(QnAComment qnaComment) {
-//		
-//		qnaService.answerQuestion(qnaComment);
-//		
-//		return "success";
-//	}
-//	@RequestMapping(value="/qna-answer", method =RequestMethod.GET)
-//	private String calledAnswer(int qaNo, Model model) {
-//
-//		List<QnAComment> comment = qnaService.findQnAAnswer(qaNo);
-//		model.addAttribute("comment",comment);
-//		
-//		return "success";
-//	}
-	
-	@RequestMapping(value = "/answerform", method = RequestMethod.POST )
-	private String qnaComment(QnAComment qnaComment,HttpServletRequest req ) {
+//-----------------------------------------------//
+	@RequestMapping(path = "/answer", 
+			method = RequestMethod.POST, 
+			produces = "text/plain;charset=utf-8") //응답 컨텐츠의 종류 지정
+	@ResponseBody
+	public String writeComment(QnAComment qnaComment) {
 		
-		qnaService.answerQuestion(qnaComment);
+		qnaService.writeComment(qnaComment);
 		
-		return "redirect:/qna/qna";
+		
+		return "success";
+		
 	}
+	
+//	@RequestMapping(path = "/delete-answer", method = RequestMethod.GET)
+//	@ResponseBody
+//	public String deleteAnswer(String sendData) {
+//		
+//		
+//		qnaService.deleteAnswer(sendData);
+//		
+//		return "success";
+//	}
+//	
+	
+	
+	//답변 불러오는 
+	@RequestMapping(value = "/qna-answer", method = RequestMethod.GET)
+	public String QnAAnswer(int qaNo, Model model) {
+		
+		List<QnAComment> qnacomments = qnaService.findQnAAnswer(qaNo);
+		model.addAttribute("qnacomments", qnacomments);
+		
+		return "qna/qnacomment";
 
+	}
+//-----------------------------------------------//
+	
+	@RequestMapping(path = "/admin", method = RequestMethod.GET)
+	public String qnaAdmin(Model model) {
+
+		
+		return "qna/admin";
+	}
+	
 
 }

@@ -16,10 +16,14 @@ public interface QnAService {
 	QnA findQnABoardbyIdx(int qaNo);
 
 	/* ===================================*/
+	
 
-	void answerQuestion(QnAComment qnaComment);
 
 	List<QnAComment> findQnAAnswer(int qaNo);
+	
+	void writeComment(QnAComment qnaComment);
+
+//	void deleteAnswer(String sendData);
 
 	
 

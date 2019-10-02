@@ -21,6 +21,14 @@ public interface QnAMapper {
 	
 	/* comment */
 	void insertQnAComment(QnAComment qnaComment);
+	//void insertQnAComment(String json);
+	
+	
 	List<QnAComment> selectComment(int qaNo);
+	void setCompleted(int qaNo);
+	
+	void dropQnAComment(int qaNo);
+	void setDecompleted(int qaNo);
+	
 
 }
