@@ -47,7 +47,7 @@
 							</li>
 
 							<li class="p-t-4">
-							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="숙소" id="room" <c:if test="${param.category eq 'room'}"></c:if>/><label for="room">방</label>
+							<input type="radio" class="s-text20 active1 radio-btn" name="category" value="숙소" id="room" <c:if test="${param.category eq 'room'}"></c:if>/><label for="room">숙소</label>
 								<!-- <button class="s-text13 active1" id="Room" data-category="tent">텐트</button> -->
 								
 							</li>

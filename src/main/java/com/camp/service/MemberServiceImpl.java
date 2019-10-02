@@ -14,7 +14,7 @@ import com.camp.mapper.MemberMapper;
 import com.camp.vo.Buy;
 import com.camp.vo.Camp;
 import com.camp.vo.Member;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -103,9 +103,9 @@ public class MemberServiceImpl implements MemberService {
 ///////////////////////////////////////주문 내역////////////////////////////////////////////			
 		
 		@Override
-		public List<Rent> orderList(String memberId) {
+		public List<Rental> orderList(String memberId) {
 			
-		List<Rent> rent = memberMapper.orderList(memberId);			
+		List<Rental> rent = memberMapper.orderList(memberId);			
 			
 			return rent;
 		}

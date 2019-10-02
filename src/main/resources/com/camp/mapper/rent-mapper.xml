@@ -5,10 +5,24 @@
 	
 <mapper namespace="com.camp.mapper.RentMapper">
 
-	<select id="selectRentsByCampNo" parameterType="int" resultType="com.camp.vo.Rent">
+	<select id="selectRentsByCampNo" parameterType="int" resultType="com.camp.vo.Rental">
 		SELECT STARTDATE, ENDDATE, CAMPNO 
 		FROM RENT 
 		WHERE CAMPNO = #{ campNo }
 	</select>
+	
+	<insert id="insertRent" parameterType="com.camp.vo.Rental">
+		INSERT INTO RENTAL(
+			RENTNO, STARTDATE, ENDDATE, CAMPNO, MEMBERID
+		)
+		VALUES
+		(
+			#{ rentNo }
+			, #{ startDate }
+			, #{ endDate }
+			, #{ campNo }
+			, #{ memberId }
+		)
+	</insert>
 	
 </mapper>

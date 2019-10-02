@@ -17,7 +17,7 @@ import com.camp.service.MemberService;
 import com.camp.service.ProductService;
 import com.camp.vo.Buy;
 import com.camp.vo.Member;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
 
 @Controller
 @RequestMapping(path = "/member")
@@ -69,11 +69,11 @@ public class MemberController {
 	   @RequestMapping(path = "/orderlist", method = RequestMethod.GET)
 	   public String orderList(Model model, String memberId) { 
 
-		List<Rent> rents = memberService.orderList(memberId);
+		List<Rental> rents = memberService.orderList(memberId);
 		
 		List<Buy> buys = memberService.orderLists(memberId);
 		
-		for (Rent rent : rents) {
+		for (Rental rent : rents) {
 			rent.setFile(campService.findCampFile(rent.getCampNo()));
 		}
 

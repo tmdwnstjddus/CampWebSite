@@ -1,13 +1,13 @@
 package com.camp.service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
 
 public interface CampService {
 
@@ -31,7 +31,5 @@ public interface CampService {
 
 	void deleteCamp(int campNo);
 	void deleteCampFile(int campFileNo);
-	
-	ArrayList<Rent> findRentsByCampNo(int campNo, Date rentDate);
 
 }

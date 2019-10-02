@@ -1,6 +1,6 @@
 package com.camp.service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import com.camp.mapper.CampMapper;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
 
 @Service
 public class CampServiceImpl implements CampService {
@@ -129,12 +129,6 @@ public class CampServiceImpl implements CampService {
 	public void deleteCampFile(int campFileNo) {
 		campMapper.deleteCampFile(campFileNo);
 		
-	}
-
-	@Override
-	public ArrayList<Rent> findRentsByCampNo(int campNo, Date rentDate) {
-		List<Rent> rents = campMapper.selectRentsByCampNo(campNo, rentDate);
-		return (ArrayList<Rent>) rents;
 	}
 
 

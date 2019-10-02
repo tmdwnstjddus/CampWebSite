@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.camp.vo.Buy;
 import com.camp.vo.Camp;
 import com.camp.vo.Member;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
 
 @Mapper
 public interface MemberMapper {
@@ -32,7 +32,7 @@ public interface MemberMapper {
 
 	List<Member> reporting();
 
-	List<Rent> orderList(String memberId);
+	List<Rental> orderList(String memberId);
 
 	List<Buy> orderLists(String memberId);
 
