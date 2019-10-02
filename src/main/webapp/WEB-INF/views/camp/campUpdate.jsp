@@ -62,15 +62,15 @@
 							<div class="row">
 								<ul class="check_list space ml-3">
 									<li>
-										<input type="radio" name="category" value="글램핑" <c:if test="${ camp.category eq '글램핑' }">checked</c:if>>
+										<input type="radio" name="category" value="글램핑" id="glamping" <c:if test="${ camp.category eq '글램핑' }">checked</c:if>>
 										<label for="glamping" class="ellip">글램핑</label>
 									</li>
 									<li>
-										<input type="radio" name="category" value="숙소" <c:if test="${ camp.category eq '숙소' }">checked</c:if>>
+										<input type="radio" name="category" value="숙소" id="room" <c:if test="${ camp.category eq '숙소' }">checked</c:if>>
 										<label for="room" class="ellip">숙소</label>
 									</li>
 									<li>
-										<input type="radio" name="category" value="카라반" <c:if test="${ camp.category eq '카라반' }">checked</c:if>>
+										<input type="radio" name="category" value="카라반" id="caravan" <c:if test="${ camp.category eq '카라반' }">checked</c:if>>
 										<label for="caravan" class="ellip">카라반</label>
 									</li>
 								</ul>

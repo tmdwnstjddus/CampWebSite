@@ -9,61 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../include/cssimport.jsp" />
 <style>
-.datepick {
-	position: relative;
-	border: 0;
-	background-color: #704de4;
-	color: wheat;
-}
-
-.nowDay {
-	background: blue;
-}
-
-.timepick {
-	background: #704de4;
-	color: wheat;
-}
-
-.calender {
-	margin: auto;
-	border: 1px solid #ccccff;
-	width: -webkit-fill-available;
-}
-
-.time {
-	text-align: -webkit-center;
-	width: 37px;
-	height: 37px;
-	border-radius: 50px;
-}
-
-/* rating */
-.starrr {
-	display: inline-block;
-}
-
-.starrr a {
-	font-size: 16px;
-	padding: 0 1px;
-	cursor: pointer;
-	color: #FFD119;
-	text-decoration: none;
-}
+/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+.ui-datepicker-trigger{cursor: pointer;}
+/*datepicer input 롤오버 시 손가락 모양 표시*/
+.hasDatepicker{cursor: pointer;}
 </style>
 </head>
 <body class="animsition">
-
-<jsp:include page="../include/header.jsp" />
-
+	<jsp:include page="../include/header.jsp" />
+	
 	<!-- breadcrumb -->
-	<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
+	<div class="bread-crumb bgwhite flex-w p-l-200 p-t-30">
 		<a href="/" class="s-text16">
 			홈
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="/camp/campList" class="s-text16">
+		<a href="/camp/campList?category=all" class="s-text16">
 			캠핑장 리스트
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
@@ -102,7 +64,7 @@
 				
 				<%-- 관리자가 로그인했을 시 삭제,수정 버튼 활성화 --%>
 				<c:if test="${ loginuser.type eq 'admin' }">
-					<div>
+					<div class="mt-5">
 						<a class="btn btn-outline-success"
 							href="/camp/campUpdate/${ camp.campNo }"
 							role="button">수정</a> 
@@ -111,77 +73,21 @@
 							role="button" onclick="return confirm('삭제하시겠습니까?');">삭제</a> 
 					</div>
 				</c:if>
-
-				<form action="/camp/campRent" method="post" id="rentform">
+				<c:if test="${ loginuser.type eq 'user' }">
+				<form action="/campRent" method="post">
 					<input type="hidden" name="campNo" id="campNo" value="${ camp.campNo }">
-					<h5 class="pt-3">날짜 선택</h5>
-					<h6 class="px-3 row justify-content-end">
-						<select name="year" id="y" onchange="change()" class="border">
-							<c:forEach var="y" begin="${ nowYear }" end="${ nowYear+1 }" varStatus="y_status">
-								<option <c:if test="${ y eq nowYear }">selected</c:if>>${ y_status.index }</option>
-							</c:forEach>
-						</select>년도&nbsp;&nbsp;&nbsp; 
-						<select name="month" id="m" onchange="change()" class="border">
-							<c:forEach var="m" begin="1" end="12" varStatus="m_status">
-								<option <c:if test="${ m eq nowMonth }">selected</c:if>>${ m_status.index }</option>
-							</c:forEach>
-						</select>월
-					</h6>
-					<!-- // 요일출력 start -->
-					<table id="calendar-table" class="calender">
-						<tr bgcolor="#ccccff">
-							<c:forEach var="week" varStatus="i" items="${ strWeek }">
-								<td class="text-center py-1 px-2">
-									<font color=<c:choose>
-										<c:when test="${ i.index eq 0 }">"red"</c:when>
-										<c:when test="${ i.index eq 6 }">"blue"</c:when>
-										<c:otherwise>"black"</c:otherwise>
-									</c:choose>><b>${ week }</b>
-									</font>
-								</td>
-							</c:forEach>
-						</tr>
-						<c:forEach var="i" begin="1" end="${ lastDay }">
-							<c:if test="${ i eq 1 }">
-								<tr>
-									<%-- <c:forEach begin="0" end="${ week-1 }">
-										<td>&nbsp;</td>
-									</c:forEach> --%>
-							</c:if>
-							<td class="text-center py-1 px-2"
-								<c:if test="${ i eq nowDay }">style="background:#e2d6b79e"</c:if>
-								<c:if test="${ i < nowDay }">style="background: #a9a9a92e;color: #c1c1c1;"</c:if>
-								<c:if test="${ i > nowDay }">style="cursor: pointer;"</c:if>>
-
-								<c:if test="${ i > nowDay }">
-									<input type="radio" id="day${i}" name="day" value="${i}"
-										hidden="hidden" onclick="javascript:dayCheck(${ i })">
-								</c:if> <label for="day${i}" class="date m-0">${i}</label>
-							</td>
-
-							<c:if test="${ i eq lastDay }">
-								<c:forEach begin="${ week+1 }" end="6">
-									<td>&nbsp;</td>
-								</c:forEach>
-							</c:if>
-
-							<c:set var="week" value="${week+1}" />
-							<c:if test="${ week > 6 }">
-								<c:set var="week" value="0" />
-								</tr>
-								<tr>
-							</c:if>
-						</c:forEach>
-						</tr>
-					</table>
-
-					<h5 class="pt-4">시간 선택</h5>
-					<div class="pt-2 row justify-content-center col-sm-12 m-0" id="time-table">날짜를 먼저 선택해주세요.</div>
-					<div class="row justify-content-end">
-						<input class="btn btn-primary" type="button" id="rent_submit" name="rent_submit" value="예약" />
+					<input type="text" id="rentDate" size="6" style="text-align:center;">
+					<div class="mt-5">
+						<label for="startDate">체크인</label>
+						<input type="text" name="startDate" id="startDate" class="col-md-4" onchange="call()" required>&nbsp;
+						<label for="endDate">체크아웃</label>
+    					<input type="text" name="endDate" id="endDate" class="col-md-4" onchange="call()" required>
+    					<div class="mt-2 p-r-50">
+    						<input class="btn btn-dark" type="submit" name="rent_submit" value="예약" />
+    					</div>				
 					</div>
 				</form>
-
+				</c:if>
 				<div class="p-b-45 mt-5">
 					<span class="s-text8">${ camp.category }</span>
 				</div>
@@ -202,14 +108,16 @@
 
 				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-						Additional information
+						Detail
 						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
 						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
 					</h5>
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
 						<p class="s-text8">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+							<strong>입실시간: 15시(22시 이후의 입실은 사전에 반드시 연락을 주시기 바랍니다.)</strong><br>
+							<strong>퇴실시간: 11시</strong><br>
+							입실시간은 오후 3시부터입니다. 객실 청소가 11시 ~ 15시까지이기 때문에 3시 이전에 입실은 불가능합니다.
 						</p>
 					</div>
 				</div>			

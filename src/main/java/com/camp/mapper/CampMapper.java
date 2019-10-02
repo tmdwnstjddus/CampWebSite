@@ -1,6 +1,6 @@
 package com.camp.mapper;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
 
 @Mapper
 public interface CampMapper {
@@ -35,7 +35,5 @@ public interface CampMapper {
 
 	void deleteCamp(int campNo);
 	void deleteCampFile(int campFileNo);
-	
-	List<Rent> selectRentsByCampNo(int campNo, Date rentDate);
 		
 }

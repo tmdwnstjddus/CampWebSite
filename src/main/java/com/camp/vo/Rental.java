@@ -1,19 +1,19 @@
 package com.camp.vo;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import lombok.Data;
 
 @Data
-public class Rent {
+public class Rental {
 	
-	private Date rentDate;
+	private int rentNo;
+	private Date startDate;
+	private Date endDate;
 	private int campNo;	
-	private String memberId; 
-	private int startDate;
-	private int endDate;
+	private String memberId;
 
 	private String category;
 	private String campName;

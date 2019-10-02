@@ -24,20 +24,26 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.camp.common.Util;
 import com.camp.service.CampService;
+import com.camp.service.RentService;
 import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
 import com.camp.vo.Member;
 import com.camp.vo.PageMaker;
-import com.camp.vo.Rent;
+import com.camp.vo.Rental;
+import com.camp.vo.Rental;
+import com.camp.vo.Review;
 
 
 @Controller
-@RequestMapping(path = "/camp/")
+@RequestMapping(path = "/camp")
 public class CampController {
 	
 	@Autowired
 	CampService campService;
+	
+	@Autowired
+	RentService rentService;
 	
 	
 	@RequestMapping(path = "/campList", method = RequestMethod.GET)
@@ -78,30 +84,44 @@ public class CampController {
 	}
 	
 	@RequestMapping(path = "/campDetail/{campNo}", method = RequestMethod.GET)
-	public String campDetail(@PathVariable int campNo, Model model) {
+	public String campDetail(@PathVariable int campNo, Model model, HttpSession session) {
 
-		Camp camps = campService.findCampByCampNo(campNo);
+		Camp camp = campService.findCampByCampNo(campNo);
+		if (camp == null) {
+			return "redirect:/camp/campList?category=all";
+		}
+
 		List<CampFile> campfiles = campService.findCampFilesByCampNo(campNo);
-		
-		int nowYear = 0, nowMonth = 0, nowDay = 0;
-		Date date = new Date();
-		SimpleDateFormat yearSdf = new SimpleDateFormat("yyyy");
-		SimpleDateFormat monthSdf = new SimpleDateFormat("MM");
-		SimpleDateFormat daySdf = new SimpleDateFormat("dd");
-		nowYear = Integer.parseInt(yearSdf.format(date));
-		nowMonth = Integer.parseInt(monthSdf.format(date));
-		nowDay = Integer.parseInt(daySdf.format(date));
-		
-		/* 현재 날짜	*/
-		model.addAttribute("nowYear", nowYear);
-		model.addAttribute("nowMonth", nowMonth);
-		model.addAttribute("nowDay", nowDay);
 
-		camps.setFileList((ArrayList<CampFile>) campfiles);
-
-		model.addAttribute("camp", camps);
+		camp.setFileList((ArrayList<CampFile>) campfiles);
+		camp.setFile(campService.findCampFile(camp.getCampNo()));
+		
+		model.addAttribute("camp", camp);
 
 		return "camp/campDetail";
+	}
+	
+	
+	@RequestMapping(value = "/campRent", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String campRent(Model model, Rental rent, HttpSession session) {
+		
+		Member loginuser = (Member) session.getAttribute("loginuser");
+		rent.setMemberId(loginuser.getMemberId());
+		
+//		String strDate = year+"-"+month+"-"+day;
+//		Date date = null;
+//		try {
+//			date = sdf.parse(strDate);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		rent.setRentDate(date);
+		
+		System.out.println(rent);
+		rentService.registerRent(rent);
+		
+		return "success";
 	}
 	
 	@RequestMapping(path = "/campWrite", method = RequestMethod.GET)
@@ -199,7 +219,7 @@ public class CampController {
 	}
 	
 	@RequestMapping(path = "/campUpdate", method = RequestMethod.POST)
-	public String campUpdate(Camp camp, MultipartHttpServletRequest req, HttpSession session, Model model) {
+	public String campUpdate(Camp camp, MultipartHttpServletRequest req, HttpSession session, Model model, String category) {
 		
 		camp.setFile(campService.findCampFile(camp.getCampNo()));
 		
@@ -268,6 +288,7 @@ public class CampController {
 			}		
 			campService.updateCamp(camp);
 			model.addAttribute("camp", camp);
+			model.addAttribute("category", category);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -299,197 +320,5 @@ public class CampController {
 		return "success" ; 
 	}
 	
-	@RequestMapping(value = "/calendar", method = RequestMethod.POST)
-	public String calendar(int campNo, Model model, 
-			@RequestParam(defaultValue = "0") int year, 
-			@RequestParam(defaultValue = "0") int month, 
-			@RequestParam(defaultValue = "0") int day) {
-
-		
-
-//		if (year == 0) {
-//			year = Integer.parseInt(yearSdf.format(date));
-//		}
-//		if (month == 0) {
-//			month = Integer.parseInt(monthSdf.format(date));
-//		}
-//		if (day == 0) {
-//			day = Integer.parseInt(daySdf.format(date));
-//		}
-		
-		String[] strWeek = { "일", "월", "화", "수", "목", "금", "토" };
-		int[] lastDay = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-		int total = (year - 1) * 365 + (year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400;
-		if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {//2월 lastDay
-			lastDay[1] = 29;
-		} else {
-			lastDay[1] = 28;
-		}
-		for (int i = 0; i < month - 1; i++) {
-			total += lastDay[i];
-		}
-		total++;
-		int week = total % 7;
-
-		/* 캘린더 change	*/
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
-		
-		
-		
-		model.addAttribute("strWeek", strWeek);
-		model.addAttribute("lastDay", lastDay[month - 1]);
-		model.addAttribute("week", week);
-
-		/*--------------------------------------------------*/
-
-		Camp camp = campService.findCampByCampNo(campNo);
-		if (camp == null) {
-			return "redirect:/camp/campList?category=all";
-		}
-		
-		camp.setFile(campService.findCampFile(camp.getCampNo()));
-		camp.setFileList((ArrayList<CampFile>) campService.findCampFilesByCampNo(camp.getCampNo()));
-
-		model.addAttribute("camp", camp);
-
-		return "camp/calendar";
-	}
-	
-	@RequestMapping(value = "/time", method = RequestMethod.POST)
-	public String time(int campNo, Model model, String year, String month, String day, HttpSession session) {
-
-		Member loginuser = (Member) session.getAttribute("loginuser");
-
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		StringTokenizer st = new StringTokenizer(sdf.format(date), "-");
-
-		if (year == null) {
-			year = st.nextToken();
-		}
-		if (month == null) {
-			month = st.nextToken();
-		}
-		if (day == null) {
-			day = st.nextToken();
-		}
-
-		/*--------------------------------------------------*/
-
-		Camp camp = campService.findCampByCampNo(campNo);
-		if (camp == null) {
-			return "redirect:/camp/campList?category=all";		
-		}
-
-		try {
-			java.util.Date utildate = sdf.parse(year + "-" + month + "-" + day);
-			java.sql.Date rentDate = new java.sql.Date(utildate.getTime());
-			ArrayList<Rent> rents = campService.findRentsByCampNo(campNo, rentDate);
-
-			model.addAttribute("rents", rents);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		model.addAttribute("camp", camp);
-		model.addAttribute("loginuser", loginuser);
-
-		return "camp/time";
-	}
-	
-	@RequestMapping(path = "/campRent", method = RequestMethod.GET)
-	public String rentForm(int campNo, Model model, HttpSession session) {
-
-		Member loginuser = (Member) session.getAttribute("loginuser");
-		int nowYear = 0, nowMonth = 0, nowDay = 0;
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		StringTokenizer st = new StringTokenizer(sdf.format(date), "-");
-
-		nowYear = Integer.parseInt(st.nextToken());
-		nowMonth = Integer.parseInt(st.nextToken());
-		nowDay = Integer.parseInt(st.nextToken());
-
-		String[] strWeek = { "일", "월", "화", "수", "목", "금", "토" };
-		int[] lastDay = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-		int total = (nowYear - 1) * 365 + (nowYear - 1) / 4 - (nowYear - 1) / 100 + (nowYear - 1) / 400;
-		if ((nowYear % 4 == 0 && nowYear % 100 != 0) || (nowYear % 400 == 0)) {// 2월 lastDay
-			lastDay[1] = 29;
-		} else {
-			lastDay[1] = 28;
-		}
-		for (int i = 0; i < nowMonth - 1; i++) {
-			total += lastDay[i];
-		}
-		total++;
-		int week = total % 7;
-
-		/* 현재 날짜 */
-		model.addAttribute("nowYear", nowYear);
-		model.addAttribute("nowMonth", nowMonth);
-		model.addAttribute("nowDay", nowDay);
-
-		model.addAttribute("strWeek", strWeek);
-		model.addAttribute("lastDay", lastDay[nowMonth - 1]);
-		model.addAttribute("week", week);
-
-		/*--------------------------------------------------*/
-
-		Camp camp = campService.findCampByCampNo(campNo);
-		if (camp == null) { 
-			return "redirect:/camp/campList?category=all";
-		}
-
-		camp.setFile(campService.findCampFile(camp.getCampNo()));
-		camp.setFileList((ArrayList<CampFile>) campService.findCampFilesByCampNo(camp.getCampNo()));
-
-//		camp.setReviews((ArrayList<Review>) campService.findReviewListByCampNo(camp.getCampNo()));
-		
-		try {
-			String rentDateStr = Integer.toString(nowYear) + "-" 
-								+ Integer.toString(nowMonth) + "-"
-								+ Integer.toString(nowDay);
-			java.util.Date utildate = sdf.parse(rentDateStr);
-			java.sql.Date rentDate = new java.sql.Date(utildate.getTime());
-			ArrayList<Rent> rents = campService.findRentsByCampNo(campNo, rentDate);
-			
-			model.addAttribute("rents", rents);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		model.addAttribute("camp", camp);
-		model.addAttribute("loginuser", loginuser);
-
-		return "camp/campRent";
-	}
-	
-
-//	@RequestMapping(value = "/campRent", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-//	@ResponseBody
-//	public String rent(Model model, Rent rent, int year, int month, int day, int startTime, int endTime, HttpSession session) {
-//		
-//		Member loginuser = (Member) session.getAttribute("loginuser");
-//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-//
-//		rent.setMemberId(loginuser.getMemberId());
-//		String strDate = year+"-"+month+"-"+day;
-//		Date date = null;
-//		try {
-//			date = sdf.parse(strDate);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		rent.setRentDate(date);
-//		rentService.registerRent(rent);
-//
-//		return "success";
-//	}
 	
 }

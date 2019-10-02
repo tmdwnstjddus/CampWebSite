@@ -76,64 +76,72 @@ $(function () {
 			error: function(xhr, status, err){
 				alert('삭제 실패');
 			}
+			
 		});
 	   
-	});
+	});	
 	
+	/* ----------- calendar -----------	*/
+	$("#startDate").datepicker({ 
+		dateFormat: 'yy-mm-dd'
+        ,showOtherMonths: true
+        ,showMonthAfterYear:true
+        ,changeYear: true 
+        ,changeMonth: true               
+        ,showOn: "both" 
+        ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
+        ,buttonImageOnly: true
+        ,buttonText: "선택"              
+        ,yearSuffix: "년"
+        ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
+        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+        ,dayNamesMin: ['일','월','화','수','목','금','토']
+        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
+        ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+		,onClose: function (selectedDate) { 
+		    $('#endDate').datepicker("option", 'minDate', selectedDate); 
+		    $("#startDate").attr('value', selectedDate);
+		}
+	}); 
+
+   $("#endDate").datepicker({ 
+	   dateFormat: 'yy-mm-dd'
+        ,showOtherMonths: true
+        ,showMonthAfterYear:true
+        ,changeYear: true 
+        ,changeMonth: true               
+        ,showOn: "both" 
+        ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
+        ,buttonImageOnly: true
+        ,buttonText: "선택"              
+        ,yearSuffix: "년"
+        ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
+        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+        ,dayNamesMin: ['일','월','화','수','목','금','토']
+        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
+        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) 
+	    ,onClose: function (selectedDate) { 
+	     $('#startDate').datepicker("option", 'maxDate', selectedDate); 
+	     $("#endDate").attr('value', selectedDate);
+	    }
+   }); 
+
 });
 
-/* ----------- year & monthChange ---------- */
-function change() {
-	$('#calendar-table').load("/camp/calendar", {
-		"year": $('#y').val(),
-		"month": $('#m').val(),
-		"campNo": $('#campNo').val()
-	});
+function call()
+{
+	var sdd = document.getElementById("startDate").value;
+    var edd = document.getElementById("endDate").value;
+    var ar1 = sdd.split('-');
+    var ar2 = edd.split('-');
+    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+    var dif = da2 - da1;
+    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+    
+    if(sdd && edd) {
+    	document.getElementById('rentDate').value = parseInt(dif/cDay)
+ 	}
 }
-
-/* ----------- dayChange ---------- */
-function dayCheck(i) {
-	if ($('#day' + i).is(":checked")) {
-		$('td').removeClass('datepick');
-		$('#day' + i).parent().addClass('datepick');
-	} else {
-		$('#day' + i).parent().removeClass('datepick');
-	}
-
-	$('#time-table').load("/camp/time", {
-		"year": $('#y').val(),
-		"month": $('#m').val(),
-		"day": $('#day' + i).val(),
-		"campNo": $('#campNo').val()
-	});
-}
-
-/* ----------- timeChange ---------- */
-var n = 0, s_t = 0, e_t = 0;
-function timeClick(time) {
-	n++;
-
-	$('label').removeClass('timepick');
-	if (n % 2 == 1) {
-		s_t = time;
-		startTime(time, s_t);
-	} else if (n % 2 == 0) {
-		e_t = time;
-		endTime(time, s_t, e_t);
-	}
-}
-
-function startTime(time, s_t) {// 시작시간 선택
-	$('#timelabel' + time).addClass('timepick');
-	$('#startTime').attr('value', s_t);
-	$('#endTime').attr('value', s_t);
-}
-
-function endTime(time, s_t, e_t) {// 끝나는시간 선택
-	for (var t = s_t; t <= e_t; t++) {
-		$('#timelabel' + t).addClass('timepick');
-	}
-	$('#endTime').attr('value', e_t);
-}
-
 
