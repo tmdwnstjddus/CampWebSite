@@ -17,7 +17,7 @@
 	<!-- Header -->
 	<jsp:include page="../include/header.jsp" />
 	<!-- content page -->
-                    <h4 class="m-text20 p-b-36 p-t-15 text-center">${ loginuser.memberId }님의 예약/주문 내역</h4> 
+                    <h4 class="m-text20 p-b-36 p-t-15 text-center"><span style="color: navy">${ loginuser.memberId }님</span>의 예약/주문 내역</h4> 
                     
 <div class="work_area">
         <div class="container">
@@ -25,7 +25,7 @@
                 <div class="bs-example">
                 <ul class="nav nav-tabs bg7 flex-sa">
                     <div class="p-t-15 p-b-14 p-l-22" >
-                        <a data-toggle="tab" href="#sectionA" class="toggle-color">
+                        <a data-toggle="tab" href="#sectionA" class="toggle-color active" >
                             <h6 class="s-text4 flex-sb-m cs-pointer color0-hov trans-0-4">캠핑장 예약 내역</h6>
                         </a>
                     </div>
@@ -40,33 +40,35 @@
                 
 
                 <div class="tab-content">													
-                    <div id="sectionC" class="tab-pane fade in active">
+                    <div id="sectionC" class="tab-pane fade in">
                         <table class="table-shopping-cart">
 							<tr class="table-head">
 								<th class="column-1"></th>
 								<th class="column-2">주문 날짜</th>
-								<th class="column-3">용품 이름</th>
+								<th class="column-2">용품 이름</th>
 								<th class="column-4">주소</th>
 								<th class="column-2">가격</th> 
 							</tr>
 							<c:forEach var="buy" items="${ buys }">  							
 							<tr class="table-row">		
 								<td class="column-1">
-									<div class="cart-img-product b-rad-4 o-f-hidden">
-										<img src="/resources/camp-files/${ buy.file.savedFileName }" alt="IMG-PRODUCT">
+									<div class="cart-img-product" style="height: 120px; width: 170px">
+										<a href="/product/productDetail/${ buy.productNo }">
+											<img src="/resources/camp-files/${ buy.file.savedFileName }" alt="IMG-PRODUCT" style="height: 140px">
+										</a>
 									</div>								
 								</td>														
 								<td class="column-2">${ buy.buyDate }</td>
-								<td class="column-3">${ buy.productName }</td>
+								<td class="column-2">${ buy.productName }</td>
 								<td class="column-4">
-										${ buy.addr1 }${ buy.addr2 }${ buy.addr3 }
+										${ buy.addr1 }&nbsp;${ buy.addr2 }&nbsp;${ buy.addr3 }
 								</td>
 								<td class="column-2">￦${  buy.price }<br><a href="/qna/qna" class="badge2 badge-success2">리뷰 남기기</a></td>
 							</tr>
 							</c:forEach>
 						</table>
                     </div>
-                    <div id="sectionA" class="tab-pane fade in active">                  
+                    <div id="sectionA" class="tab-pane fade in active show">                  
                            <table class="table-shopping-cart">
 							<tr class="table-head">
 								<th class="column-1"></th>
@@ -78,11 +80,13 @@
 							<c:forEach var="rent" items="${ rents }">  							
 							<tr class="table-row">		
 								<td class="column-1">
-									<div class="cart-img-product" style="height: 120px; width: 180px">
+									<div class="cart-img-product" style="height: 120px; width: 170px">
+										<a href="/camp/campDetail/${ rent.campNo }">
 											<img src="/resources/camp-files/${ rent.file.savedFileName }" alt="NO-IMAGE">
-									</div>								
+										</a>
+									</div>				 				
 								</td>														
-								<td class="column-2">${ rent.rentDate }</td>
+								<td class="column-2">${ rent.startDate }${ rent.endDate }</td>							
 								<td class="column-4">${ rent.category }</td>
 								<td class="column-4">
 										${ rent.campName }

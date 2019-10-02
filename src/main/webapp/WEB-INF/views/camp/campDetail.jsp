@@ -74,16 +74,15 @@
 					</div>
 				</c:if>
 				<c:if test="${ loginuser.type eq 'user' }">
-				<form action="/campRent" method="post">
+				<form action="/camp/campRent" method="post" id="rentform">
 					<input type="hidden" name="campNo" id="campNo" value="${ camp.campNo }">
-					<input type="text" id="rentDate" size="6" style="text-align:center;">
 					<div class="mt-5">
 						<label for="startDate">체크인</label>
-						<input type="text" name="startDate" id="startDate" class="col-md-4" onchange="call()" required>&nbsp;
+						<input type="text" name="startDate" id="startDate" class="col-md-4" required>&nbsp;
 						<label for="endDate">체크아웃</label>
-    					<input type="text" name="endDate" id="endDate" class="col-md-4" onchange="call()" required>
+    					<input type="text" name="endDate" id="endDate" class="col-md-4" required>
     					<div class="mt-2 p-r-50">
-    						<input class="btn btn-dark" type="submit" name="rent_submit" value="예약" />
+    						<input class="btn btn-dark" type="submit" id="rent_submit" name="rent_submit" value="예약" />
     					</div>				
 					</div>
 				</form>

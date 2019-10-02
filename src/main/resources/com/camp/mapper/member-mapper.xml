@@ -13,7 +13,7 @@
 		INSERT INTO MEMBER ( MEMBERID, PWD, NAME, PHONE, EMAIL, ADDR1, ADDR2, ADDR3 )
 		VALUES ( #{ memberId }, #{ pwd }, #{ name }, #{ phone }, #{ email }, #{ addr1 }, #{ addr2 }, #{ addr3 } )	
 	</insert>
-	 
+	
 	<!-- 아이디 중복 확인 -->
 	<select id="idCheck" resultType="com.camp.vo.Member">
 		SELECT MEMBERID
@@ -50,14 +50,14 @@
 	
  	<!-- 주문 페이지 -->	
     <select id="orderList" resultType="com.camp.vo.Rental">	
-		SELECT R.MEMBERID, R.RENTDATE, C.CAMPNAME, C.CATEGORY, C.PRICE, R.CAMPNO
-		FROM RENT R, CAMP C
+		SELECT R.RENTNO, R.MEMBERID, R.STARTDATE, R.ENDDATE, C.CAMPNAME, C.CATEGORY, C.PRICE, R.CAMPNO
+		FROM RENTAL R, CAMP C
 		WHERE R.CAMPNO = C.CAMPNO AND R.MEMBERID = #{ memberId }
-		GROUP BY R.RENTDATE
+		GROUP BY R.RENTNO
 	</select> 
 	
     <select id="orderLists" resultType="com.camp.vo.Buy">	
-		SELECT B.MEMBERID, B.BUYDATE, B.ADDR1, B.ADDR2, B.ADDR3, P.PRODUCTNAME, P.CATEGORY, P.PRICE
+		SELECT B.MEMBERID, B.BUYDATE, B.ADDR1, B.ADDR2, B.ADDR3, P.PRODUCTNAME, P.CATEGORY, P.PRICE, P.PRODUCTNO
 		FROM PRODUCT P, BUY B
 		WHERE P.PRODUCTNO = B.PRODUCTNO AND B.MEMBERID = #{ memberId }
 		GROUP BY B.BUYDATE
@@ -70,16 +70,35 @@
 	</select>
 	
 	<!-- 레포팅 -->
-		<select id="reporting" resultType="com.camp.vo.Member">
-	<include refid="memberColumns"/>
-		FROM MEMBER
+		<!-- 캠핑장 -->
+	<select id="reporting" resultType="com.camp.vo.Rental">
+		SELECT C.CAMPNAME, COUNT(*) AS RESERVE
+		FROM RENTAL R, CAMP C
+		WHERE R.CAMPNO = C.CAMPNO
+		GROUP BY C.CAMPNAME
+		ORDER BY RESERVE ASC
 	</select>
 	
+		<!-- 캠핑용품 -->
+	<select id="reportings" resultType="com.camp.vo.Buy">	
+		SELECT P.PRODUCTNAME, COUNT(*) AS SELL
+		FROM PRODUCT P, BUY B
+		WHERE P.PRODUCTNO = B.PRODUCTNO
+		GROUP BY P.PRODUCTNO
+		ORDER BY SELL ASC
+	</select>	
+	
+	<!-- 질문/답변 -->
+	<select id="qaList" resultType="com.camp.vo.QnA">	
+		SELECT TITLE, MEMBERID, REGDATE, COMPLETED AS NOANSWER, QANO
+		FROM QA
+		WHERE COMPLETED = '0';
+	</select>
 </mapper>
 
 
 
-
+ 
 
 
 

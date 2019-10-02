@@ -126,8 +126,28 @@ $(function () {
 	     $("#endDate").attr('value', selectedDate);
 	    }
    }); 
+   
+   /* ----------- rent ---------- */
+   $('#rent_submit').on('click', function (event) {
+	   // serialize() : <form에 포함된 입력 요소의 값을 이름=값&이름=값&... 형식으로 만드는 함수
+	   var formData = $('#rentform').serialize();
+
+	   $.ajax({
+		   url: "/camp/campRent",
+		   method: "POST",
+		   data: formData,
+		   success: function (data, status, xhr) {
+			   alert("예약되었습니다!");
+			   window.location.href = '/member/rentList';
+		   },
+		   error: function (xhr, status, err) {
+			   alert(err);
+		   }
+	   });
+   });	
 
 });
+
 
 function call()
 {

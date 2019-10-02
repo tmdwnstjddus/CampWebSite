@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.camp.vo.Buy;
 import com.camp.vo.Camp;
 import com.camp.vo.Member;
+import com.camp.vo.QnA;
 import com.camp.vo.Rental;
 
 public interface MemberService {
@@ -25,10 +26,14 @@ public interface MemberService {
 
 	List<Member> findMemberList();
 
-	List<Member> reporting();
+	List<Rental> reporting();
 
 	List<Rental> orderList(String memberId);
 
 	List<Buy> orderLists(String memberId);
+
+	List<Buy> reportings();
+
+	List<QnA> qaList(); 
 
 }

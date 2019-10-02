@@ -17,6 +17,7 @@ import com.camp.service.MemberService;
 import com.camp.service.ProductService;
 import com.camp.vo.Buy;
 import com.camp.vo.Member;
+import com.camp.vo.QnA;
 import com.camp.vo.Rental;
 
 @Controller
@@ -94,6 +95,7 @@ public class MemberController {
 	      return "member/adminpage";
 	   }
 	   
+	   //회원리스트
 		@RequestMapping(path = "/memberlist", method = RequestMethod.GET)
 		public String memberList(Model model) {
 			
@@ -103,16 +105,27 @@ public class MemberController {
 			return "member/memberlist";
 		}
 		
+		 //회원리스트
+		@RequestMapping(path = "/qalist", method = RequestMethod.GET)
+		public String qaList(Model model) {
+				
+			List<QnA> qa = memberService.qaList();
+				
+			model.addAttribute("qa", qa);
+			return "member/qalist";
+		}		 
+			
 /////////////////////////////////////////////레포팅 페이지///////////////////////////////////////////////////////
-		//구매자별 레포팅
+		//캠핑장 및 캠핑용품 별 레포팅
 		@RequestMapping(path = "/reporting", method = RequestMethod.GET)
 		public String ReportingForm(Model model) {
 			
-			List<Member> report = memberService.reporting();
+			List<Rental> report = memberService.reporting();
+			List<Buy> reports = memberService.reportings();
 			
 		    model.addAttribute("reports", report);
+		    model.addAttribute("reportss", reports);
 				
 			return "member/reporting";
-			
-		}
+		}	
 }

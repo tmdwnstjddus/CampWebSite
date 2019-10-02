@@ -18,11 +18,12 @@
 	<jsp:include page="../include/header.jsp" />
 	<!-- content page -->
 		<div class="container">
-		</div>
+		</div> 
 		
 	<div class ="mypage_block01_wrap">
 		<div class="mypage_block01">
-			<img src="/resources/images/person.png" style="width: 50px; height: 50px">&nbsp;관리자 페이지
+			<img src="/resources/images/person.png" style="width: 50px; height: 50px">&nbsp;<span style="color:blue;">${ loginuser.memberId }</span> 관리자님!
+												<br><span style="font-size: 16px; font-weight: normal; color:gray;">이 곳은 더 캠프 관리자 페이지입니다</span>
 		</div>
 	</div>
 
@@ -35,7 +36,7 @@
 			<li style="text-align: center">
 			<button id="memberlist" name="memberlist" type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 리스트&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-			<button type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
+			<button id="qalist" type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 답변&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>	
 			<button id="reporting" type="button" class="btn btn-dark btn-lg">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;캠핑장 통계&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>					
@@ -66,6 +67,11 @@
 	   	
    		$('#memberlist').on('click', function(event){
    			location.href="/member/memberlist"; 
+   			
+   		});
+
+   		$('#qalist').on('click', function(event){
+   			location.href="/member/qalist"; 
    			
    		});
    		
