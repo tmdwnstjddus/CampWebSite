@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>캠핑장 용품 등록</title>
 <meta charset="utf-8">
 <jsp:include page="../include/cssimport.jsp" />
 <link rel="stylesheet" type="text/css" href="/resources/css/camp.css">
@@ -33,7 +34,7 @@
 					<form action="/product/productWrite" method="post" enctype="multipart/form-data" id="writeForm">
 						<input type="hidden" name="memberId" value="${ loginuser.memberId }">
 						<div class="heading">
-							<h3>캠핑 정보를 입력해 주세요.</h3>
+							<h3>캠핑물품 정보를 입력해 주세요.</h3>
 							<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>
 						</div>
 						<div class="box_form">
@@ -62,19 +63,19 @@
 							<div class="row">
 								<ul class="check_list space ml-3">
 									<li>
-										<input type="radio" name="category" value="텐트/탑프" id="tent" required>
+										<input type="radio" name="category" value="텐트and탑프" id="tent" required>
 										<label for="tent" class="ellip">텐트/탑프</label>
 									</li>
 									<li>
-										<input type="radio" name="category" value="침낭/매트리스" id="sleepingBag" required>
+										<input type="radio" name="category" value="침낭and매트리스" id="sleepingBag" required>
 										<label for="sleepingBag" class="ellip">침낭/매트리스</label>
 									</li>
 									<li>
-										<input type="radio" name="category" value="그릴/화로" id="grill" required>
+										<input type="radio" name="category" value="그릴and화로" id="grill" required>
 										<label for="grill" class="ellip">그릴/화로</label>
 									</li>
 									<li>
-										<input type="radio" name="category" value="버너/랜턴" id="burner" required>
+										<input type="radio" name="category" value="버너and랜턴" id="burner" required>
 										<label for="burner" class="ellip">버너/랜턴</label>
 									</li>
 									<li>
@@ -93,7 +94,7 @@
 							</span>
 							<div class="input">
 								<textarea id="product_text" class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" minlength="20" maxlength="500" name="content" required
-									placeholder="캠핑장을 상세하게 소개해보세요. 캠핑장의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."></textarea>
+									placeholder="캠핑물품을 상세하게 설명해주세요. 사용방법이나 장점을 적으시면 됩니다."></textarea>
 							</div>
 							<p class="p_guide warn">
 								<i class="sp_icon ico_alert"></i>소개는 필수 입력입니다.
