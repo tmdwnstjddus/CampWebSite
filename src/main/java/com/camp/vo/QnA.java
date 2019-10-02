@@ -15,6 +15,7 @@ public class QnA {
 	private Date regDate;
 	private String memberId;
 	private Boolean deleted;
+	private Boolean completed;
 	
 	private List<QnAComment> qnaComment;
 

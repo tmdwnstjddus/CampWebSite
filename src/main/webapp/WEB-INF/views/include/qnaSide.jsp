@@ -9,34 +9,24 @@
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="#" class="s-text13 active1">
-									All
+								<a href="/qna/qna" class="s-text13 active1">
+									공지사항
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Women
+								<a href="/qna/qna" class="s-text13">
+									QnA
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Men
+								<a href="/qna/admin" class="s-text13">
+									관리자 공지사항
 								</a>
 							</li>
 
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Kids
-								</a>
-							</li>
 
-							<li class="p-t-4">
-								<a href="#" class="s-text13">
-									Accesories
-								</a>
-							</li>
 						</ul>
 
 
