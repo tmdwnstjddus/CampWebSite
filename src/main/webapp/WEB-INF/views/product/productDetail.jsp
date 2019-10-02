@@ -20,7 +20,7 @@
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
 
-		<a href="/product/productList" class="s-text16">
+		<a href="/product/productList?category=all" class="s-text16">
 			캠핌용품 리스트
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
@@ -35,35 +35,79 @@
 		<div class="flex-w flex-sb">
 			<div class="w-size13 p-t-30 respon5">
 				<div class="wrap-slick3 flex-sb flex-w">
-					<div class="wrap-slick3-dots"></div>
-					
-					<c:forEach var="file" items="${ product.fileList }">
+					<div class="wrap-slick3-dots"></div>								
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="/resources/images/thumb-item-01.jpg">
-							<div class="wrap-pic-w">
-								<img src="/CampWebSite/resources/camp-files/${ file.savedFileName }">
+						<c:forEach var="file" items="${ product.fileList }">
+							<div class="item-slick3" data-thumb="/resources/camp-files/${ file.savedFileName }">
+								<div class="wrap-pic-w">
+									<img src="/resources/camp-files/${ file.savedFileName }" width="500px" height="600px" alt="IMG-PRODUCT">
+								</div>
 							</div>
-						</div>
-					</div>
-					</c:forEach>
-					
+						</c:forEach>
+					</div>					
 				</div>
 			</div>
 
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13">
-					${ product.name }
+					${ product.productName }
 				</h4>
 				
 				<span class="m-text17">
 					${ product.price }
 				</span>
 				
-				<div class="p-b-45">
+				
+				
+				<%-- 관리자가 로그인했을 시 삭제,수정 버튼 활성화 --%>
+				<c:if test="${ loginuser.type eq 'admin' }">
+					<div>
+						<a class="btn btn-outline-success"
+							href="/product/productUpdate/${ product.productNo }"
+							role="button">수정</a> 
+						<a class="btn btn-outline-secondary"
+							href="/product/productDelete/${ product.productNo }"
+							role="button" onclick="return confirm('삭제하시겠습니까?');">삭제</a> 
+					</div>
+				</c:if>
+				
+				<form name="form1" method="post" action="/cart/insertCart">
+		        	<input type="hidden" name="memberId" value="${ loginuser.memberId }">
+					<input type="hidden" name="productNo" value="${ product.productNo }">
+				
+					<div class="flex-r-m flex-w p-t-10">
+							<div class="w-size16 flex-m flex-w">
+								<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+								
+									<!-- 감소버튼 -->
+									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+									</button>
+	
+									<input class="size8 m-text18 t-center num-product" type="number" name="amount" value="1">
+									
+									<!-- 증가버튼 -->
+									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+									</button>
+								</div>
+	
+								<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+									<!-- Button -->
+									<button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</div>
+							</div>
+						</div>
+						
+				</form>
+				
+				<div class="p-b-45 mt-5">
 					<span class="s-text8">${ product.category }</span>
 				</div>
 
-				<!--  -->          
+				<!-- 세부설명  -->          
 				<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
 						Description
