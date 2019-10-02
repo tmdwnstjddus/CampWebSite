@@ -14,6 +14,7 @@ import com.camp.mapper.MemberMapper;
 import com.camp.vo.Buy;
 import com.camp.vo.Camp;
 import com.camp.vo.Member;
+import com.camp.vo.QnA;
 import com.camp.vo.Rental;
 
 @Service
@@ -94,10 +95,16 @@ public class MemberServiceImpl implements MemberService {
 ////////////////////////////////////////레포팅 페이지////////////////////////////////////////////			
 
 		@Override
-		public List<Member> reporting() {
-			List<Member> member = memberMapper.reporting();
+		public List<Rental> reporting() {
+			List<Rental> rent = memberMapper.reporting();
 			
-			return member;
+			return rent;
+		}
+		
+		@Override
+		public List<Buy> reportings() {
+			List<Buy> buy = memberMapper.reportings();
+			return buy;
 		}
 
 ///////////////////////////////////////주문 내역////////////////////////////////////////////			
@@ -117,5 +124,12 @@ public class MemberServiceImpl implements MemberService {
 			
 			return buy;
 		}
-		
+
+		@Override
+		public List<QnA> qaList() {
+			
+			List<QnA> qa = memberMapper.qaList();
+			
+			return qa; 
+		}
 }

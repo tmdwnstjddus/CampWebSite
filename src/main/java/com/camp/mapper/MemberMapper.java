@@ -1,6 +1,5 @@
 package com.camp.mapper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.camp.vo.Buy;
-import com.camp.vo.Camp;
 import com.camp.vo.Member;
+import com.camp.vo.QnA;
 import com.camp.vo.Rental;
 
 @Mapper
@@ -25,15 +24,21 @@ public interface MemberMapper {
 	String idfind(HttpServletResponse response, String email) throws Exception;
 	
 	Member getMemberById(String memberId);
-	
+	 
 	void updateMember(Member member);
 
-	List<Member> getList();
+	List<Member> getList(); 
 
-	List<Member> reporting();
+	List<Rental> reporting();
+	
+	List<Buy> reportings();
 
 	List<Rental> orderList(String memberId);
 
 	List<Buy> orderLists(String memberId);
+
+	List<QnA> qaList();
+
+
 
 }

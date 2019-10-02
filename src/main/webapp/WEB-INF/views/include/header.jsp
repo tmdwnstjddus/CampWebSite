@@ -24,11 +24,11 @@
                      </li>
 
                      <li >
-                        <a href="/product/productList">캠핑장 용품</a>
+                        <a href="/product/productList?category=all">캠핑장 용품</a>
                      </li>
                      <li>
                         <a href="/upload/tourist">주변관광지</a>
-                     </li>
+                     </li> 
                      <li>
                         <a href="/qna/qna">Q&A</a>
                      </li>                     
@@ -47,7 +47,7 @@
 					<div>                        
 						<a href="#" onclick="openNav()" class="p-r-8">
 							<img src="/resources/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-						 ${ loginuser.memberId }님 환영합니다!</a>&nbsp;	</a>
+						 <span style="color: blue">${ loginuser.memberId }님</span> 환영합니다!</a>&nbsp;	</a>
 					</div>
 				</c:otherwise>
 			</c:choose>

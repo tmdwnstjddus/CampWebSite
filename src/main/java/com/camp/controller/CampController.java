@@ -102,7 +102,7 @@ public class CampController {
 	}
 	
 	
-	@RequestMapping(value = "/campRent", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	@RequestMapping(path = "/campRent", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	@ResponseBody
 	public String campRent(Model model, Rental rent, HttpSession session) {
 		
@@ -118,8 +118,8 @@ public class CampController {
 //		}
 //		rent.setRentDate(date);
 		
-		System.out.println(rent);
 		rentService.registerRent(rent);
+		System.out.println(rent);
 		
 		return "success";
 	}

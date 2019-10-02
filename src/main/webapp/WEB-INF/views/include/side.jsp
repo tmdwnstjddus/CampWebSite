@@ -27,17 +27,17 @@
                         </a>
                       </li>
                      <li class="p-t-6 p-b-8 bo6">
-                        <a href="/member/mypage?memberId=${loginuser.memberId }" class="s-text13 p-t-5 p-b-5">
+                        <a href="/cart/ordercart?memberId=${ loginuser.memberId }" class="s-text13 p-t-5 p-b-5">
                           	장바구니
                         </a>
                       </li>    
                      <li class="p-t-6 p-b-8 bo6">
-                        <a href="/member/mypage?memberId=${loginuser.memberId }" class="s-text13 p-t-5 p-b-5">
+                        <a href="/member/orderlist?memberId=${loginuser.memberId }" class="s-text13 p-t-5 p-b-5">
                           	예약내역
                         </a>
                       </li>                                                       
                     </ul>
-                    
+                     
         
                     <div class="p-t-10 t-right logout-btn">
                     	<button class="btn btn-outline-primary" onclick="location.href='/account/logout'">
