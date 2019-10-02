@@ -14,7 +14,10 @@ public class Review {
 	private String category;
 	private Date regDate;
 	private String memberId;
-	private  int rentNo;
+	private  int typeNo;
+	
+	private int campNo;
+	private int productNo;
 	
 	private ReviewFile file;  // flag = 1
 	private ArrayList<ReviewFile> fileList; // flag = 0

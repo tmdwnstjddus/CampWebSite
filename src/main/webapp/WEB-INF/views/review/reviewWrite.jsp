@@ -32,6 +32,8 @@
 				<div class="col-md-12 p-b-30">
 					<form action="reviewWrite" method="post" enctype="multipart/form-data" id="writeForm">
 						<input type="hidden" name="memberId" value="${ loginuser.memberId }">
+						<input type="hidden" name="productNo" value="${review.productNo}" />
+						<input type="hidden" name="campNo" value="${review.campNo}" />
 						<div class="heading">
 							<h3>리뷰 작성</h3>
 							<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>

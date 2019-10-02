@@ -11,8 +11,8 @@
 	
 	<insert id="insertReview" parameterType="com.camp.vo.Review"
 			useGeneratedKeys="true" keyColumn="reviewNo" keyProperty="reviewNo">
-		INSERT INTO REVIEW (TITLE, CONTENT, CATEGORY, MEMBERID)
-		VALUES (#{title}, #{content}, #{category}, #{memberId})
+		INSERT INTO REVIEW (TITLE, CONTENT, CATEGORY, MEMBERID, TYPENO)
+		VALUES (#{title}, #{content}, #{category}, #{memberId}, #{typeNo})
 	</insert>
 				
 	<insert id="insertReviewFile" parameterType="com.camp.vo.ReviewFile">

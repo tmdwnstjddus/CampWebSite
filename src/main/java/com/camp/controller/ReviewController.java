@@ -32,8 +32,9 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping(path = "/reviewWrite", method = RequestMethod.GET)
-	public String reviewWriteFrom() {
-
+	public String reviewWriteFrom(Review review, Model model) {
+		
+		model.addAttribute(review);
 		return "review/reviewWrite";
 	}
 	
@@ -70,6 +71,12 @@ public class ReviewController {
 		
 			Member loginuer = (Member)session.getAttribute("loginuser");
 			review.setMemberId(loginuer.getMemberId());
+			if(review.getCategory().equals("productreview")) {
+				review.setTypeNo(review.getProductNo());
+			}
+			else {
+				review.setTypeNo(review.getCampNo());
+				}
 			reviewService.writeReview(review);
 			
 		} catch (Exception e) {

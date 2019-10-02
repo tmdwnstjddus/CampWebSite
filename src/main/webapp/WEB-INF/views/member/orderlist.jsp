@@ -63,7 +63,7 @@
 								<td class="column-4">
 										${ buy.addr1 }&nbsp;${ buy.addr2 }&nbsp;${ buy.addr3 }
 								</td>
-								<td class="column-2">￦${  buy.price }<br><a href="/review/reviewWrite?memberId=${loginuser.memberId }" class="badge2 badge-success2">리뷰 남기기</a></td>
+								<td class="column-2">￦${  buy.price }<br><a href="/review/reviewWrite?memberId=${loginuser.memberId }&productNo=${buy.productNo}" class="badge2 badge-success2">리뷰 남기기</a></td>
 							</tr>
 							</c:forEach>
 						</table>
@@ -91,7 +91,7 @@
 								<td class="column-4">
 										${ rent.campName }
 								</td>
-								<td class="column-2">￦${ rent.price }<br><a href="/review/reviewWrite?memberId=${loginuser.memberId }" class="badge2 badge-success2">리뷰 남기기</a></td>
+								<td class="column-2">￦${ rent.price }<br><a href="/review/reviewWrite?memberId=${loginuser.memberId }&campNo=${rent.campNo}" class="badge2 badge-success2">리뷰 남기기</a></td>
 							</tr>
 							</c:forEach>
 						</table>
