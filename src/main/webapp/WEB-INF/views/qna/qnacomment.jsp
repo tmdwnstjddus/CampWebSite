@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 		<!-- 관리자만 가능하게 차후 수정할것 -->
@@ -17,7 +18,7 @@
 				
 			<!-- 답변등록 폼 -->
 					<div id="answer">
-					<form id="answerform" action="answerform" method="POST">
+					<form id="answerform">
 						<input type="hidden" name="memberId" id="memberId" value="${ loginuser.memberId }" />
 						<input type="hidden" name="qaNo" id="qaNo" value="${ qna.qaNo }"/>
 						
@@ -25,15 +26,17 @@
 		
 						<div class="p-b-10 t-right">
 							<!-- Button -->
-							<button type="submit" class="btn btn-secondary" id="answerSubmitButton">답변등록</button>
+							<button type="button" class="btn btn-secondary" id="answerSubmitButton">답변등록</button>
 						</div>
 					</form>
 					</div>
 				
 			</c:when>
 			<c:otherwise>
+				<div  id="comment-answer">
 				<c:forEach var="qnacomment" items="${ qnacomments }">
 				<div class="m-text6	 flex-sb flex-m p-b-21">
+				
 					<div class="t-left">
 						<span>답변자</span>
 						<span class="m-l-3 m-r-6">|</span>
@@ -51,11 +54,14 @@
 				</div>
 				<div class="p-b-10 t-right">
 					<c:if test="${ true }">	
-						<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">수정</button>
-						<button type="button" class="btn btn-secondary" >삭제</button>
+						<button type="button" class="btn btn-secondary" id="updateCommentBtn" value="${ qnaComment.commentNo }">수정</button>
+						<button type="button" class="btn btn-secondary" id="deleteCommentBtn" value="${ qnaComment.commentNo }">삭제</button>
 					</c:if>
+				
 				</div>
 				</c:forEach>
+				</div>
+				
 			</c:otherwise>
 		
 		</c:choose>

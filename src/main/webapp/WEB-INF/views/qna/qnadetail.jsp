@@ -10,7 +10,6 @@
 	<title>Product</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
 	<jsp:include page="../include/cssimport.jsp"/>
 </head>
 <body class="animsition">
@@ -71,17 +70,84 @@
 
 										<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="content">${ qna.content }</div>
 										
-										<c:if test="${ loginuser.memberId eq qna.memberId }">
+										<div style='display:${ loginuser.memberId eq qna.memberId ? "block" : "none" }'>
+										
+										
 											<div class="p-b-10 t-right">
 												<!-- Button -->
 												
 												<button type="button" class="btn btn-outline-secondary" id="user_deleted_qa">삭제</button>
 											</div>
-										</c:if>
+										</div>
 
 										<hr class="p-b-30"/>	
 										
-										<jsp:include page="qnacomment.jsp" />
+										<div id="comment-data-container">
+											<c:choose>
+												<c:when test="${ empty qnacomments }">
+													<div id="Unregistered" class="s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 bg8 t-center">
+														<p class="p-t-35 p-b-8">아직 답변이 등록되지않았습니다.</p>
+														<!-- eq 관리자 -->
+														<c:if test="${ true }">
+															<h5>
+																<a href="#" id="UnregisteredBtn" class="badge badge-dark">답변달기</a>
+															</h5>
+														</c:if>
+													</div>
+													
+												<!-- 답변등록 폼 -->
+														<div id="answer">
+														<form id="answerform">
+															<input type="hidden" name="memberId" id="memberId" value="${ loginuser.memberId }" />
+															<input type="hidden" name="qaNo" id="qaNo" value="${ qna.qaNo }"/>
+															
+															<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 sizefull" name="content" id="answerText"></textarea>
+											
+															<div class="p-b-10 t-right">
+																<!-- Button -->
+																<button type="button" class="btn btn-secondary" id="answerSubmitButton">답변등록</button>
+															</div>
+														</form>
+														</div>
+													
+												</c:when>
+												<c:otherwise>
+													<div  id="comment-answer">
+													<c:forEach var="qnacomment" items="${ qnacomments }">
+													<div class="m-text6	 flex-sb flex-m p-b-21">
+													
+														<div class="t-left">
+															<span>답변자</span>
+															<span class="m-l-3 m-r-6">|</span>
+															<span>${ qnacomment.memberId }</span>
+														</div>
+														<div class="t-right">
+															<span>등록일자</span>
+															<span class="m-l-3 m-r-6">|</span>
+															<span>${ qnacomment.regDate }</span>
+														</div>
+									
+													</div>
+													<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="success-anser">
+														${ qnacomment.content }
+													</div>
+													<div class="p-b-10 t-right">
+														<c:if test="${ true }">	
+															<button type="button" class="btn btn-secondary" id="updateCommentBtn">수정</button>
+															<button type="button" class="btn btn-secondary" id="delete-answer-btn" value=${ qnaComment.qaNo }>삭제</button>
+														</c:if>
+													
+													</div>
+													</c:forEach>
+													</div>
+													
+												</c:otherwise>
+											
+											</c:choose>
+											
+										</div>
+										
+										
 										<div class="p-b-10 t-center">
 											<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">목록으로</button>
 										</div>
@@ -100,6 +166,10 @@
 		</div>
 
 	</section>
+	
+			<div class="col col-md-5">
+				<input type="text" class="form-control" id="searchValueForQuestionList" placeholder="검색어를 입력하세요" />		
+			</div>
 
 	<section class="bg6 p-t-20 p-b-46 m-b-20">
 			<div class="flex-w p-l-15 p-r-15">
@@ -138,8 +208,9 @@
 				</div>
 			</div>
 		</section>
-
-	<jsp:include page="../include/footer.jsp" />
+	
+	
+	
 
 
 	<!-- Back to top -->
@@ -156,79 +227,93 @@
 
 	
 	<jsp:include page="../include/jsimport.jsp" />
-		<script type="text/javascript">
-	$(function() {
-		$("#answerSubmit").on("click", function(event){
-			event.preventDefault();
-			submitAnswer();
+		
+		<script type="text/javascript" >
+		
+	    //== admin answer write ajax
+	    $(function() {
+
+	    	$("#answer").hide();
+		    $("#UnregisteredBtn").click(function ( event ) {
+		           event.preventDefault(); 
+		           $("#Unregistered").hide(); 
+		           $("#answer").show();
+	       });
+
+		    
+	    	$('#answerSubmitButton').on('click', function(event) {
+
+	    		event.preventDefault(); 
+	    		
+	    		var formData = $('#answerform').serialize();
+
+	    		$.ajax({
+	    			url: "/qna/answer",
+	    			method: "POST",
+	    			data: formData,
+	    			success: function(data, status, xhr) {
+	    				$("#comment-data-container").load('/qna/qna-answer?qaNo=' + ${ qna.qaNo })
+	    			},
+	    			error: function(xhr, status, err) { 
+	    				console.log(err);
+	    			}
+    			});
+    		});
+	    			
+	    }); 
+
+	    //== admin answer update ajax
+	    
+	    
+	    //== admin answer delete ajax //delete-comment-btn
+	    $('#comment-answer').on('click', '#delete-answer-btn', function(event){
+
+			var qaNo = this.();
+			var commentNo = ${ qna.commentNo }
+			var sendData = {
+					"qaNo" : qaNo,
+					"commentNo" : commentNo
+					}
+		    
+		    $.ajax({
+			    url: "/qna/delete-answer",
+			    method:"GET",
+			    data: 
+			    success: function(data, status, xhr) {
+					if(data == 'success') {
+						$('#comment-answer').remove();
+						alert('답변을 삭제했습니다');
+						} else {
+							alert('삭제실패1');
+							}
+
+					},
+					error: function(xhr, status, err) {
+						alert('삭제실패');
+						}
+			    });
+
+		    });
+
+	    
+	    
+	     
+	    	    	
+       //=====user q delete 
+		$(function(){
+       		var qaNo = ${qna.qaNo};
+       		
+       		var btnDelete = document.querySelector('#user_deleted_qa');
+       		btnDelete.addEventListener('click', function(event) {
+       			var ok = confirm("삭제할까요?");
+       			if (ok) {
+        			location.href = "deletedqna/"+ qaNo ; 			
+       			}
+       		});
 		});
-		
-		function submitAnswer() {
-			
-			//var formData = $('#answerform').serialize();
-			
-			var writer = $("#memberId").text();
-			var answerQaNo = $("#qaNo").text();
-			var answerText = $("#answerText").val();
-
-			var formData = {
-				"memberId":writer,
-				"qaNo":answerQaNo,
-				"answerText":answerText
-				 }
-			
-			
-			$.ajax({
-				type: "post",
-				url: "/qna/answer",
-				contentType: "application/json;charset=UTF-8",
-				dataType: "text",
-				data: JSON.stringify(formData),
-		//		data: formData,
-				success: function(data, status, xhr) {
-					//$("#success-anser").load('/qna/qna-answer', 
-					//		{ "qaNo" : ${ qna.qaNo } },
-					alert("성공"); 
-				},
-				error: function(err) {
-					console.log(err);
-				}
-			});
-			
-		}
-
-
-		})
-		
-	</script>
-	
-	
-	
+ 
 	
 
-	
-	<script type="text/javascript"> 
-       $("#answer").hide(); 
-       $("#UnregisteredBtn").click(function ( event ) {
-           event.preventDefault(); 
-           $("#Unregistered").hide(); 
-           $("#answer").show();
-       }); 
-       
-	</script>
-	<script type="text/javascript">
-		        	window.addEventListener('load', function(event) {
-		        		var qaNo = ${qna.qaNo};
-		        		var btnDelete = document.querySelector('#user_deleted_qa');
-		        		btnDelete.addEventListener('click', function(event) {
-		        			var ok = confirm("삭제할까요?");
-		        			if (ok) {
-			        			location.href = "deletedqna/"+ qaNo ; 			
-		        			}
-		        		});
-		        		
-		        		
-		        	});
 	</script>
 
 	 

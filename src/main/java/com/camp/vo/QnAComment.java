@@ -12,6 +12,5 @@ public class QnAComment {
 	private Date regDate;
 	private int qaNo;
 	private String memberId;
-	
 
 }

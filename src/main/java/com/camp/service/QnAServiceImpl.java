@@ -18,6 +18,9 @@ public class QnAServiceImpl implements QnAService {
 	
 	@Autowired
 	private QnAMapper qnaMapper;
+	
+	private static final String SUCCESS = "success";
+	private static final String FAILED = "failed";
 
 	@Override
 	public void uploadQnA(QnA qna) {
@@ -45,16 +48,43 @@ public class QnAServiceImpl implements QnAService {
 		return qna;
 	}
 
-	@Override
-	public void answerQuestion(QnAComment qnaComment) {
-		qnaMapper.insertQnAComment(qnaComment);
-	}
+//	@Override
+//	public void answerQuestion(QnAComment qnaComment) {
+//		qnaMapper.insertQnAComment(qnaComment);
+//	}
 
 	@Override
 	public List<QnAComment> findQnAAnswer(int qaNo) {
 		List<QnAComment> qnaComment = qnaMapper.selectComment(qaNo);
 		return qnaComment;
 	}
+
+	@Override
+	public void writeComment(QnAComment qnaComment) {
+		qnaMapper.insertQnAComment(qnaComment);
+		
+		int qaNo = (int)qnaComment.getQaNo();
+		qnaMapper.setCompleted(qaNo);
+		
+		//int qnaNo = Integer.parseInt((String)params.get("qnaNo"));
+		
+	}
+
+//	@Override
+//	public void deleteAnswer(String sendData) {
+//		
+//		int commentNo = (int)sendData.get;
+//		int qaNo = (int)sendData.qaNo;
+//		
+//		qnaMapper.dropQnAComment(qaNo);
+//		qnaMapper.setDecompleted(qaNo);
+//		
+//	}
+	
+
+
+
+
 
 
 

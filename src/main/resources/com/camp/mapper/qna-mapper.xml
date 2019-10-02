@@ -17,11 +17,10 @@
 	<!-- 목록조회  -->
 	<select id="selectQnA" resultType="com.camp.vo.QnA">
 	
-		SELECT QANO, TITLE, CONTENT, REGDATE, MEMBERID
+		SELECT QANO, TITLE, CONTENT, REGDATE, MEMBERID, COMPLETED
 		FROM QA
 		WHERE DELETED = '0'
 		ORDER BY QANO DESC
-	
 		
 	</select>
 	
@@ -40,10 +39,11 @@
 			Q.CONTENT,
 			Q.REGDATE,
 			Q.MEMBERID,
+			Q.COMPLETED,
 			A.COMMENTNO,
 			A.CONTENT,
 			A.REGDATE,
-			A.MEMBERID		
+			A.MEMBERID
 		FROM 
 			QA Q
 		LEFT OUTER JOIN 
@@ -63,15 +63,29 @@
 	<insert id="insertQnAComment" parameterType="com.camp.vo.QnAComment" 
 			useGeneratedKeys="true" keyProperty="commentNo">
 		INSERT INTO QACOMMENT (QANO, MEMBERID, CONTENT)
-		VALUES (#{ qaNo }, #{ memberId}, #{ content } )
-		
+		VALUES (#{ qaNo }, #{ memberId}, #{ content } )	
 	</insert>
+	
+	<update id="setCompleted" parameterType="int">
+		UPDATE QA
+		SET COMPLETED ='1' 
+		WHERE QANO = #{ qaNo }
+	</update>
 	
 	<select id="selectComment" parameterType="int" resultType="com.camp.vo.QnAComment" >
 		SELECT QANO, COMMENTNO, CONTENT, REGDATE, MEMBERID
 		FROM QACOMMENT
 		WHERE QANO = #{ qaNo }
 	</select>
+	
+	<delete id="dropQnAComment" parameterType="int">
+		DELETED FROM QACOMMENT WHERE QANO = #{ qaNo }		
+	</delete>
+	<update id="setDecompleted" parameterType="int">
+		UPDATE QA
+		SET COMPLETED ='0' 
+		WHERE QANO = #{ qaNo }
+	</update>
 	
 
 

@@ -36,6 +36,7 @@
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
 					<div class="flex-w flex-sb p-b-10 ">
 						<h4>공지</h4>
+						<a href="#" class="badge badge-primary"> <p class="s-text14">글작성</p>	</a> 
 					</div>
 							
 
@@ -64,10 +65,6 @@
 					</div>
 					
 					
-					<!--Q service-->
-					<jsp:include page="../include/quickqna.jsp" />
-
-
 					<div class="flex-w flex-sb">
 							<h4 class="p-b-10"> 고객 문의사항</h4>
 								<table class="table table-hover bo4">
@@ -80,37 +77,56 @@
 												<th scope="col" class="column-5">답변여부</th>
 											</tr>
 										</thead>
-										<tbody>
-										
-										<c:forEach var="qnaList" items="${ qnaList }">
-											<tr onClick="location.href='/qna/qnadetail?qaNo=${ qnaList.qaNo }'">
-												<td>${ qnaList.qaNo }</td>
-												<td> ${ qnaList.title } </td>
-												<td>${ qnaList.memberId }</td>
-												<td>${ qnaList.regDate }</td>
+										<tbody id="questionListArray">
 												
-												<c:choose>
-												<c:when test="${ qnaList.completed eq '0' }">
-													<td><span class="badge badge-danger">답변대기</span> </td>
-												</c:when>
-												<c:otherwise>
-													<td><span class="badge badge-success">답변완료</span></td>
-												</c:otherwise>
-												</c:choose>
-											</tr>
-										</c:forEach>
+												<!-- 답변리스트 동적생성  -->
 
 										</tbody>
 								</table>
-								<div class="flex-sb">
-									<button type="button" class="btn btn-dark"  onclick ="location.href ='/qna/qnawrite'">문의사항 남기기</button>
-								</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="answerModalTitle">답변하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+          		문의번호: <span id="qaNo"></span><br>
+            	문의자 : <span id="memberId"></span><br>
+            	카테고리: <span id="title"></span><br>
+            	문의일자: <span id="qnaDate"></span><br>
+            	문의 내용: <span id="qnaContent"></span><br>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">답변:</label>
+            <textarea class="form-control" id="answerText"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" id="answerSubmitButton" class="btn btn-primary">답변하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+	
+	
+
 
 	<section class="bg6 p-t-20 p-b-46 m-b-20">
 			<div class="flex-w p-l-15 p-r-15">
