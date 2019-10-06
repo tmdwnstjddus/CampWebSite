@@ -78,11 +78,11 @@
 					<input type="hidden" name="campNo" id="campNo" value="${ camp.campNo }">
 					<div class="mt-5">
 						<label for="startDate">체크인</label>
-						<input type="text" name="startDate" id="startDate" class="col-md-4" required>&nbsp;
+						<input type="text" name="startDate" id="startDate" class="col-md-4" required>
 						<label for="endDate">체크아웃</label>
     					<input type="text" name="endDate" id="endDate" class="col-md-4" required>
     					<div class="mt-2 p-r-50">
-    						<input class="btn btn-dark" type="submit" id="rent_submit" name="rent_submit" value="예약" />
+    						<input class="btn btn-dark" type="button" id="rent_submit" name="rent_submit" value="예약" />
     					</div>				
 					</div>
 				</form>
@@ -94,7 +94,7 @@
 				<!-- 세부설명 -->          
 				<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-						Description
+						객실정보
 						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
 						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
 					</h5>
@@ -107,7 +107,7 @@
 
 				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-						Detail
+						세부사항
 						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
 						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
 					</h5>

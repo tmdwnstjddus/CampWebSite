@@ -28,6 +28,8 @@ function readURL(input, target) {
 /* ----------- camp (write, update) ---------- */
 $(function () {
 	
+	var date;
+	
 	/* ----------- textCount ---------- */
 	$("#camp_name").keyup(function (e) {
 		var content = $(this).val();
@@ -87,26 +89,23 @@ $(function () {
         ,showOtherMonths: true
         ,showMonthAfterYear:true
         ,changeYear: true 
-        ,changeMonth: true               
+        ,changeMonth: true 
         ,showOn: "both" 
         ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
         ,buttonImageOnly: true
         ,buttonText: "선택"              
         ,yearSuffix: "년"
         ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
-        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
         ,dayNamesMin: ['일','월','화','수','목','금','토']
-        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
-        ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+        ,minDate: 0
+        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)	
 		,onClose: function (selectedDate) { 
-		    $('#endDate').datepicker("option", 'minDate', selectedDate); 
-		    $("#startDate").attr('value', selectedDate);
+		    $('#endDate').datepicker("option", 'minDate', selectedDate);
 		}
 	}); 
 
-   $("#endDate").datepicker({ 
-	   dateFormat: 'yy-mm-dd'
+    $("#endDate").datepicker({
+    	dateFormat: 'yy-mm-dd'
         ,showOtherMonths: true
         ,showMonthAfterYear:true
         ,changeYear: true 
@@ -117,15 +116,29 @@ $(function () {
         ,buttonText: "선택"              
         ,yearSuffix: "년"
         ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
-        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
         ,dayNamesMin: ['일','월','화','수','목','금','토']
-        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
-        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) 
+        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 	    ,onClose: function (selectedDate) { 
-	     $('#startDate').datepicker("option", 'maxDate', selectedDate); 
-	     $("#endDate").attr('value', selectedDate);
+	    	$('#startDate').datepicker("option", 'maxDate', selectedDate); 
 	    }
-   }); 
+    }); 
+    
+//    $('#startDate').on('click', function (event) {
+//    	var query = { startDate : $("#startDate").val(), endDate : $("#endDate").val() };
+// 	   	$.ajax({
+// 	   		url: "/camp/dateCheck",
+// 	   		method: "POST",
+// 	   		data: query,
+// 	   		success: function (data, status, xhr) {
+// 	   			if(data == 1) {  
+// 	   				$(".ui-datepicker-div td").attr("disabled", "disabled");
+// 	   			} else {
+// 	   				$(".ui-datepicker-div td").removeAttr("disabled");
+//				}
+// 		   	}
+// 	   	});
+//    });	
+	
    
    /* ----------- rent ---------- */
    $('#rent_submit').on('click', function (event) {
@@ -137,8 +150,8 @@ $(function () {
 		   method: "POST",
 		   data: formData,
 		   success: function (data, status, xhr) {
-			   alert("예약되었습니다!");
-			   window.location.href = '/member/rentList';
+			   alert("예약이 완료되었습니다.");
+			   location.href="/member/orderlist?memberId="+ data;
 		   },
 		   error: function (xhr, status, err) {
 			   alert(err);
@@ -147,21 +160,4 @@ $(function () {
    });	
 
 });
-
-
-function call()
-{
-	var sdd = document.getElementById("startDate").value;
-    var edd = document.getElementById("endDate").value;
-    var ar1 = sdd.split('-');
-    var ar2 = edd.split('-');
-    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
-    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
-    var dif = da2 - da1;
-    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-    
-    if(sdd && edd) {
-    	document.getElementById('rentDate').value = parseInt(dif/cDay)
- 	}
-}
 

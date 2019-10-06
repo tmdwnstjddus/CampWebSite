@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <!DOCTYPE html>
@@ -72,8 +73,8 @@
                            <table class="table-shopping-cart">
 							<tr class="table-head">
 								<th class="column-1"></th>
-								<th class="column-2">예약 날짜</th>
-								<th class="column-4">분류</th>
+								<th class="column-4">예약 날짜</th>
+								<th class="column-2">분류</th>
 								<th class="column-4">이름</th>
 								<th class="column-2">가격</th>
 							</tr>
@@ -86,8 +87,8 @@
 										</a>
 									</div>				 				
 								</td>														
-								<td class="column-2">${ rent.startDate }${ rent.endDate }</td>							
-								<td class="column-4">${ rent.category }</td>
+								<td class="column-4"><fmt:formatDate value="${rent.startDate}" /> ~ <fmt:formatDate value="${rent.endDate}" /></td>							
+								<td class="column-2">${ rent.category }</td>
 								<td class="column-4">
 										${ rent.campName }
 								</td>

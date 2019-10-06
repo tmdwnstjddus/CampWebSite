@@ -1,7 +1,6 @@
 package com.camp.controller;
 
 import java.io.File;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,15 +8,18 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -31,13 +33,19 @@ import com.camp.vo.Criteria;
 import com.camp.vo.Member;
 import com.camp.vo.PageMaker;
 import com.camp.vo.Rental;
-import com.camp.vo.Rental;
-import com.camp.vo.Review;
 
 
 @Controller
 @RequestMapping(path = "/camp")
 public class CampController {
+	
+	@InitBinder
+	public void allowEmptyDateBinding( WebDataBinder binder )
+	{
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    sdf.setLenient(false);
+	    binder.registerCustomEditor( Date.class, new CustomDateEditor( sdf,false));	   
+	}
 	
 	@Autowired
 	CampService campService;
@@ -85,7 +93,20 @@ public class CampController {
 	
 	@RequestMapping(path = "/campDetail/{campNo}", method = RequestMethod.GET)
 	public String campDetail(@PathVariable int campNo, Model model, HttpSession session) {
+		
+		Member loginuser = (Member) session.getAttribute("loginuser");
+		int startDate, endDate = 0;
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+		StringTokenizer st = new StringTokenizer(sdf.format(date), "-");
+
+		startDate = Integer.parseInt(st.nextToken());
+		endDate = Integer.parseInt(st.nextToken());
+		
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		
 		Camp camp = campService.findCampByCampNo(campNo);
 		if (camp == null) {
 			return "redirect:/camp/campList?category=all";
@@ -96,32 +117,49 @@ public class CampController {
 		camp.setFileList((ArrayList<CampFile>) campfiles);
 		camp.setFile(campService.findCampFile(camp.getCampNo()));
 		
+		try {
+			ArrayList<Rental> rents = rentService.findRentsByCampNo(campNo);		
+			model.addAttribute("rents", rents);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		model.addAttribute("camp", camp);
+		model.addAttribute("loginuser", loginuser);
 
 		return "camp/campDetail";
 	}
 	
-	
-	@RequestMapping(path = "/campRent", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	@RequestMapping(path = "/campRent", method = RequestMethod.POST)
 	@ResponseBody
-	public String campRent(Model model, Rental rent, HttpSession session) {
+	public String campRent(Model model, Rental rent, Date startDate, Date endDate, HttpSession session) {
 		
 		Member loginuser = (Member) session.getAttribute("loginuser");
 		rent.setMemberId(loginuser.getMemberId());
-		
-//		String strDate = year+"-"+month+"-"+day;
-//		Date date = null;
-//		try {
-//			date = sdf.parse(strDate);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		rent.setRentDate(date);
+		rent.setStartDate(startDate);
+		rent.setEndDate(endDate);
 		
 		rentService.registerRent(rent);
-		System.out.println(rent);
 		
-		return "success";
+		return loginuser.getMemberId();
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = "/dateCheck", method = RequestMethod.POST)
+	public int idCheck(HttpServletRequest req) {
+		
+		String startDate = req.getParameter("startDate");
+		String endDate = req.getParameter("endDate");
+		
+		Rental rent = rentService.dateCheck(startDate, endDate);
+		
+		int result = 0;
+		
+		if (rent != null) {
+			result = 1;
+		}
+		return result;
 	}
 	
 	@RequestMapping(path = "/campWrite", method = RequestMethod.GET)

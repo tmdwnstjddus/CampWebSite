@@ -15,16 +15,21 @@ public class RentServiceImpl implements RentService {
 	
 	@Autowired
 	private RentMapper rentMapper;
+	
+	@Override
+	public ArrayList<Rental> findRentsByCampNo(int campNo) {
+		List<Rental> rents = rentMapper.selectRentsByCampNo(campNo);
+		return (ArrayList<Rental>) rents;
+	}
 
 	@Override
 	public void registerRent(Rental rent) {
 		rentMapper.insertRent(rent);	
 	}
-	
+
 	@Override
-	public ArrayList<Rental> findRentsByCampNo(int campNo, Date rentDate) {
-		List<Rental> rents = rentMapper.selectRentsByCampNo(campNo, rentDate);
-		return (ArrayList<Rental>) rents;
+	public Rental dateCheck(String startDate, String endDate) {
+		return rentMapper.dateCheck(startDate, endDate);
 	}
 
 }
