@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.camp.vo.Buy;
 import com.camp.vo.Camp;
 import com.camp.vo.Member;
+import com.camp.vo.Product;
 import com.camp.vo.QnA;
 import com.camp.vo.Rental;
 
@@ -34,6 +35,11 @@ public interface MemberService {
 
 	List<Buy> reportings();
 
-	List<QnA> qaList(); 
+	List<QnA> qaList();
 
+	void deleteMember(String memberId);
+
+	void send_mail(Member member, String div) throws Exception;
+
+	void findpwd(HttpServletResponse response, Member member) throws Exception;
 }

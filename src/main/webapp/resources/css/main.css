@@ -34,7 +34,16 @@ Paragrap        : 18px/1.6 '', Arial, sans-serif;
 Input, textarea : 14px/1.6 '', Arial, sans-serif;
 -------------------------------------------------------------------*/
 
-
+#lists{
+    position: relative;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    height: 110px;
+    margin: 0;
+}
 
 /*[ FONT ]
 ///////////////////////////////////////////////////////////
@@ -1873,7 +1882,7 @@ li.sale-noti > a {
 */
 .bg-title-page {
   width: 100%;
-  min-height: 239px;
+  min-height: 300px;
   padding-left: 15px;
   padding-right: 15px;
   background-repeat: no-repeat;

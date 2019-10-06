@@ -18,4 +18,5 @@ public class Member {
 	private String addr2;
 	private String addr3;
 	private Date regDate;
+	
 }
