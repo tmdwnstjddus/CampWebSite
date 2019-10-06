@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact</title>
+	<title>회원가입</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<jsp:include page="../include/cssimport.jsp" />
@@ -52,7 +52,7 @@
 															<input type="password" name="pwd" placeholder="비밀번호">
 															<input type="password" name="confirm" placeholder="비밀번호 확인">
 															<input type="text" name="phone" placeholder="핸드폰" >
-															<input type="email" name="email" placeholder="이메일" >
+															<input type="email" name="email" placeholder="이메일       [비밀번호 찾기에 사용됩니다]" >
 															
 															<div class="cart_title">주소 정보</div><br>															
 															<input type="button" style="color: white;background-color: black" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
@@ -143,38 +143,41 @@
         }).open();
     }
 
-  //중복검사
-	$("#idCheck").click(function(){	 
-		 var query = {memberId : $("#memberId").val()};
-		 
-		 $.ajax({
-			 url : "/account/idCheck",
-			 type : "post",
-			 data : query,
-			 success : function(data) {		  
-				 if(data == 1) {
-					 $("#result #msg").text("이미 사용중인 아이디 입니다.");
-					 $("#result #msg").attr("style", "color:#f00"); 
-					 $("#submit").attr("disabled", "disabled"); 
-					 } else {
-						 $("#result #msg").text("사용 가능한 아이디 입니다.");
-						 $("#result #msg").attr("style", "color:#00f");
-						 $("#submit").removeAttr("disabled");
+	  //중복검사
+		$("#idCheck").click(function(){	 
+			 var query = {memberId : $("#memberId").val()};
+			 
+			 $.ajax({
+				 url : "/account/idCheck",
+				 type : "post",
+				 data : query,
+				 success : function(data) {		  
+					 if(data == 1) {
+						 $("#result #msg").text("이미 사용중인 아이디 입니다.");
+						 $("#result #msg").attr("style", "color:#f00"); 
+						 $("#submit").attr("disabled", "disabled"); 
+						 } else {
+							 $("#result #msg").text("사용 가능한 아이디 입니다.");
+							 $("#result #msg").attr("style", "color:#00f");
+							 $("#submit").removeAttr("disabled");
+						 }
 					 }
-				 }
-		 	});
-		 });
-	
-	//중복확인후 아이디 변경 재검사
-	$("#memberId").keyup(function(){
-		 $("#result #msg").text("중복확인을 해주세요.");
-		 $("#result #msg").attr("style", "color:#000"); 
-		 $("#submit").attr("disabled", "disabled");
-		 
-		});
-</script>
-	
-
-
-</body>
+			 	});
+			 });
+		
+		//중복확인후 아이디 변경 재검사
+		$("#memberId").keyup(function(){
+			 $("#result #msg").text("중복확인을 해주세요.");
+			 $("#result #msg").attr("style", "color:#000"); 
+			 $("#submit").attr("disabled", "disabled");
+			 
+			});
+		
+   		$('#submit').on('click', function(event){
+		    alert("회원가입을 완료했습니다");
+   			$('#register').submit();
+   			
+   		});
+		</script>
+	</body>
 </html>

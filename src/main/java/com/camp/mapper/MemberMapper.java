@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.camp.vo.Buy;
 import com.camp.vo.Member;
+import com.camp.vo.Product;
 import com.camp.vo.QnA;
 import com.camp.vo.Rental;
 
@@ -39,6 +40,7 @@ public interface MemberMapper {
 
 	List<QnA> qaList();
 
+	void deleteMember(String memberId);
 
-
+	void findpwd(Member member);
 }

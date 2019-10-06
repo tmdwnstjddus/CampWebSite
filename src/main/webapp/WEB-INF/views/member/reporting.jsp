@@ -24,7 +24,7 @@ body {
 .tabs {
   position: relative;
   margin: 3rem 0;
-  background: navy;
+  background: black;
   height: 14.75rem;
 }
 .tabs::before,
@@ -47,8 +47,8 @@ body {
   line-height: 2.75em;
   height: 3em;
   padding: 0 1.618em;
-  background: navy;
-  border-right: 0.125rem solid navy;
+  background: black;
+  border-right: 0.125rem solid black;
   color: #fff;
   cursor: pointer;
   top: 0;
@@ -142,7 +142,7 @@ body {
             subtitle: '통계 년도: 2018-2019',
             bar: { groupWidth: '70%' },
             isStacked: true,
-            colors:['#262da6'],
+            colors:['#000000'],
             hAxis: {
 	            		title: '캠핑장 이름',
             		},
@@ -171,7 +171,7 @@ body {
             title: '캠핑용품별 판매량',
             subtitle: '통계 년도: 2018-2019',
             isStacked: true,
-            colors:['#262da6'],
+            colors:['#000000'],
             hAxis: {
 	            		title: '캠핑용품',
             		},

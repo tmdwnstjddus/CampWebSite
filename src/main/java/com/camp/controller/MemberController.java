@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.camp.common.Util;
 import com.camp.service.CampService;
@@ -63,7 +65,7 @@ public class MemberController {
 		if (!pwd.equals(confirm)) {
 			return "redirect:/member/memberset?memberId="+memberId;
 		}	
-		pwd = Util.getHashedString(pwd, "SHA-256");
+//		pwd = Util.getHashedString(pwd, "SHA-256");
 		
 		member.setMemberId(memberId);
 		member.setPwd(pwd);
@@ -71,6 +73,22 @@ public class MemberController {
 		
 		return "redirect:/member/mypage?memberId="+memberId;
 	}
+	/////////////////////////////////////////////회원 탈퇴///////////////////////////////////////////////////////
+	
+	@RequestMapping(path = "/delete", method = RequestMethod.GET)
+	public String delete (HttpSession session) {  
+
+		Member loginuser = (Member) session.getAttribute("loginuser");
+		String memberId = loginuser.getMemberId();
+
+		memberService.deleteMember(memberId);
+		
+		session.removeAttribute("loginuser");
+
+		return "redirect:/";		
+	}
+	
+
 	
 /////////////////////////////////////////////주문 내역///////////////////////////////////////////////////////
 	   @RequestMapping(path = "/orderlist", method = RequestMethod.GET)
@@ -111,7 +129,7 @@ public class MemberController {
 			return "member/memberlist";
 		}
 		
-		 //회원리스트
+		//질문리스트
 		@RequestMapping(path = "/qalist", method = RequestMethod.GET)
 		public String qaList(Model model) {
 				
@@ -121,7 +139,6 @@ public class MemberController {
 			return "member/qalist";
 		}		 
 			
-/////////////////////////////////////////////레포팅 페이지///////////////////////////////////////////////////////
 		//캠핑장 및 캠핑용품 별 레포팅
 		@RequestMapping(path = "/reporting", method = RequestMethod.GET)
 		public String ReportingForm(Model model) {

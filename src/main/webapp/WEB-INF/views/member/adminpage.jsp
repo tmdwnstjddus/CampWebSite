@@ -10,7 +10,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<jsp:include page="../include/cssimport.jsp" />
-	
 </head>
 <body class="animsition">
 
@@ -31,17 +30,22 @@
 
 
 	<!-- 마이페이지 카테고리 -->
-	<div class="mypage">
-		<ul>
-			<li style="text-align: center">
-			<button id="memberlist" name="memberlist" type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
+	<div class="mypage row" style="max-width: 2000px;">
+		<div class="row-1" style="padding-left: 575px;padding-right: 80px">
+			<img src="/resources/images/admin1.png" alt="" style="width: 150px; height: 150px"><br>
+			<button id="memberlist" name="memberlist" type="button" class="btn btn-dark btn-lg">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 리스트&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-			<button id="qalist" type="button" class="btn btn-dark btn-lg" style="margin-right: 20px">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 답변&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>	
+		</div>
+		<div class="row-2" style="padding-right: 80px">
+			<img src="/resources/images/admin2.png" alt="" style="width: 150px; height: 150px"><br>
+			<button id="qalist" type="button" class="btn btn-dark btn-lg">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 답변&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		</div>
+		<div class="row-3">
+			<img src="/resources/images/admin3.png" alt="" style="width: 150px; height: 150px"><br>
 			<button id="reporting" type="button" class="btn btn-dark btn-lg">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;캠핑장 통계&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>					
-			</li>
-		</ul>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;캠핑장 통계&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		</div>					
 	</div>
 	<br><br><br>
 

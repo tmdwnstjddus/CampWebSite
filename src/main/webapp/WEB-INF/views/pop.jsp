@@ -30,6 +30,8 @@
 	setCookie( "Notice", "done" , 1);
 	self.close();
 	}
+	</script>
 </html>		
+
 		
 

@@ -11,10 +11,10 @@
    $(function(){
       $("#findBtn").click(function(){
          $.ajax({
-            url : ".account/pwfind",
+            url : "/account/findpwd",
             type : "POST",
             data : {
-               id : $("#memberId").val(),
+               memberId : $("#memberId").val(),
                email : $("#email").val()
             },
             success : function(result) {

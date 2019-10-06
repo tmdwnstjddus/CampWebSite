@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Contact</title>
+	<title>회원정보 수정</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -67,7 +67,8 @@
 		</div>	
                     <!-- Button -->
 	             <div style="padding-top: 10px; text-align: center">
-				 <input type="submit" id="btnmemberset" value="수정" class="size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4" style="color:white;" >
+				 <input type="submit" id="btnmemberset" value="정보수정" class="size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4" style="color:white;" >
+      		 	 <input type="button" id="btnmemberdelete" value="회원 탈퇴" class="size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4" />
 				 <input type="button" id="btnmembermypage" value="취소" class="size9 bg4 bo-rad-20 hov1 m-text3 trans-0-4" style="color:white;" >		
 				</div>	
 
@@ -101,8 +102,17 @@
    		});
    		
    		$('#btnmemberset').on('click', function(event){
+   	   		alert("회원정보가 수정되었습니다")
    			$('#memberset-form').submit();
    			
+   		});
+
+   		var btnDelete = document.querySelector('#btnmemberdelete');
+   		btnDelete.addEventListener('click', function(event) {
+   			var ok = confirm("정말로 탈퇴하시겠습니까?");
+   			if (ok) {
+    			location.href = "/member/delete";		        			
+   			}
    		});
    	});
   	</script>

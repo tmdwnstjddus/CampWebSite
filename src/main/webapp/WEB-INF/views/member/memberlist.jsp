@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>회원목록</title>
+	<title>회원 목록</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -32,11 +32,7 @@
 			</tr>
 			<c:forEach var="member" items="${members}">
 				<tr style="height: 20px; text-align: center">
-					<td >
-						<a href="memberview?memberId=${member.memberId }">
-        					${member.memberId }
-        				</a>
-       				</td>					
+					<td>${ member.memberId }</td>		
 					<td>${ member.name }</td>
 					<td>${ member.type }</td>					
 					<td>${ member.email }</td>

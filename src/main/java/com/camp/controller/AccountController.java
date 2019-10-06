@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,10 +64,24 @@ public class AccountController {
 	  
 	  // 아이디 찾기
 	  @RequestMapping(value = "/idfind", method = RequestMethod.POST)
-	  public String findId(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-	 md.addAttribute("memberId", memberService.idfind(response, email));
-	 return "/account/idfind2";
+	  public String findId(HttpServletResponse response, @RequestParam("email") String email, Model model) throws Exception{
+		 model.addAttribute("memberId", memberService.idfind(response, email));
+		 return "/account/idfind2";
 	  }
+	  
+	  // 비밀번호 찾기
+	  @RequestMapping(value = "/findpwdform")
+	  public String findpwdform() throws Exception{
+		return "/account/findpwd";
+		}
+	  
+	  
+	  @RequestMapping(value = "/findpwd", method = RequestMethod.POST)
+	  public void findpwd(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
+			memberService.findpwd(response, member);
+			
+		} 
+	  
 	
 	//회원가입 폼 이동
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
