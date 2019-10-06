@@ -15,13 +15,12 @@ public class Buy {
 	private String addr2;
 	private String addr3; 
 	private Date buyDate;
-	
+	private String memberId;
 	private int productNo;
-	private String category;
+	private int price;
 	private String productName;
-	private String price;
+	private int flag;	
 	private int sell;
-	
 	private ProductFile file;  // flag = 1
 	private ArrayList<ProductFile> fileList; // flag = 0
 
