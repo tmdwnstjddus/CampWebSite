@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.service.CartService;
+import com.camp.vo.Buy;
 import com.camp.vo.Cart;
 
 @Controller
@@ -41,8 +42,10 @@ public class CartController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();		
 		List<Cart> carts = cartService.findCartListBymemberId(memberId);
+		
 		int sumMoney = cartService.sumMoney(memberId);
 		int fee = sumMoney >= 100000 ? 0: 2500; 
+		
 		map.put("carts", carts);
 		map.put("count", carts.size());
 		map.put("sumMoney", sumMoney);
@@ -52,6 +55,14 @@ public class CartController {
 		mav.addObject("map", map);
 		
 		return mav; // "/WEB-INF/views/" + upload/write + ".jsp"
+	}
+	
+	@RequestMapping(path = "/deleteCart", method = RequestMethod.GET)
+	public String deleteCart(@RequestParam int cartNo, String memberId) {
+		
+		cartService.deleteCart(cartNo);
+		
+		return "redirect:/cart/ordercart?memberId="+memberId;
 	}
 	
 	@RequestMapping(path = "/updateCart", method = RequestMethod.GET)
@@ -67,4 +78,18 @@ public class CartController {
 		return "redirect:/cart/ordercart?memberId="+memberId;
 	}
 	
+	@RequestMapping(path="/buyCart", method = RequestMethod.POST) 
+	public String buyCart(String memberId, Buy buy) { 
+		
+		
+		
+		buy.setMemberId(memberId);
+		
+		cartService.buyCartDetail(buy);
+		
+		cartService.allDelete(memberId);
+
+		return "redirect:/member/orderlist?memberId="+memberId; 
+	  
+	  }
 }
