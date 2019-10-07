@@ -8,9 +8,8 @@ import lombok.Data;
 public class QnAComment {
 	
 	private int commentNo;
-	private String content;
+	private String comment;
 	private Date regDate;
 	private int qaNo;
-	private String memberId;
 
 }

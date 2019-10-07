@@ -64,7 +64,7 @@
 
 					<div class="p-b-20"> 
 					
-						<form class="leave-comment" action="qnawrite" method="POST" >
+						<form class="leave-comment" action="announce-update" method="POST" >
 							<!-- Edit Password start -->
 							<div class="p-t-15 p-b-14">
 								<div class="p-t-15 p-b-23">
@@ -72,12 +72,13 @@
 										<p class="m-text2 flex-sb-m p-b-10"> 글 작성하기 </p>
 										<!-- 멤버 아이디로 받아오기 -->
 										<input type="hidden" name="memberId" value="${ loginuser.memberId }" />
+										<input type="hidden" name="qaNo" value="${ qna.qaNo }" />
 										<p>제목</p>
 										<div class="bo4 of-hidden size15 m-b-20">
-											<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="title" >
+											<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="title" value="${ qna.title }" >
 										</div>
 										<p> 내용을 작성해주세요 </p>
-										<textarea class="dis-block s-text7 size21 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="content"></textarea>
+										<textarea class="dis-block s-text7 size21 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="content">${ qna.content }</textarea>
 										<c:choose>
 											<c:when test="${ loginuser.type eq 'admin' }">
 												<input type="hidden" name="writerType" value="1" />

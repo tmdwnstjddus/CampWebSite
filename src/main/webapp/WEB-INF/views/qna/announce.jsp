@@ -18,7 +18,7 @@
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/resources/images/heading-pages-01.jpg);">
 		<h2 class="l-text2 t-center">
-			SERVICE CENTER
+			ANNOUNCE
 		</h2>
 	</section>
 
@@ -34,55 +34,39 @@
 
 				<!--알맹이-->
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<!--Q service-->
-					<jsp:include page="../include/quickqna.jsp" />
-
-
-					<div class="flex-w flex-sb">
-							<h4 class="p-b-10"> 고객 문의사항</h4>
-								<table class="table table-hover bo4">
-										<thead>
-											<tr>
-												<th scope="col" class="column-7">#</th>
-												<th scope="col" class="column-6">문의사항</th>
-												<th scope="col" class="column-5">작성자</th>
-												<th scope="col" class="column-5">작성날짜</th>
-												<th scope="col" class="column-5">답변여부</th>
-											</tr>
-										</thead>
-										<tbody>
-										
-										<c:forEach var="qnaList" items="${ qnaList }">
-											<tr class ="move-qna-detailpage" id ="move-qna-detailpage" onClick="location.href='/qna/qnadetail?qaNo=${ qnaList.qaNo }'"> 
-												<td>${ qnaList.qaNo }</td>
-												<td> 
-													<c:if test="${ qnaList.lockCheck eq 'on' }">
-														<i class="fa fa-lock" aria-hidden="true"></i>
-													</c:if>
-													${ qnaList.title } 
-												
-												</td>
-												<td>${ qnaList.memberId }</td>
-												<td>${ qnaList.regDate }</td>
-												
-												<c:choose>
-												<c:when test="${ qnaList.completed eq '0' }">
-													<td><span class="badge badge-danger">답변대기</span> </td>
-												</c:when>
-												<c:otherwise>
-													<td><span class="badge badge-success">답변완료</span></td>
-												</c:otherwise>
-												</c:choose>
-											</tr>
-										</c:forEach>
-
-										</tbody>
-								</table>
-								<div class="flex-sb" style='display:${ not empty loginuser  ? "block" : "none" }'>
-									<button type="button" class="btn btn-dark"  onclick ="location.href ='/qna/qnawrite'">문의사항 남기기</button>
-								</div>
-						</div>
+					<div class="flex-w flex-sb p-b-10 ">
+						<h4>공지</h4>
 					</div>
+							
+
+					<div class="m-b-30 "> 
+						<div class="flex-w flex-sb">
+							<table class="table table-hover bo4">
+								<thead>
+									<tr>
+										<th scope="col" class="column-7">#</th>
+										<th scope="col" class="column-6">공지</th>
+										<th scope="col" class="column-5">작성자</th>
+										<th scope="col" class="column-5">작성일</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+								<c:forEach var="announce" items="${ announce }">
+									<tr onClick="location.href='/qna/announce-detail?qaNo=${ announce.qaNo }'">
+										<td><a href="#" class="badge badge-primary"><input type="hidden" value=${ announce.qaNo }>공지</a> </td>
+										<td>${ announce.title } </td>
+										<td>관리자</td>
+										<td>${ announce.regDate }</td>
+									</tr>
+								</c:forEach>
+								
+								</tbody>
+							</table>	
+						</div>
+					
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -144,24 +128,6 @@
 
 	<!-- js import -->
 	<jsp:include page="../include/jsimport.jsp" />
-	
-	<script type="text/javascript">
-		$(function(){
-	   		var qaNo = null;
-	   		var locked = null;
-
-	   		var trLink = document.querySelector(".move-qna");
-
-	   		trLink.addEventListener('click', function(event){
-				if (locked == 0 ){
-						location.href ='/qna/qnadetail/' + qaNo; 
-					}
-
-		   	});
-	   		   		
-		});
-
-	</script>
 	
 </body>
 </html>
