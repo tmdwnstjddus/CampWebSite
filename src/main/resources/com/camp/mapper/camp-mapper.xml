@@ -103,5 +103,11 @@
 		WHERE CAMPFILENO = #{ campFileNo }
 	</delete>
 	
+	<select id="findReviewByCampNo" parameterType="int" resultType="com.camp.vo.Review">
+		SELECT CONTENT, TITLE, REGDATE, MEMBERID
+		FROM REVIEW
+		WHERE CAMPNO = #{ campNo }
+		ORDER BY CAMPNO DESC 
+	</select>
 </mapper>
 

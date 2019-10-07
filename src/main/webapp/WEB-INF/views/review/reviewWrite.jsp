@@ -36,7 +36,6 @@
 						<input type="hidden" name="rentNo" value="${review.rentNo }" />
 						<div class="heading">
 							<h3>리뷰 작성</h3>
-							<h3>${review.rentNo }</h3>
 							<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>
 						</div>
 						

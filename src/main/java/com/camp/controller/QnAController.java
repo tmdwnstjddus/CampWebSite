@@ -126,7 +126,7 @@ public class QnAController {
 	@RequestMapping(
 			value="/admin-answer",
 			method=RequestMethod.POST,
-			produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String answerQuestion (int qaNo, String answerText){
 		

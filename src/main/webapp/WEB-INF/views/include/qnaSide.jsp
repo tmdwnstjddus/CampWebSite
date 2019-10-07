@@ -20,14 +20,6 @@
 							</li>
 
 
-
-							<li class="p-t-4">
-								<a href="/qna/admin" class="s-text13">
-									관리자 페이지
-								</a>
-							</li>
-
-
 						</ul>
 
 

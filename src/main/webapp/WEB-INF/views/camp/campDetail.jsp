@@ -134,7 +134,12 @@
 					Reviews
 				</h3>
 			</div>		
-
+		<c:forEach var="review" items="${ reviews }">
+			<h3>${review.memberId }</h3>
+			<h3>${review.content }</h3>
+			<h3>${review.regDate }</h3>
+					
+		</c:forEach>
 		</div>
 	</section>
 	

@@ -8,6 +8,7 @@ import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
 import com.camp.vo.Rental;
+import com.camp.vo.Review;
 
 public interface CampService {
 
@@ -31,5 +32,6 @@ public interface CampService {
 
 	void deleteCamp(int campNo);
 	void deleteCampFile(int campFileNo);
+	List<Review> selectReviewByCampNo(int campNo);
 
 }

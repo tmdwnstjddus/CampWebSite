@@ -33,6 +33,7 @@ import com.camp.vo.Criteria;
 import com.camp.vo.Member;
 import com.camp.vo.PageMaker;
 import com.camp.vo.Rental;
+import com.camp.vo.Review;
 
 
 @Controller
@@ -102,7 +103,7 @@ public class CampController {
 		}
 
 		List<CampFile> campfiles = campService.findCampFilesByCampNo(campNo);
-
+		List<Review> reviews = campService.selectReviewByCampNo(campNo);
 		camp.setFileList((ArrayList<CampFile>) campfiles);
 		camp.setFile(campService.findCampFile(camp.getCampNo()));
 		
@@ -117,6 +118,7 @@ public class CampController {
 		
 		model.addAttribute("camp", camp);
 		model.addAttribute("loginuser", loginuser);
+		model.addAttribute("reviews", reviews);
 
 		return "camp/campDetail";
 	}

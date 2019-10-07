@@ -16,7 +16,6 @@ public class PTReview {
 	private String memberId;
 	private int buyNo;
 	
-	
 	private int productNo;
 	
 	private PTReviewFile file;  // flag = 1

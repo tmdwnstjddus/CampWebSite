@@ -11,8 +11,8 @@
 	
 	<insert id="insertReview" parameterType="com.camp.vo.Review"
 			useGeneratedKeys="true" keyColumn="reviewNo" keyProperty="reviewNo">
-		INSERT INTO REVIEW (TITLE, CONTENT, CATEGORY, MEMBERID, RENTNO)
-		VALUES (#{title}, #{content}, #{category}, #{memberId}, #{rentNo})
+		INSERT INTO REVIEW (TITLE, CONTENT, CATEGORY, MEMBERID, RENTNO, CAMPNO)
+		VALUES (#{title}, #{content}, #{category}, #{memberId}, #{rentNo}, #{campNo})
 	</insert>
 				
 	<insert id="insertReviewFile" parameterType="com.camp.vo.ReviewFile">
@@ -93,8 +93,8 @@
 	
 	<insert id="insertptReview" parameterType="com.camp.vo.PTReview"
 			useGeneratedKeys="true" keyColumn="ptreviewNo" keyProperty="ptreviewNo">
-		INSERT INTO PTREVIEW (TITLE, CONTENT, MEMBERID, BUYNO)
-		VALUES (#{title}, #{content}, #{memberId}, #{buyNo})
+		INSERT INTO PTREVIEW (TITLE, CONTENT, MEMBERID, BUYNO, PRODUCTNO)
+		VALUES (#{title}, #{content}, #{memberId}, #{buyNo}, #{productNo})
 	</insert>
 				
 	<insert id="insertptReviewFile" parameterType="com.camp.vo.PTReviewFile">
