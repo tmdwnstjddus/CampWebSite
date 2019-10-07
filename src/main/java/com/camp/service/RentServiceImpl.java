@@ -27,10 +27,5 @@ public class RentServiceImpl implements RentService {
 		rentMapper.insertRent(rent);	
 	}
 
-	@Override
-	public Rental dateCheck(String startDate, String endDate) {
-		return rentMapper.dateCheck(startDate, endDate);
-	}
-
 }
 

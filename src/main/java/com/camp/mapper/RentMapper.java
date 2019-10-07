@@ -12,7 +12,5 @@ public interface RentMapper {
 	List<Rental> selectRentsByCampNo(int campNo);
 	
 	void insertRent(Rental rent);
-	
-	Rental dateCheck(String startDate, String endDate);
 
 }

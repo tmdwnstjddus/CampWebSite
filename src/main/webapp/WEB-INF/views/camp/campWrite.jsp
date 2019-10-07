@@ -136,7 +136,7 @@
 						
 						<div class="box_form">
 							<div class="btn_box">
-								<input type="submit" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4" value="캠핑 등록">
+								<input type="submit" class="flex-c-m size1 bg4 bo-rad-23 hov1 m-text3 trans-0-4" value="캠핑 등록">
 							</div>
 						</div>
 							

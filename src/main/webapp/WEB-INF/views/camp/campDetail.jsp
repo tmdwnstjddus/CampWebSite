@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="title" value="디테일" scope="request"/>
 <!DOCTYPE html>
 <html>
@@ -59,7 +60,7 @@
 				</h4>
 				
 				<span class="m-text17">
-					${ camp.price }
+					<fmt:formatNumber value="${ camp.price }" pattern="#,###" />
 				</span>
 				
 				<%-- 관리자가 로그인했을 시 삭제,수정 버튼 활성화 --%>
@@ -125,7 +126,6 @@
 		</div>
 	</div>
 
-
 	<!-- Relate Product -->
 	<section class="relateproduct bgwhite p-t-45 p-b-138">
 		<div class="container">
@@ -137,6 +137,13 @@
 
 		</div>
 	</section>
+	
+	<div style="width:0; height:0" id="rentDate">
+		
+		<c:forEach var="rent" items="${ rents }">
+		<div><fmt:formatDate value="${ rent.startDate }" pattern="yyyy-MM-dd"/>#<fmt:formatDate value="${ rent.endDate }" pattern="yyyy-MM-dd"/></div>
+		</c:forEach>
+	</div>
 
 	<!-- Footer -->
 	<jsp:include page="../include/footer.jsp" />

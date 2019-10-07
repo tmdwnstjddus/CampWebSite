@@ -25,10 +25,4 @@
 		)
 	</insert>
 	
-<!-- 	<select id="dateCheck" parameterType="String" resultType="com.camp.vo.Rental">
-		SELECT STARTDATE, ENDDATE
-		FROM RENTAL
-		WHERE STARTDATE AND ENDDATE BETWEEN STARTDATE = { startDate } AND ENDDATE = { endDate + 1 }
-	</select> -->
-	
 </mapper>

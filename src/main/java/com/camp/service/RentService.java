@@ -9,7 +9,5 @@ public interface RentService {
 	ArrayList<Rental> findRentsByCampNo(int campNo);
 	
 	void registerRent(Rental rent);
-	
-	Rental dateCheck(String startDate, String endDate);
 
 }

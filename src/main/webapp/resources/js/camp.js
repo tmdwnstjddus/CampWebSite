@@ -28,8 +28,6 @@ function readURL(input, target) {
 /* ----------- camp (write, update) ---------- */
 $(function () {
 	
-	var date;
-	
 	/* ----------- textCount ---------- */
 	$("#camp_name").keyup(function (e) {
 		var content = $(this).val();
@@ -83,6 +81,7 @@ $(function () {
 	   
 	});	
 	
+	
 	/* ----------- calendar -----------	*/
 	$("#startDate").datepicker({ 
 		dateFormat: 'yy-mm-dd'
@@ -98,7 +97,8 @@ $(function () {
         ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
         ,dayNamesMin: ['일','월','화','수','목','금','토']
         ,minDate: 0
-        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)	
+        ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+    	,beforeShowDay: addDates
 		,onClose: function (selectedDate) { 
 		    $('#endDate').datepicker("option", 'minDate', selectedDate);
 		}
@@ -118,26 +118,36 @@ $(function () {
         ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
         ,dayNamesMin: ['일','월','화','수','목','금','토']
         ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+    	,beforeShowDay: addDates
 	    ,onClose: function (selectedDate) { 
 	    	$('#startDate').datepicker("option", 'maxDate', selectedDate); 
 	    }
-    }); 
+    });
     
-//    $('#startDate').on('click', function (event) {
-//    	var query = { startDate : $("#startDate").val(), endDate : $("#endDate").val() };
-// 	   	$.ajax({
-// 	   		url: "/camp/dateCheck",
-// 	   		method: "POST",
-// 	   		data: query,
-// 	   		success: function (data, status, xhr) {
-// 	   			if(data == 1) {  
-// 	   				$(".ui-datepicker-div td").attr("disabled", "disabled");
-// 	   			} else {
-// 	   				$(".ui-datepicker-div td").removeAttr("disabled");
-//				}
-// 		   	}
-// 	   	});
-//    });	
+	var rentDates = [];
+	
+	var addDates = function(startDate, endDate) {
+		var currentDate = startDate,
+			addDays = function(days) {
+				var date = new Date(this.valueOf());
+		        date.setDate(date.getDate() + days);
+		        return date;
+			};
+			while (currentDate <= endDate) {
+				var dateString = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getDate();
+				if (!rentDates.includes(dateString)) {
+					rentDates.push(dateString);
+				}
+				currentDate = addDays.call(currentDate, 1);
+			}
+	};
+	
+	var divs = $('#rentDate div');
+	//divs.each(function(idx, item) {
+	for (var i = 0; i < divs.length; i++) {		
+		var rent = $(divs[i]).text().split('#');
+		addDates(new Date(rent[0]), new Date(rent[1]));
+	}
 	
    
    /* ----------- rent ---------- */

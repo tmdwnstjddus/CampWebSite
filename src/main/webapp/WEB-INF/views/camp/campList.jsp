@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8" 
@@ -101,7 +102,7 @@
 									</a>
 
 									<span class="block2-price m-text6 p-r-5">
-										${camp.price }
+										<fmt:formatNumber value="${ camp.price }" pattern="#,###" />
 									</span>
 								</div>
 							</div>

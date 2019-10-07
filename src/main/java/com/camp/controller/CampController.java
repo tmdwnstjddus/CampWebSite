@@ -95,17 +95,6 @@ public class CampController {
 	public String campDetail(@PathVariable int campNo, Model model, HttpSession session) {
 		
 		Member loginuser = (Member) session.getAttribute("loginuser");
-		int startDate, endDate = 0;
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		StringTokenizer st = new StringTokenizer(sdf.format(date), "-");
-
-		startDate = Integer.parseInt(st.nextToken());
-		endDate = Integer.parseInt(st.nextToken());
-		
-		model.addAttribute("startDate", startDate);
-		model.addAttribute("endDate", endDate);
 		
 		Camp camp = campService.findCampByCampNo(campNo);
 		if (camp == null) {
@@ -118,7 +107,8 @@ public class CampController {
 		camp.setFile(campService.findCampFile(camp.getCampNo()));
 		
 		try {
-			ArrayList<Rental> rents = rentService.findRentsByCampNo(campNo);		
+			ArrayList<Rental> rents = rentService.findRentsByCampNo(campNo);
+			
 			model.addAttribute("rents", rents);
 			
 		} catch (Exception e) {
@@ -137,30 +127,13 @@ public class CampController {
 		
 		Member loginuser = (Member) session.getAttribute("loginuser");
 		rent.setMemberId(loginuser.getMemberId());
-		rent.setStartDate(startDate);
-		rent.setEndDate(endDate);
 		
 		rentService.registerRent(rent);
 		
 		return loginuser.getMemberId();
 	}
 	
-	@ResponseBody
-	@RequestMapping(path = "/dateCheck", method = RequestMethod.POST)
-	public int idCheck(HttpServletRequest req) {
-		
-		String startDate = req.getParameter("startDate");
-		String endDate = req.getParameter("endDate");
-		
-		Rental rent = rentService.dateCheck(startDate, endDate);
-		
-		int result = 0;
-		
-		if (rent != null) {
-			result = 1;
-		}
-		return result;
-	}
+	
 	
 	@RequestMapping(path = "/campWrite", method = RequestMethod.GET)
 	public String campWriteFrom() {
