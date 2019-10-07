@@ -17,10 +17,10 @@
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/resources/images/heading-pages-02.jpg);">
 		<h2 class="l-text2 t-center">
-			Camp
+			상품리뷰
 		</h2>
 		<p class="m-text13 t-center">
-			캠핑공간 등록
+			상품리뷰
 		</p>
 	</section>
 	
@@ -30,13 +30,12 @@
 			<div class="row">
 
 				<div class="col-md-12 p-b-30">
-					<form action="reviewWrite" method="post" enctype="multipart/form-data" id="writeForm">
+					<form action="ptreviewWrite" method="post" enctype="multipart/form-data" id="writeForm">
 						<input type="hidden" name="memberId" value="${ loginuser.memberId }">
-						<input type="hidden" name="campNo" value="${review.campNo}" />
-						<input type="hidden" name="rentNo" value="${review.rentNo }" />
+						<input type="hidden" name="buyNo" value="${ptreview.buyNo }" />
 						<div class="heading">
 							<h3>리뷰 작성</h3>
-							<h3>${review.rentNo }</h3>
+							
 							<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>
 						</div>
 						
@@ -76,8 +75,7 @@
 							<div class="row">
 								<ul class="check_list space ml-3">
 									<li>
-										<input type="radio" name="category" value="campreview" id="campreview" required>
-										<label for="campreview" class="ellip">캠핑장</label>
+										<label for="campreview" class="ellip">상품리뷰</label>
 									</li>
 								</ul>
 							</div>

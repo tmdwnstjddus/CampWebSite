@@ -11,8 +11,8 @@
 	
 	<insert id="insertReview" parameterType="com.camp.vo.Review"
 			useGeneratedKeys="true" keyColumn="reviewNo" keyProperty="reviewNo">
-		INSERT INTO REVIEW (TITLE, CONTENT, CATEGORY, MEMBERID, TYPENO)
-		VALUES (#{title}, #{content}, #{category}, #{memberId}, #{typeNo})
+		INSERT INTO REVIEW (TITLE, CONTENT, CATEGORY, MEMBERID, RENTNO)
+		VALUES (#{title}, #{content}, #{category}, #{memberId}, #{rentNo})
 	</insert>
 				
 	<insert id="insertReviewFile" parameterType="com.camp.vo.ReviewFile">
@@ -20,24 +20,26 @@
 		VALUES (#{reviewNo}, #{savedFileName}, #{userFileName}, #{flag})
 	</insert>
 	
-	<select id="selectReviewByReviewNo" 
+	<select id="selectReviewByRentNo" 
 			parameterType="int" resultType="com.camp.vo.Review">
-		select 
+		SELECT 
 			REVIEWNO,
 			TITLE,
 			CONTENT,
 			CATEGORY,
-			MEMBERID
-		from REVIEW
-		where REVIEWNO = #{ reviewNo }
+			MEMBERID,
+			RENTNO
+		FROM REVIEW
+		WHERE RENTNO = #{ rentNo }
 	</select>
 	
 	<select id="selectReviewFile" parameterType="int" resultType="com.camp.vo.ReviewFile">
-		SELECT REVIEWFILENO, SAVEDFILENAME, USERFILENAME, REIVEWNO, FLAG
+		SELECT REVIEWFILENO, SAVEDFILENAME, USERFILENAME, REVIEWNO, FLAG
 		FROM REVIEWFILE
 		WHERE REVIEWNO = #{ reviewNo }
 		AND FLAG = 1
 	</select>
+
 	
 	<update id="updateReview" parameterType="com.camp.vo.Review">
 		UPDATE REVIEW
@@ -60,7 +62,7 @@
 	
 	<delete id="deleteReviewFile" parameterType="int">
 		DELETE FROM REVIEWFILE
-		WHERE REVIEWFILENO = #{ reviewFileNo }
+		WHERE REVIEWNO = #{ reviewNo }
 	</delete>
 	
 	<select id="selectReviewFileByReviewFileNo" parameterType="int" resultType="com.camp.vo.ReviewFile">
@@ -68,6 +70,86 @@
 		FROM REVIEWFILE
 		WHERE REVIEWFILENO = #{ reviewFileNo }
 	</select>
+	
+	<update id="BuyFlag" parameterType="com.camp.vo.Buy">
+		UPDATE BUY
+		SET FLAG = 1
+		WHERE BUYNO = #{ buyNo }
+	</update>
+	
+	<update id="RentFlag" parameterType="com.camp.vo.Rental">
+		UPDATE RENTAL
+		SET FLAG = 1
+		WHERE RENTNO = #{ rentNo }
+	</update>
+	
+	<update id="zeroRentFlag" parameterType="com.camp.vo.Rental">
+		UPDATE RENTAL
+		SET FLAG = 0
+		WHERE RENTNO = #{ rentNo }
+	</update>
+	
+	<!-- /////////////////////////////////////////////////////product review/////////////////////////////////// 관련 -->
+	
+	<insert id="insertptReview" parameterType="com.camp.vo.PTReview"
+			useGeneratedKeys="true" keyColumn="ptreviewNo" keyProperty="ptreviewNo">
+		INSERT INTO PTREVIEW (TITLE, CONTENT, MEMBERID, BUYNO)
+		VALUES (#{title}, #{content}, #{memberId}, #{buyNo})
+	</insert>
+				
+	<insert id="insertptReviewFile" parameterType="com.camp.vo.PTReviewFile">
+		INSERT INTO PTREVIEWFILE (PTREVIEWNO, SAVEDFILENAME, USERFILENAME, FLAG)
+		VALUES (#{ptreviewNo}, #{savedFileName}, #{userFileName}, #{flag})
+	</insert>
+	
+	<select id="selectptReviewByBuyNo" 
+			parameterType="int" resultType="com.camp.vo.PTReview">
+		SELECT 
+			PTREVIEWNO,
+			TITLE,
+			CONTENT,
+			MEMBERID,
+			BUYNO
+		FROM PTREVIEW
+		WHERE BUYNO = #{ buyNo }
+	</select>
+	
+	<select id="selectptReviewFile" parameterType="int" resultType="com.camp.vo.PTReviewFile">
+		SELECT PTREVIEWFILENO, SAVEDFILENAME, USERFILENAME, PTREVIEWNO, FLAG
+		FROM PTREVIEWFILE
+		WHERE PTREVIEWNO = #{ ptreviewNo }
+		AND FLAG = 1
+	</select>
+	
+	<update id="updateptReview" parameterType="com.camp.vo.PTReview">
+		UPDATE PTREVIEW
+		SET TITLE = #{ title }
+			, CONTENT = #{ content }
+		WHERE PTREVIEWNO = #{ ptreviewNo }
+	</update>
+	
+	<update id="updateptReviewFile" parameterType="com.camp.vo.PTReviewFile">
+		UPDATE PTREVIEWFILE
+		SET SAVEDFILENAME = #{ savedFileName }, USERFILENAME = #{ userFileName }
+		WHERE PTREVIEWNO = #{ ptreviewNo } AND FLAG = 1
+	</update>
+	
+	<update id="zeroBuyFlag" parameterType="com.camp.vo.Buy">
+		UPDATE BUY
+		SET FLAG = 0
+		WHERE BUYNO = #{ buyNo }
+	</update>
+	
+	<delete id="deleteptReview" parameterType="int">
+		DELETE FROM PTREVIEW
+		WHERE PTREVIEWNO = #{ ptreviewNo }
+	</delete>
+	
+	<delete id="deleteptReviewFile" parameterType="int">
+		DELETE FROM PTREVIEWFILE
+		WHERE PTREVIEWNO = #{ ptreviewNo }
+	</delete>
+	
 	
 </mapper>
 
