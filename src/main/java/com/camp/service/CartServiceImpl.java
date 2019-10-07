@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.camp.mapper.CartMapper;
+import com.camp.vo.Buy;
 import com.camp.vo.Cart;
 
 @Service
@@ -59,6 +60,28 @@ public class CartServiceImpl implements CartService {
 
 
 		cartMapper.modifyCart(cart);
+		
+	}
+
+	@Override
+	public void deleteCart(int cartNo) {
+		
+		cartMapper.deleteCart(cartNo);
+		
+	}
+
+	@Override
+	public void buyCartDetail(Buy buy) {
+		
+		cartMapper.buyCartDetail(buy);
+		
+	}
+
+	@Override
+	public void allDelete(String memberId) {
+		
+		
+		cartMapper.allDelete(memberId);
 		
 	}
 

@@ -20,7 +20,7 @@
 			m.name AS name,
 			p.productName AS productName,
 			c.amount AS amount,
-			p.price AS productPrice,
+			p.price AS price,
 			ROUND(price * amount) money
 		FROM MEMBER m, PRODUCT p, CART c
 		WHERE m.memberId = c.memberId
@@ -55,10 +55,29 @@
 	<!--장바구니 수정  -->
 	<update id="modifyCart">
 		UPDATE CART
-		SET CART = #{amount}
-		WHERE CARTNO = #{cartNo}
-		
+		SET amount = #{amount}
+		WHERE CARTNO = #{cartNo}		
 	</update>
 	
+	<!--장바구니에서 삭제  -->
+	<delete id="deleteCart">
+		DELETE FROM CART
+		WHERE cartNo = #{cartNo}
+	</delete>
+	
+	<!-- 장바구니 목록 구매하기 -->
+	<insert id="buyCartDetail" parameterType="com.camp.vo.Buy">
+		INSERT INTO BUY ( ProductNo, MEMBERID, AMOUNT, ADDR1, ADDR2, ADDR3 )
+ 		SELECT ProductNo, MEMBERID, AMOUNT, #{addr1}, #{addr2}, #{addr3}
+ 		FROM CART
+ 		WHERE MEMBERID = #{memberId}
+			 	
+	</insert> 
+	
+	<!--장바구니에서 모든상품삭제  -->
+	<delete id="allDelete">
+		DELETE FROM CART
+		WHERE memberId = #{memberId}
+	</delete>
 </mapper>
 
