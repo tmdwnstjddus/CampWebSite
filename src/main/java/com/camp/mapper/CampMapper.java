@@ -9,6 +9,7 @@ import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
 import com.camp.vo.Rental;
+import com.camp.vo.Review;
 
 @Mapper
 public interface CampMapper {
@@ -35,5 +36,6 @@ public interface CampMapper {
 
 	void deleteCamp(int campNo);
 	void deleteCampFile(int campFileNo);
+	List<Review> findReviewByCampNo(int campNo);
 		
 }

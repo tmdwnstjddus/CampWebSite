@@ -92,12 +92,12 @@ public class CampController {
 		}
 
 		List<CampFile> campfiles = campService.findCampFilesByCampNo(campNo);
-
+		List<Review> reviews = campService.selectReviewByCampNo(campNo);
 		camp.setFileList((ArrayList<CampFile>) campfiles);
 		camp.setFile(campService.findCampFile(camp.getCampNo()));
 		
 		model.addAttribute("camp", camp);
-
+		model.addAttribute("reviews", reviews);
 		return "camp/campDetail";
 	}
 	

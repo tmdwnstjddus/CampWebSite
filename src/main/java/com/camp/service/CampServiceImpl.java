@@ -13,6 +13,7 @@ import com.camp.vo.Camp;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
 import com.camp.vo.Rental;
+import com.camp.vo.Review;
 
 @Service
 public class CampServiceImpl implements CampService {
@@ -129,6 +130,12 @@ public class CampServiceImpl implements CampService {
 	public void deleteCampFile(int campFileNo) {
 		campMapper.deleteCampFile(campFileNo);
 		
+	}
+
+	@Override
+	public List<Review> selectReviewByCampNo(int campNo) {
+		List<Review> review = campMapper.findReviewByCampNo(campNo);
+		return review;
 	}
 
 
