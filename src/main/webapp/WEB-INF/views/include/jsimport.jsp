@@ -3,6 +3,12 @@
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.material.min.js"></script>
 
 <!--===============================================================================================-->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>	
@@ -76,8 +82,6 @@
 	</script> -->
 <!--===============================================================================================-->
 	<script src="/resources/js/main.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="/resources/js/camp.js"></script>
 	<script src="/resources/js/product.js"></script>
 

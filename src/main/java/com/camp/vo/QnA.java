@@ -14,9 +14,12 @@ public class QnA {
 	private String content;
 	private Date regDate;
 	private String memberId;
+	private Boolean writerType;
 	private Boolean deleted;
 	private Boolean completed;
+	private String lockCheck;
 	
-	private List<QnAComment> qnaComment;
+	private List<QnAComment> qnaCommentList;
+	private QnAComment qnaAComment;
 
 }

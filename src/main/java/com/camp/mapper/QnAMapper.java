@@ -16,6 +16,8 @@ public interface QnAMapper {
 	void uploadQnA(QnA qna);
 	void deleteQnA(int qaNo);
 	List<QnA> selectQnA();
+	List<QnA> findAnnounce();
+
 	QnA selectQnABoardByIdx(int qaNo);
 	
 	
@@ -27,8 +29,17 @@ public interface QnAMapper {
 	List<QnAComment> selectComment(int qaNo);
 	void setCompleted(int qaNo);
 	
-	void dropQnAComment(int qaNo);
-	void setDecompleted(int qaNo);
+	void dropQnAComment(int commentVal);
+	void setDecompleted(int commentVal);
+	
+	
+	/* for Admin*/
+	List<QnA> getSearchValue();
+	List<QnAComment> getComment();
+	void answerQuestion(int qaNo, String answerText);
+	void updateAnnounce(QnA qna);
+	
+
 	
 
 }

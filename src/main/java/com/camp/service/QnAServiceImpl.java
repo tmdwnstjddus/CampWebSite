@@ -1,8 +1,8 @@
 package com.camp.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.camp.mapper.QnAMapper;
 import com.camp.vo.QnA;
 import com.camp.vo.QnAComment;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class QnAServiceImpl implements QnAService {
@@ -19,15 +17,19 @@ public class QnAServiceImpl implements QnAService {
 	@Autowired
 	private QnAMapper qnaMapper;
 	
-	private static final String SUCCESS = "success";
-	private static final String FAILED = "failed";
 
 	@Override
 	public void uploadQnA(QnA qna) {
 		
+		String lock = qna.getLockCheck();
+		if (lock == null) {
+			qna.setLockCheck("off");
+		}
+		
 		qnaMapper.uploadQnA(qna);
 		
 	}
+
 
 	@Override
 	public void deleteQna(int qaNo) {
@@ -40,7 +42,13 @@ public class QnAServiceImpl implements QnAService {
 		List<QnA> qnaList = qnaMapper.selectQnA();
 		return qnaList;
 	}
-
+	
+	@Override
+	public List<QnA> findAnnounce() {
+		List<QnA> announce = qnaMapper.findAnnounce();
+		return announce;
+	}
+	
 	@Override
 	public QnA findQnABoardbyIdx(int qaNo) {
 		
@@ -48,10 +56,7 @@ public class QnAServiceImpl implements QnAService {
 		return qna;
 	}
 
-//	@Override
-//	public void answerQuestion(QnAComment qnaComment) {
-//		qnaMapper.insertQnAComment(qnaComment);
-//	}
+
 
 	@Override
 	public List<QnAComment> findQnAAnswer(int qaNo) {
@@ -70,16 +75,43 @@ public class QnAServiceImpl implements QnAService {
 		
 	}
 
-//	@Override
-//	public void deleteAnswer(String sendData) {
-//		
-//		int commentNo = (int)sendData.get;
-//		int qaNo = (int)sendData.qaNo;
-//		
-//		qnaMapper.dropQnAComment(qaNo);
-//		qnaMapper.setDecompleted(qaNo);
-//		
-//	}
+	@Override
+	public void deleteAnswer(int commentVal) {
+		qnaMapper.dropQnAComment(commentVal);
+		qnaMapper.setDecompleted(commentVal);
+		
+	}
+
+	@Override
+	public List<QnA> findAllforAdmin() {
+
+		List<QnA> QnAs = qnaMapper.getSearchValue();
+
+		return QnAs;
+	}
+
+	@Override
+	public List<QnAComment> findQnAAnswerforAdmin() {
+		List<QnAComment> Comments = qnaMapper.getComment();
+		return Comments;
+	}
+
+
+	@Override
+	public void updateAnnounce(QnA qna) {
+	
+		qnaMapper.updateAnnounce(qna);
+		
+	}
+
+
+
+
+
+
+	
+
+
 	
 
 

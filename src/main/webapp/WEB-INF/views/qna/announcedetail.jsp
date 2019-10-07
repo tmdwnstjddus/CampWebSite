@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
@@ -20,7 +21,7 @@
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/resources/images/heading-pages-01.jpg);">
 		<h2 class="l-text2 t-center">
-			SERVICE CENTER
+			Announce
 		</h2>
 	</section>
 
@@ -39,7 +40,7 @@
 				<!--알맹이-->
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
 					<div class="flex-w p-b-10">
-						<h4>1:1 고객센터</h4>
+						<h4>공지 사항</h4>
 					</div>
 					<div class="p-b-20"> 
 						<div class="leave-comment">
@@ -52,12 +53,12 @@
 											<div class="t-left">
 												<span>작성자</span>
 												<span class="m-l-3 m-r-6">|</span>
-												<span>${ qna.memberId }</span>
+												<span class="badge badge-primary">관리자</span>
 											</div>
 											<div class="t-right">
 												<span>등록일자</span>
 												<span class="m-l-3 m-r-6">|</span>
-												<span>${ qna.regDate }</span>
+												<span>${ announce.regDate }</span>
 											</div>
 
 										</div>
@@ -65,78 +66,28 @@
 									
 										<div class="bo4 of-hidden size15 m-b-20">
 											
-											<input class="sizefull s-text7 p-l-22 p-r-22" id=title name="title" value=${ qna.title } />
+											<input class="sizefull s-text7 p-l-22 p-r-22" id=title name="title" value="${ announce.title }" />
 										</div>
-
-										<textarea class="dis-block size20  s-text7 bo4 p-l-22 p-r-22 p-t-13 p-b-13 m-b-25" name="content">${ qna.content }</textarea>
+<%-- 줄바꿈 문자열을 저장하고 있는 변수 만들기 --%>	
+<c:set var="enter" value="
+" />
+										<div class="dis-block s-text7 bo4 p-l-22 p-r-22 p-t-13 p-b-13 m-b-25" name="content">
+											${ fn:replace(announce.content, enter, '<br>') }
+										</div>
 										
-										<div style='display:${ loginuser.memberId eq qna.memberId ? "block" : "none" }'>
+										<div style='display:${ loginuser.memberId eq announce.memberId ? "block" : "none" }'>										
+										
 											<div class="p-b-10 t-right">
 												<!-- Button -->
-												
-												<button type="button" class="btn btn-outline-secondary" id="user_deleted_qa">삭제</button>
+												<button type="button" class="btn btn-outline-secondary" 
+														id="announce_updated" onClick="location.href='/qna/announce-update?qaNo=${ announce.qaNo }'">
+													수정
+												</button>
+												<button type="button" class="btn btn-outline-secondary" id="announce_deleted">삭제</button>
 											</div>
 										</div>
-
-										<hr class="p-b-30"/>	
-										
-										<div id="comment-data-container">
-											<c:choose>
-												<c:when test="${ empty qnacomments }">
-													<div id="Unregistered" style="display:block;" class="s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 bg8 t-center">
-														<p class="p-t-35 p-b-8">아직 답변이 등록되지않았습니다.</p>
-													</div>
-													
-												<!-- 답변등록 폼 -->
-												
-														<div id="answer" style="display: none">
-														<form id="answerform">
-															<input type="hidden" name="qaNo" id="qaNo" value="${ qna.qaNo }"/>
-															
-															<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 sizefull" name="content" id="answerText"></textarea>
-											
-															<div class="p-b-10 t-right">
-																<!-- Button -->
-																<button type="button" class="btn btn-secondary" id="answerSubmitButton">답변등록</button>
-															</div>
-														</form>
-														</div>
-													
-												</c:when>
-												<c:otherwise>
-													<div  id="comment-answer">
-													<c:forEach var="qnacomment" items="${ qnacomments }">
-													<div class="m-text6	 flex-sb flex-m p-b-21">
-													
-														<div class="t-left">
-															<span>답변자</span>
-															<span class="m-l-3 m-r-6">|</span>
-															<span>관리자</span>
-														</div>
-														<div class="t-right">
-															<span>등록일자</span>
-															<span class="m-l-3 m-r-6">|</span>
-															<span>${ qnacomment.regDate }</span>
-														</div>
-									
-													</div>
-													<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" name="success-anser">
-														${ qnacomment.comment }
-													</div>
-													<div class="p-b-10 t-right">
-													</div>
-													</c:forEach>
-													</div>
-													
-												</c:otherwise>
-											
-											</c:choose>
-											
-										</div>
-										
-										
 										<div class="p-b-10 t-center">
-											<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/qna'">목록으로</button>
+											<button type="button" class="btn btn-secondary"onclick ="location.href ='/qna/announce'">목록으로</button>
 										</div>
 									
 									</div>
@@ -154,9 +105,6 @@
 
 	</section>
 	
-			<div class="col col-md-5">
-				<input type="text" class="form-control" id="searchValueForQuestionList" placeholder="검색어를 입력하세요" />		
-			</div>
 
 	<section class="bg6 p-t-20 p-b-46 m-b-20">
 			<div class="flex-w p-l-15 p-r-15">
@@ -217,25 +165,16 @@
 		
 		<script type="text/javascript" >
 		
-	    
 
-	    //== admin answer update ajax
-	    
-	    
-	    //== admin answer delete ajax //delete-comment-btn
- 
-	    
-	     
-	    	    	
-       //=====user q delete 
+       //=====announce delete 
 		$(function(){
-       		var qaNo = ${qna.qaNo};
+       		var qaNo = ${announce.qaNo};
        		
-       		var btnDelete = document.querySelector('#user_deleted_qa');
+       		var btnDelete = document.querySelector('#announce_deleted');
        		btnDelete.addEventListener('click', function(event) {
        			var ok = confirm("삭제할까요?");
        			if (ok) {
-        			location.href = "deletedqna/"+ qaNo ; 			
+        			location.href = "announce-delete/"+ qaNo ; 			
        			}
        		});
 		});
