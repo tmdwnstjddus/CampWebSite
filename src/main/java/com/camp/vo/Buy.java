@@ -11,6 +11,7 @@ import lombok.Data;
 public class Buy {
 	
 	private int buyNo;
+	private int amount;
 	private String addr1; 
 	private String addr2;
 	private String addr3; 

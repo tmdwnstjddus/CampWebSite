@@ -19,6 +19,7 @@ public class Rental {
 	private String campName;
 	private int price;
 	private int reserve;
+	private boolean flag;
 
 	private CampFile file;  // flag = 1
 	private ArrayList<CampFile> fileList; // flag = 0

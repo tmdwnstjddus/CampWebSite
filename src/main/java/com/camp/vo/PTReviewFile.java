@@ -5,14 +5,14 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class ReviewFile {
+public class PTReviewFile {
 
-	private int reviewFileNo;	
+	private int ptReviewFileNo;	
 	private String savedFileName;
 	private String userFileName;	
 	private boolean flag;	
-	private int reviewNo; 
+	private int ptreviewNo; 
 	
-	private Date rentDate;
+	
 	
 }

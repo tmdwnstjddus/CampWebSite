@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="title" value="캠핑공간 수정" scope="request"/>
+<c:set var="title" value="캠핑공간 수정"  scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +20,7 @@
 			Camp
 		</h2>
 		<p class="m-text13 t-center">
-			캠핑공간 등록
+			캠핑리뷰 등록
 		</p>
 	</section>
 	
@@ -31,19 +31,23 @@
 
 				<div class="col-md-12 p-b-30">
 					<form action="reviewUpdate" method="post" enctype="multipart/form-data" id="updateForm">
-						<input type="hidden" name="reivewNo" value="${ review.reviewNo }">
-					<div class="heading">
+						<input type="hidden" name="rentNo" value="${review.rentNo }">
+						<input type="hidden" name="memberId" value="${loginuser.memberId}">
+						<input type="hidden" name="reviewNo" value="${review.reviewNo}">
+						<div class="heading">
 							<h3>리뷰 작성</h3>
+							
 							<span class="option"><span class="txt_required"><span class="ico_required">* </span>필수입력</span></span>
 						</div>
 						
 						<div class="box_form">
 							<div class="tit">
-								<label for="title">제목<span class="ico_required">*</span></label>
+								<label for="review_title">제목<span class="ico_required">*</span></label>
 							</div>
 							<span class="option"><span class="txt_count"><em id="campNameCnt">0</em>자/<em>18</em>자</span></span>
 							<div class="input">
-								<input type="text" id="title" min="1" maxlength="18" name="title" placeholder="제목을 입력해주세요." required>
+								<input type="text" id="title" min="1" maxlength="18" name="title" value="${ review.title }">
+								
 								<hr>
 							</div>
 							<p class="p_guide normal">
@@ -68,18 +72,13 @@
 								<label for="category">리뷰종류<span class="ico_required">*</span></label>
 							</div>
 							<p class="option">
-								<span class="txt_required">필수선택</span>
+								<span class="txt_required"></span>
 							</p>
 							<div class="row">
 								<ul class="check_list space ml-3">
 									<li>
 										<input type="radio" name="category" value="campreview" id="campreview" required>
 										<label for="campreview" class="ellip">캠핑장</label>
-									</li>
-									
-									<li>
-										<input type="radio" name="category" value="productreview" id="productreview" required>
-										<label for="productreview" class="ellip">캠핑 용품</label>
 									</li>
 								</ul>
 							</div>
@@ -93,7 +92,7 @@
 							</span>
 							<div class="input">
 								<textarea id="content" class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" minlength="20" maxlength="500" name="content" required
-									placeholder="캠핑장이나 상품에 관련된 리뷰를 작성해주세요"></textarea>
+									placeholder="캠핑장이나 상품에 관련된 리뷰를 작성해주세요">${review.content }</textarea>
 							</div>
 							<p class="p_guide warn">
 								<i class="sp_icon ico_alert"></i>내용은 필수 입력입니다.
@@ -103,7 +102,9 @@
 							<span class="tit">이미지<span class="ico_required"> *</span></span>
 							<p class="option">2048 *1158 권장, 최대 3MB</p>
 							<div class="file ">
-								<div class="inner inner_img">이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
+								<div class="inner inner_img">
+									<img src="/resources/review-files/${ review.file.savedFileName }" width="200px" height="200px">
+								</div>
 								<div class="btn_box">
 									<label class="titleImgBtn btn" for="titleImgFile"><div>파일첨부</div> 
 									<input type="file" class="_fileRel" name="titleImgFile" id="titleImgFile" required
@@ -114,8 +115,6 @@
 								<i class="sp_icon ico_alert"></i>대표이미지는 필수 입력입니다.
 							</p>
 						</div>
-						
-						
 						
 						
 						

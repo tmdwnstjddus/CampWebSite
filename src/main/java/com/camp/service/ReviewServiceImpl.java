@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.camp.mapper.ReviewMapper;
 import com.camp.vo.CampFile;
 import com.camp.vo.Criteria;
+import com.camp.vo.PTReview;
+import com.camp.vo.PTReviewFile;
 import com.camp.vo.Rental;
 import com.camp.vo.Review;
 import com.camp.vo.ReviewFile;
@@ -35,8 +37,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Review findReviewByReviewNo(int reviewNo) {
-		Review review = reviewMapper.selectReviewByReviewNo(reviewNo);
+	public Review findReviewByRentNo(int rentNo) {
+		Review review = reviewMapper.selectReviewByRentNo(rentNo);
 		return review;
 	}
 
@@ -53,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void updateReivew(Review review) {
+	public void updateReview(Review review) {
 		reviewMapper.updateReview(review);
 		
 	}
@@ -71,10 +73,88 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void deleteReviewFile(int reviewFileNo) {
-		reviewMapper.deleteReviewFile(reviewFileNo);
+	public void deleteReviewFile(int reviewNo) {
+		reviewMapper.deleteReviewFile(reviewNo);
 		
 	}
+
+	@Override
+	public void updateBuyFlag(int buyNo) {
+		reviewMapper.BuyFlag(buyNo);
+		
+	}
+
+	@Override
+	public void updateRentFlag(int rentNo) {
+		reviewMapper.RentFlag(rentNo);
+		
+	}
+	
+	@Override
+	public void zeroRentalFlag(int rentNo) {
+		reviewMapper.zeroRentFlag(rentNo);
+		
+	}
+	
+	///////////product review ///////////////////////////////
+	@Override
+	public void writeptReview(PTReview ptreview) {
+		reviewMapper.insertptReview(ptreview);
+		int newptReviewNo = ptreview.getPtreviewNo();
+		
+//		대표이미지
+		PTReviewFile titleFile = ptreview.getFile();
+		titleFile.setPtreviewNo(newptReviewNo);
+		reviewMapper.insertptReviewFile(titleFile);
+		
+	}
+
+	@Override
+	public PTReview findptReviewByBuyNo(int buyNo) {
+		PTReview ptreview = reviewMapper.selectptReviewByBuyNo(buyNo);
+		return ptreview;
+		
+	}
+
+	@Override
+	public PTReviewFile findptReviewFile(int ptreviewNo) {
+		PTReviewFile file = reviewMapper.selectptReviewFile(ptreviewNo);
+		return file;
+	}
+
+	@Override
+	public void updateptReviewFile(PTReviewFile ptreviewFile) {
+		reviewMapper.updateptReviewFile(ptreviewFile);
+		
+	}
+
+	@Override
+	public void updateptReview(PTReview ptreview) {
+		reviewMapper.updateptReview(ptreview);
+		
+	}
+
+	@Override
+	public void zeroBuyFlag(int buyNo) {
+		reviewMapper.zeroBuyFlag(buyNo);
+		
+	}
+
+	@Override
+	public void deleteptReviewFile(int ptreviewNo) {
+		reviewMapper.deleteptReviewFile(ptreviewNo);
+		
+	}
+
+	@Override
+	public void deleteptReview(int ptreviewNo) {
+		reviewMapper.deleteptReview(ptreviewNo);
+		
+	}
+
+	
+
+	
 
 	
 
