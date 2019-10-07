@@ -195,6 +195,56 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- update modal  -->
+
+<div class="modal fade" id="answerUpdateModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="answerModalTitle">답변하기</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		
+		<div class="modal-body">
+			<form id="answerform">
+				<div class="form-group">
+					<span id="c-qaNo" style="display:none;"></span>
+					<div class="m-text6	 flex-sb flex-m p-b-21">
+						<div class="t-left">
+							<span>작성자</span>
+							<span class="m-l-3 m-r-6">|</span>
+							<span id="u-memberId"></span>
+						</div>
+						<div class="t-right">
+							<span>등록일자</span>
+							<span class="m-l-3 m-r-6">|</span>
+							<span id="u-qnaDate"></span>
+						</div>
+					</div>
+					<div class="bo4 of-hidden size15 m-b-20">
+						<span class="sizefull s-text7 p-l-22 p-r-22" id=u-title></span>
+					</div>
+					<div class="dis-block s-text7 size25 bo4 p-l-22 p-r-22 p-t-13 m-b-25" id="u-qnaContent"></div>
+				</div>
+				<div class="form-group">
+					<label for="message-text" class="col-form-label">답변:</label>
+					<textarea class="form-control dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-25 sizefull" id="u-answerText"></textarea>
+				</div>
+			</form>
+		</div>
+		
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">수정취소</button>
+			<button type="button" id="answerUpdateButton" class="btn btn-primary">수정하기</button>
+		</div>
+
+		</div>
+	</div>
+</div>
 	
 	
 
